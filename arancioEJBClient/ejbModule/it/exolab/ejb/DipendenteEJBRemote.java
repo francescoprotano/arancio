@@ -11,10 +11,11 @@ public interface DipendenteEJBRemote {
 	
 	public void add(Dipendente dipendente);
 	
-	public void edit(int id);
+	public void edit(Dipendente dipendente);
 	
 	public void delete(int id);
 	
 	public List<Dipendente> allDipendenti();
+	
 	
 }

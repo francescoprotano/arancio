@@ -1,0 +1,40 @@
+<form >
+    <fieldset>
+        <legend>Inserisci Dipendente</legend>
+
+        <label>Nome</label><br/>
+        <input type="text" [(ngModel)]="model.nome" name="nome"
+        /><br/>
+    
+         
+        <label>Cognome</label><br/>
+        <input type="text" [(ngModel)]="model.cognome" name="cognome"
+        /><br/>
+
+        <label>Data di nascita</label><br/>
+        <input type="date" [(ngModel)]="model.data_nascita" name="data_nascita"
+        /><br/>
+        
+        <label>Email</label><br/>
+        <input type="email" [(ngModel)]="model.email" name="email"
+        /><br/>
+
+        <label>Password</label><br/>
+        <input type="password" [(ngModel)]="model.password" name="password"
+        /><br/>
+
+        <label>Ruolo</label><br/>
+        <input type="text" [(ngModel)]="model.ruolo" name="ruolo"
+        /><br/>
+
+    <br/>
+                
+    
+    <hr/>
+        <input type="button" 
+        name="buttonSalva"
+        (click)="salva()" value="Salva" /><br/>
+    
+    </fieldset>
+    
+    </form>

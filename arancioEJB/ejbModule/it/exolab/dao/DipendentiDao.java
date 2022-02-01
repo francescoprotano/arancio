@@ -28,10 +28,10 @@ public class DipendentiDao {
 		System.out.println("Dipendente eliminato");
 	}
 
-	public static void update(int id) {
+	public static void update(Dipendente model) {
 		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		mapper.update(id);
+		mapper.update(model);
 		sqlSession.commit();
 		System.out.println("Dipendente modificato");
 	}
@@ -42,5 +42,6 @@ public class DipendentiDao {
 		return mapper.all();
 
 	}
+	
 
 }

@@ -5,8 +5,10 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionDipendenteEJB;
@@ -23,16 +25,16 @@ public class GestionePresenzeService {
 		ConnectionDipendenteEJB.getConnection().add(model);
 	}
 
-	@POST
+	@GET
 	@Path("/delete")
-	public void delete(int id) {
+	public void delete(@QueryParam("codice") int id) {
 		ConnectionDipendenteEJB.getConnection().delete(id);
 	}
 
 	@POST
 	@Path("/update")
-	public void update(int id) {
-		ConnectionDipendenteEJB.getConnection().edit(id);
+	public void update(Dipendente model) {
+		ConnectionDipendenteEJB.getConnection().edit(model);
 	}
 
 	@GET
@@ -41,5 +43,6 @@ public class GestionePresenzeService {
 		return ConnectionDipendenteEJB.getConnection().allDipendenti();
 
 	}
+	
 
 }

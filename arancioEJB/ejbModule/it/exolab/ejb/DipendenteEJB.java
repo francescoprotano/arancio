@@ -27,8 +27,8 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public void edit(int id) {
-		DipendentiDao.update(id);
+	public void edit(Dipendente dipendente) {
+		DipendentiDao.update(dipendente);
 		
 	}
 
@@ -43,5 +43,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		
 		return DipendentiDao.all();
 	}
+
+	
 
 }

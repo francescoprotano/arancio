@@ -1,0 +1,19 @@
+p {
+  font-family: Lato;
+}
+
+.container {
+  padding: 1.5rem;
+  margin: 10px auto;
+  border-width: 0.2rem;
+  border: solid cornsilk;
+}
+
+input {
+  width: 6.5rem;
+}
+
+th,
+td {
+  width: 12rem;
+}

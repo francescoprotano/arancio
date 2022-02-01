@@ -1,0 +1,52 @@
+<h1>Lista Dipendenti</h1>
+
+<body>
+
+	<div class="container">
+		<table class="table">
+		  <thead>
+			<tr>
+			  <th scope="col">ID Dipendente</th>
+			  <th scope="col">Nome</th>
+			  <th scope="col">Cognome</th>
+			  <th scope="col">Data di Nascita</th>
+			  <th scope="col">Email</th>
+			  <th scope="col">Password</th>
+			  <th scope="col">Ruolo</th>
+			  <th scope="col">-AZIONI-</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<ng-container *ngFor="let d of listaDipendenti; index as i;">
+			  <tr>
+				<th scope="row">{{d.id_dipendente}}</th>
+				<ng-container *ngIf="enableEditIndex != i">
+				  <td>{{d.nome}}</td>
+				  <td>{{d.cognome}}</td>
+				  <td>{{d.data_nascita}}</td>
+				  <td>{{d.email}}</td>
+				  <td>{{d.password}}</td>
+				  <td>{{d.ruolo}}</td>
+				  <td *ngIf="enableEditIndex != i">
+					<button type="button" (click)="switchEditMode(i)">Modifica</button>
+					<input type="button" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
+				  </td>
+				</ng-container>
+				<ng-container *ngIf="enableEditIndex == i">
+				  <td><input [(ngModel)]="d.nome" /></td>
+				  <td><input [(ngModel)]="d.cognome" /></td>
+				  <td><input [(ngModel)]="d.data_nascita" type="date" /></td>
+				  <td><input [(ngModel)]="d.email" /></td>
+				  <td><input [(ngModel)]="d.password" /></td>
+				  <td><input [(ngModel)]="d.ruolo" /></td>
+				  <td><button (click)="save(d)">Conferma</button></td>
+				</ng-container>
+			  </tr>
+			</ng-container>
+		  </tbody>
+		</table>
+	  </div>
+	  <hr/>
+	  <input type="button" value="Indietro" routerLink="../">
+	
+   </body>
