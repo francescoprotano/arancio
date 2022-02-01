@@ -7,15 +7,29 @@ import java.util.List;
 
 public class Dipendente implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1629573878793697142L;
 	
 	public Dipendente() {
 		
 	}
 	
+	
+	
+	public Dipendente(int id_dipendente, String nome, String cognome, Date data_nascita, String email, String password,
+			String ruolo, List<Contratto> contratti, List<Presenza> presenze) {
+		super();
+		this.id_dipendente = id_dipendente;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.data_nascita = data_nascita;
+		this.email = email;
+		this.password = password;
+		this.ruolo = ruolo;
+		this.contratti = contratti;
+		this.presenze = presenze;
+	}
+
+
+
 	private int id_dipendente;
 	private String nome;
 	private String cognome;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.exolab.mapper.DipendenteMapper">
+
+	<resultMap id="dipendentiJoinContratti"
+		type="it.exolab.model.Dipendente">
+		<result property="id_dipendente" column="id_dipendente" />
+		<result property="nome" column="nome" />
+		<result property="cognome" column="cognome" />
+		<result property="data_nascita" column="data_nascita" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="ruolo" column="ruolo" />
+		<collection property="contratti"
+			ofType="it.exolab.model.Contratto">
+			<id property="id_contratto" column="id_contratto" />
+			<result property="data_assunzione" column="data_assunzione" />
+			<result property="data_scadenza" column="data_scadenza" />
+			<result property="tipologia" column="tipologia" />
+		</collection>
+	</resultMap>
+
+
+	<select id="all" resultType="it.exolab.model.Dipendente">
+		SELECT
+		* FROM dipendenti
+	</select>
+
+	<insert id="insert" parameterType="it.exolab.model.Dipendente"
+		useGeneratedKeys="true" keyProperty="id_dipendente" keyColumn="id_dipendente">
+		INSERT into
+		dipendenti (nome,
+		cognome, data_nascita, email, password, ruolo)
+		VALUES
+		(#{nome},
+		#{cognome}, #{data_nascita}, #{email}, #{password},
+		#{ruolo});
+	</insert>
+
+
+	<delete id="delete" parameterType="int">
+		delete FROM dipendenti where
+		id = #{id}
+	</delete>
+
+
+
+	<update id="update" parameterType="it.exolab.model.Dipendente">
+		update dipendenti set
+		email=#{email}, password=#{password} where id = #{id}
+	</update>
+
+
+</mapper>

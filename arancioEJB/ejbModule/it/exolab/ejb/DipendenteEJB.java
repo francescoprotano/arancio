@@ -22,19 +22,19 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public void add(Dipendente dipendente) {
-		// TODO Auto-generated method stub
+		DipendentiDao.insert(dipendente);
 		
 	}
 
 	@Override
 	public void edit(int id) {
-		// TODO Auto-generated method stub
+		DipendentiDao.update(id);
 		
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		DipendentiDao.delete(id);
 		
 	}
 

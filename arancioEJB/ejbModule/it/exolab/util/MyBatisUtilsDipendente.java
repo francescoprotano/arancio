@@ -4,8 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 
 public class MyBatisUtilsDipendente {
 
@@ -23,7 +25,7 @@ public class MyBatisUtilsDipendente {
 		  
 		  URL url = MyBatisUtilsDipendente.class
 			        .getClassLoader()
-			        .getResource("mybatis-config.xml");
+			        .getResource("C:\\Users\\danie\\git\\arancio\\arancioEJB\\resources\\mybatis-config.xml");
 		  
 			    
 			if(url == null) {

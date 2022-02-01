@@ -6,8 +6,8 @@ import it.exolab.model.Dipendente;
 
 
 public interface DipendenteMapper {
-	int insert(Dipendente model);
+	void insert(Dipendente model);
 	void delete(int id);
-	void update(Dipendente model);
+	void update(int id);
 	List<Dipendente> all();
 }
