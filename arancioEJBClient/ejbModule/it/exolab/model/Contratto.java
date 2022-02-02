@@ -18,6 +18,19 @@ public class Contratto implements Serializable {
 	public Contratto() {
 		
 	}
+	
+	
+	
+	public Contratto(int id_contratto, Date data_assunzione, Date data_scadenza, String tipologia) {
+		super();
+		this.id_contratto = id_contratto;
+		this.data_assunzione = data_assunzione;
+		this.data_scadenza = data_scadenza;
+		this.tipologia = tipologia;
+	}
+
+
+
 	public int getId_contratto() {
 		return id_contratto;
 	}

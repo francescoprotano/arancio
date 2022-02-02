@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.exolab.mapper.PresenzaMapper">
+
+
+
+
+	<select id="all" resultType="it.exolab.model.Presenza">
+		SELECT
+		* FROM presenze
+	</select>
+
+
+	<insert id="insert" parameterType="it.exolab.model.Presenza"
+		useGeneratedKeys="true" keyProperty="id_presenza"
+		keyColumn="id_presenza">
+		INSERT into
+		presenze (data,
+		motivazione_assenza_fk,
+		id_dipendente_fk, compilabile, controllata, chiusa)
+		VALUES
+		(#{data},
+		#{motivazione_assenza_fk}, #{id_dipendente_fk}, #{compilabile},
+		#{controllata}, #{chiusa});
+	</insert>
+
+
+	<delete id="delete" parameterType="int">
+		delete FROM presenze where
+		id_presenza = #{id_presenza}
+	</delete>
+
+
+
+	<update id="update" parameterType="it.exolab.model.Presenza">
+		update presenze set
+		data=#{data}, motivazione_assenza_fk=#{motivazione_assenza_fk},
+		id_dipendente_fk=#{id_dipendente_fk},
+		compilabile=#{compilabile},
+		controllata=#{controllata},
+		chiusa=#{chiusa}
+		where id_presenza =
+		#{id_presenza}
+	</update>
+
+
+</mapper>
