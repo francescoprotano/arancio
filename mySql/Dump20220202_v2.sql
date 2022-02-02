@@ -29,8 +29,12 @@ CREATE TABLE `contratti` (
   `data_assunzione` date DEFAULT NULL,
   `data_scadenza` date DEFAULT NULL,
   `tipologia` varchar(45) DEFAULT NULL,
+  `id_dipendente_fk` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_contratto`),
-  CONSTRAINT `dip-contr` FOREIGN KEY (`id_contratto`) REFERENCES `dipendenti` (`id_dipendente`)
+  KEY `fk_dip_cont_idx` (`id_dipendente_fk`),
+  KEY `tipologie_contratti_idx` (`tipologia`),
+  CONSTRAINT `dipendenti_contratti` FOREIGN KEY (`id_dipendente_fk`) REFERENCES `dipendenti` (`id_dipendente`),
+  CONSTRAINT `tipologie_contratti` FOREIGN KEY (`tipologia`) REFERENCES `tipologie` (`id_tipologia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,12 +61,15 @@ CREATE TABLE `dipendenti` (
   `data_nascita` date DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `ruolo` varchar(45) DEFAULT NULL,
-  `id_contratto_fk` int(11) DEFAULT NULL,
+  `ruolo_fk` varchar(45) DEFAULT NULL,
+  `contratto_corrente_fk` int(11) DEFAULT NULL COMMENT '\n',
   PRIMARY KEY (`id_dipendente`),
   UNIQUE KEY `email_UNIQUE` (`email`),
-  CONSTRAINT `controllo_ruolo` CHECK ((`ruolo` in (_utf8mb4'dipendente',_utf8mb4'responsabile',_utf8mb4'admin')))
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ruoli_dipendenti_idx` (`ruolo_fk`),
+  KEY `contratti_dipendenti_idx` (`contratto_corrente_fk`),
+  CONSTRAINT `contratti_dipendenti` FOREIGN KEY (`contratto_corrente_fk`) REFERENCES `contratti` (`id_contratto`),
+  CONSTRAINT `ruoli_dipendenti` FOREIGN KEY (`ruolo_fk`) REFERENCES `ruoli` (`id_ruolo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,6 +82,29 @@ LOCK TABLES `dipendenti` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `motivazioni`
+--
+
+DROP TABLE IF EXISTS `motivazioni`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `motivazioni` (
+  `id_motivazione` varchar(45) NOT NULL,
+  `descrizione` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_motivazione`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `motivazioni`
+--
+
+LOCK TABLES `motivazioni` WRITE;
+/*!40000 ALTER TABLE `motivazioni` DISABLE KEYS */;
+/*!40000 ALTER TABLE `motivazioni` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `presenze`
 --
 
@@ -83,13 +113,17 @@ DROP TABLE IF EXISTS `presenze`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `presenze` (
   `id_presenza` int(11) NOT NULL AUTO_INCREMENT,
-  `ora_entrata` datetime DEFAULT NULL,
-  `ora_uscita` datetime DEFAULT NULL,
-  `motivazione_assenza` varchar(45) DEFAULT NULL,
+  `data` date DEFAULT NULL,
+  `motivazione_assenza_fk` varchar(45) DEFAULT NULL,
   `id_dipendente_fk` int(11) DEFAULT NULL,
+  `compilabile` tinyint(4) DEFAULT '1',
+  `controllata` tinyint(4) DEFAULT '0',
+  `chiusa` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id_presenza`),
-  KEY `id_dipendente_fk_idx` (`id_dipendente_fk`),
-  CONSTRAINT `id_dipendente_fk` FOREIGN KEY (`id_dipendente_fk`) REFERENCES `dipendenti` (`id_dipendente`)
+  KEY `presenza_motivazione_idx` (`motivazione_assenza_fk`),
+  KEY `dipendenti_presenze_idx` (`id_dipendente_fk`),
+  CONSTRAINT `dipendenti_presenze` FOREIGN KEY (`id_dipendente_fk`) REFERENCES `dipendenti` (`id_dipendente`),
+  CONSTRAINT `motivazioni_presenze` FOREIGN KEY (`motivazione_assenza_fk`) REFERENCES `motivazioni` (`id_motivazione`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,6 +135,57 @@ LOCK TABLES `presenze` WRITE;
 /*!40000 ALTER TABLE `presenze` DISABLE KEYS */;
 /*!40000 ALTER TABLE `presenze` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `ruoli`
+--
+
+DROP TABLE IF EXISTS `ruoli`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ruoli` (
+  `id_ruolo` varchar(45) NOT NULL,
+  `descrizione` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_ruolo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ruoli`
+--
+
+LOCK TABLES `ruoli` WRITE;
+/*!40000 ALTER TABLE `ruoli` DISABLE KEYS */;
+INSERT INTO `ruoli` VALUES ('admin','admin');
+/*!40000 ALTER TABLE `ruoli` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipologie`
+--
+
+DROP TABLE IF EXISTS `tipologie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tipologie` (
+  `id_tipologia` varchar(45) NOT NULL,
+  `descrizione` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_tipologia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipologie`
+--
+
+LOCK TABLES `tipologie` WRITE;
+/*!40000 ALTER TABLE `tipologie` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipologie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'gestionepresenze'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -111,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-01 23:02:47
+-- Dump completed on 2022-02-02 11:31:17
