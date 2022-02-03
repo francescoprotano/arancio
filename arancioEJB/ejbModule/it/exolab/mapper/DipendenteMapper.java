@@ -10,5 +10,6 @@ public interface DipendenteMapper {
 	void delete(int id);
 	void update(Dipendente model);
 	List<Dipendente> all();
+	Dipendente selectByEmail(String email);
 
 }

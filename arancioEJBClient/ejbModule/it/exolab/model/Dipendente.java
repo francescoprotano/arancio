@@ -7,27 +7,25 @@ import java.util.List;
 
 public class Dipendente implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 239504350187104834L;
-	
-	private int id_dipendente;
+
+	private Integer id_dipendente;
 	private String nome;
 	private String cognome;
 	private Date data_nascita;
 	private String email;
 	private String password;
-	private String ruolo;
-	private List<Contratto> contratto_corrente_fk = new ArrayList<>();
+	private String ruolo_fk;
+	private Contratto contratto_corrente_fk;
 	private List<Presenza> presenze = new ArrayList<>();
+	private List<DipendenteMese> dipendentiMesi = new ArrayList<>();
 
 	public Dipendente() {
-
 	}
 
-	public Dipendente(int id_dipendente, String nome, String cognome, Date data_nascita, String email, String password,
-			String ruolo, List<Contratto> contratto_corrente_fk, List<Presenza> presenze) {
+	public Dipendente(Integer id_dipendente, String nome, String cognome, Date data_nascita, String email,
+			String password, String ruolo_fk, Contratto contratto_corrente_fk, List<Presenza> presenze,
+			List<DipendenteMese> dipendentiMesi) {
 		super();
 		this.id_dipendente = id_dipendente;
 		this.nome = nome;
@@ -35,16 +33,17 @@ public class Dipendente implements Serializable {
 		this.data_nascita = data_nascita;
 		this.email = email;
 		this.password = password;
-		this.ruolo = ruolo;
+		this.ruolo_fk = ruolo_fk;
 		this.contratto_corrente_fk = contratto_corrente_fk;
 		this.presenze = presenze;
+		this.dipendentiMesi = dipendentiMesi;
 	}
 
-	public int getId_dipendente() {
+	public Integer getId_dipendente() {
 		return id_dipendente;
 	}
 
-	public void setId_dipendente(int id_dipendente) {
+	public void setId_dipendente(Integer id_dipendente) {
 		this.id_dipendente = id_dipendente;
 	}
 
@@ -88,19 +87,19 @@ public class Dipendente implements Serializable {
 		this.password = password;
 	}
 
-	public String getRuolo() {
-		return ruolo;
+	public String getRuolo_fk() {
+		return ruolo_fk;
 	}
 
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
+	public void setRuolo_fk(String ruolo_fk) {
+		this.ruolo_fk = ruolo_fk;
 	}
 
-	public List<Contratto> getContratti() {
+	public Contratto getContratto_corrente_fk() {
 		return contratto_corrente_fk;
 	}
 
-	public void setContratti(List<Contratto> contratto_corrente_fk) {
+	public void setContratto_corrente_fk(Contratto contratto_corrente_fk) {
 		this.contratto_corrente_fk = contratto_corrente_fk;
 	}
 
@@ -112,11 +111,20 @@ public class Dipendente implements Serializable {
 		this.presenze = presenze;
 	}
 
+	public List<DipendenteMese> getDipendentiMesi() {
+		return dipendentiMesi;
+	}
+
+	public void setDipendentiMesi(List<DipendenteMese> dipendentiMesi) {
+		this.dipendentiMesi = dipendentiMesi;
+	}
+
 	@Override
 	public String toString() {
 		return "Dipendente [id_dipendente=" + id_dipendente + ", nome=" + nome + ", cognome=" + cognome
-				+ ", data_nascita=" + data_nascita + ", email=" + email + ", password=" + password + ", ruolo=" + ruolo
-				+ ", contratti=" + contratto_corrente_fk + ", presenze=" + presenze + "]";
+				+ ", data_nascita=" + data_nascita + ", email=" + email + ", password=" + password + ", ruolo_fk="
+				+ ruolo_fk + ", contratto_corrente_fk=" + contratto_corrente_fk + ", presenze=" + presenze
+				+ ", dipendentiMesi=" + dipendentiMesi + "]";
 	}
 
 }

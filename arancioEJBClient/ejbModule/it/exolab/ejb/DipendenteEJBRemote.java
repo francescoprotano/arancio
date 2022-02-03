@@ -13,9 +13,11 @@ public interface DipendenteEJBRemote {
 	
 	public void edit(Dipendente dipendente);
 	
-	public void delete(int id);
+	public void delete(Integer id);
 	
 	public List<Dipendente> allDipendenti();
+	
+	public Dipendente selectByEmail(String email);
 	
 	
 }

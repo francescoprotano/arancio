@@ -33,7 +33,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(Integer id) {
 		DipendentiDao.delete(id);
 		
 	}
@@ -42,6 +42,11 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 	public List<Dipendente> allDipendenti() {
 		
 		return DipendentiDao.all();
+	}
+
+	@Override
+	public Dipendente selectByEmail(String email) {
+		return DipendentiDao.selectByEmail(email);
 	}
 
 	

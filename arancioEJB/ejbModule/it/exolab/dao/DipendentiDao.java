@@ -42,6 +42,12 @@ public class DipendentiDao {
 		return mapper.all();
 
 	}
+
+	public static Dipendente selectByEmail(String email) {
+		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		return mapper.selectByEmail(email);
+	}
 	
 
 }

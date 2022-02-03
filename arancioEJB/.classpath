@@ -7,24 +7,22 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/danie/Desktop/CORSO/Corso/Lezioni Francesco/wildfly-12.0.0.Final/modules/system/layers/base/javax/ejb/api/main/jboss-ejb-api_3.2_spec-1.0.1.Final.jar">
+	<classpathentry kind="lib" path="C:/Users/Exolab SRL/git/arancio/JAR/javax.inject-1.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/danie/Desktop/CORSO/Corso/Lezioni Francesco/wildfly-12.0.0.Final/modules/system/layers/base/javax/inject/api/main/javax.inject-1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/danie/.m2/repository/org/mybatis/mybatis/3.5.5/mybatis-3.5.5.jar" sourcepath="C:/Users/danie/.m2/repository/org/mybatis/mybatis/3.5.5/mybatis-3.5.5-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Exolab SRL/git/arancio/JAR/jboss-ejb-api_3.2_spec-1.0.1.Final.jar">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.archivename" value="mybatis-3.5.5.jar"/>
-			<attribute name="maven.groupId" value="org.mybatis"/>
-			<attribute name="maven.artifactId" value="mybatis"/>
-			<attribute name="maven.version" value="3.5.5"/>
-			<attribute name="maven.scope" value="compile"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/danie/Desktop/CORSO/java_lib/mysql-connector-java-5.1.46.jar">
+	<classpathentry kind="lib" path="C:/Users/Exolab SRL/git/arancio/JAR/mybatis-3.5.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Exolab SRL/git/arancio/JAR/mysql-connector-java-5.1.46.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
 		</attributes>
