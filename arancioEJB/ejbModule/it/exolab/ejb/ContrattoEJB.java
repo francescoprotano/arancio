@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import it.exolab.dao.ContrattiDao;
+import it.exolab.dao.ContrattoDao;
 import it.exolab.model.Contratto;
 
 @Stateless
@@ -18,26 +18,26 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public void add(Contratto contratto) {
-		ContrattiDao.insert(contratto);
+		ContrattoDao.insert(contratto);
 
 	}
 
 	@Override
 	public void edit(Contratto contratto) {
-		ContrattiDao.update(contratto);
+		ContrattoDao.update(contratto);
 
 	}
 
 	@Override
 	public void delete(int id) {
-		ContrattiDao.delete(id);
+		ContrattoDao.delete(id);
 
 	}
 
 	@Override
 	public List<Contratto> allContratti() {
 
-		return ContrattiDao.all();
+		return ContrattoDao.all();
 	}
 
 }

@@ -5,34 +5,35 @@
 
 <mapper namespace="it.exolab.mapper.DipendenteMapper">
 
+	<insert id="insert" parameterType="it.exolab.model.Dipendente"
+		useGeneratedKeys="true" keyProperty="id_dipendente"
+		keyColumn="id_dipendente">
+		INSERT INTO dipendenti (nome, cognome, data_nascita, email,
+		password, ruolo)
+		VALUES(#{nome},#{cognome}, #{data_nascita},
+		#{email},#{password},#{ruolo});
+	</insert>
+	
+	<update id="update" parameterType="it.exolab.model.Dipendente">
+		UPDATE dipendenti
+		SET nome=#{nome}, cognome=#{cognome}, data_nascita=#{data_nascita},
+		email=#{email}, password=#{password}
+		WHERE id_dipendente = #{id_dipendente}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM dipendenti
+		WHERE id_dipendente = #{id_dipendente}
+	</delete>
+	
 	<select id="all" resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 	</select>
-
-	<select id="selectByEmail"
-		resultType="it.exolab.model.Dipendente">
+	<select id="selectByEmail" resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 		WHERE email=#{email}
 	</select>
-
-	<insert id="insert" parameterType="it.exolab.model.Dipendente"
-		useGeneratedKeys="true" keyProperty="id_dipendente"
-		keyColumn="id_dipendente">
-		INSERT INTO dipendenti (nome, cognome, data_nascita, email, password, ruolo)
-		VALUES(#{nome},#{cognome}, #{data_nascita}, #{email},#{password},#{ruolo});
-	</insert>
-
-	<delete id="delete" parameterType="int">
-		DELETE FROM dipendenti 
-		WHERE id_dipendente = #{id_dipendente}
-	</delete>
-
-	<update id="update" parameterType="it.exolab.model.Dipendente">
-		UPDATE dipendenti 
-		SET nome=#{nome}, cognome=#{cognome}, data_nascita=#{data_nascita}, email=#{email}, password=#{password}
-		WHERE id_dipendente = #{id_dipendente}
-	</update>
-
+	
 </mapper>

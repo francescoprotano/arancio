@@ -7,44 +7,48 @@ import org.apache.ibatis.session.SqlSession;
 import it.exolab.mapper.DipendenteMapper;
 
 import it.exolab.model.Dipendente;
+import it.exolab.service.DipendenteService;
+import it.exolab.util.MyBatisUtils;
 
-import it.exolab.util.MyBatisUtilsDipendente;
-
-public class DipendentiDao {
-	public static void insert(Dipendente model) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+public class DipendenteDao {
+	
+	public static void insert(Dipendente dip) {
+		DipendenteService.validaInsert(dip);
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		mapper.insert(model);
+		mapper.insert(dip);
 		sqlSession.commit();
 		System.out.println("Dipendente inserito");
 
 	}
 
-	public static void delete(int id) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+	public static void delete(Integer id) {
+		DipendenteService.validaID(id);
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.delete(id);
 		sqlSession.commit();
 		System.out.println("Dipendente eliminato");
 	}
 
-	public static void update(Dipendente model) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+	public static void update(Dipendente dip) {
+		DipendenteService.validaUpdate(dip);
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		mapper.update(model);
+		mapper.update(dip);
 		sqlSession.commit();
 		System.out.println("Dipendente modificato");
 	}
 
 	public static List<Dipendente> all() {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.all();
 
 	}
 
 	public static Dipendente selectByEmail(String email) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectByEmail(email);
 	}

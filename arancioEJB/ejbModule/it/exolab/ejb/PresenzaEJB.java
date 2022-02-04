@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import it.exolab.dao.PresenzeDao;
+import it.exolab.dao.PresenzaDao;
 import it.exolab.model.Presenza;
 
 @Stateless
@@ -18,26 +18,26 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 
 	@Override
 	public void add(Presenza presenza) {
-		PresenzeDao.insert(presenza);
+		PresenzaDao.insert(presenza);
 
 	}
 
 	@Override
 	public void edit(Presenza presenza) {
-		PresenzeDao.update(presenza);
+		PresenzaDao.update(presenza);
 
 	}
 
 	@Override
 	public void delete(int id) {
-		PresenzeDao.delete(id);
+		PresenzaDao.delete(id);
 
 	}
 
 	@Override
 	public List<Presenza> allPresenze() {
 
-		return PresenzeDao.all();
+		return PresenzaDao.all();
 	}
 
 }

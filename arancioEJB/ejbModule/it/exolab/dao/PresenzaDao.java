@@ -6,11 +6,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import it.exolab.mapper.PresenzaMapper;
 import it.exolab.model.Presenza;
-import it.exolab.util.MyBatisUtilsDipendente;
+import it.exolab.util.MyBatisUtils;
 
-public class PresenzeDao {
+public class PresenzaDao {
 	public static void insert(Presenza model) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.insert(model);
 		sqlSession.commit();
@@ -19,7 +19,7 @@ public class PresenzeDao {
 	}
 
 	public static void delete(int id) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.delete(id);
 		sqlSession.commit();
@@ -27,7 +27,7 @@ public class PresenzeDao {
 	}
 
 	public static void update(Presenza model) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.update(model);
 		sqlSession.commit();
@@ -35,7 +35,7 @@ public class PresenzeDao {
 	}
 
 	public static List<Presenza> all() {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		return mapper.all();
 

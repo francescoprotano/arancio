@@ -6,9 +6,9 @@ import it.exolab.model.Dipendente;
 
 
 public interface DipendenteMapper {
-	void insert(Dipendente model);
-	void delete(int id);
-	void update(Dipendente model);
+	void insert(Dipendente dip);
+	void delete(Integer id);
+	void update(Dipendente dip);
 	List<Dipendente> all();
 	Dipendente selectByEmail(String email);
 

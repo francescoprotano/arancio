@@ -6,11 +6,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import it.exolab.mapper.ContrattoMapper;
 import it.exolab.model.Contratto;
-import it.exolab.util.MyBatisUtilsDipendente;
+import it.exolab.util.MyBatisUtils;
 
-public class ContrattiDao {
+public class ContrattoDao {
 	public static void insert(Contratto model) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		mapper.insert(model);
 		sqlSession.commit();
@@ -19,7 +19,7 @@ public class ContrattiDao {
 	}
 
 	public static void delete(int id) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		mapper.delete(id);
 		sqlSession.commit();
@@ -27,7 +27,7 @@ public class ContrattiDao {
 	}
 
 	public static void update(Contratto model) {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		mapper.update(model);
 		sqlSession.commit();
@@ -35,7 +35,7 @@ public class ContrattiDao {
 	}
 
 	public static List<Contratto> all() {
-		SqlSession sqlSession = MyBatisUtilsDipendente.getSqlSessionFactory().openSession();
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		return mapper.all();
 
