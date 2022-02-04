@@ -43,6 +43,12 @@ public class GestionePresenzeService {
 		return ConnectionDipendenteEJB.getConnection().allDipendenti();
 
 	}
-	
+
+	@GET
+	@Path("/allByEmail")
+	public Dipendente allByEmail(@QueryParam("email") String email) {
+		return ConnectionDipendenteEJB.getConnection().selectByEmail(email);
+
+	}
 
 }
