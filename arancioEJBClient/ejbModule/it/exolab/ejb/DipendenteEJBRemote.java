@@ -12,8 +12,9 @@ public interface DipendenteEJBRemote {
 	
 	public Risposta add(Dipendente dipendente);
 	public Risposta edit(Dipendente dipendente);
-	public Risposta delete(Integer id);
+	public Risposta delete(Integer id_dipendente);
 	public Risposta selectByEmail(String email);
+	public Risposta selectByRuolo(String ruolo);
 	public List<Dipendente> allDipendenti();
 	
 }

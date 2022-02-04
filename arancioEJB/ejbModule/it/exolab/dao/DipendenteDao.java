@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import it.exolab.exception.CampoRichiesto;
 import it.exolab.mapper.DipendenteMapper;
 
 import it.exolab.model.Dipendente;
@@ -11,8 +12,8 @@ import it.exolab.service.DipendenteService;
 import it.exolab.util.MyBatisUtils;
 
 public class DipendenteDao {
-	
-	public static void insert(Dipendente dip) {
+
+	public static void insert(Dipendente dip) throws CampoRichiesto {
 		DipendenteService.validaInsert(dip);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
@@ -22,16 +23,7 @@ public class DipendenteDao {
 
 	}
 
-	public static void delete(Integer id) {
-		DipendenteService.validaID(id);
-		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
-		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		mapper.delete(id);
-		sqlSession.commit();
-		System.out.println("Dipendente eliminato");
-	}
-
-	public static void update(Dipendente dip) {
+	public static void update(Dipendente dip) throws CampoRichiesto {
 		DipendenteService.validaUpdate(dip);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
@@ -40,18 +32,34 @@ public class DipendenteDao {
 		System.out.println("Dipendente modificato");
 	}
 
-	public static List<Dipendente> all() {
+	public static void delete(Integer id_dipendente) throws CampoRichiesto {
+		DipendenteService.validaID(id_dipendente);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		return mapper.all();
-
+		mapper.delete(id_dipendente);
+		sqlSession.commit();
+		System.out.println("Dipendente eliminato");
 	}
 
-	public static Dipendente selectByEmail(String email) {
+	public static Dipendente selectByEmail(String email) throws CampoRichiesto {
+		DipendenteService.validaEmail(email);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectByEmail(email);
 	}
-	
+
+	public static List<Dipendente> selectByRuolo(String ruolo) throws CampoRichiesto {
+		DipendenteService.validaRuolo(ruolo);
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		return mapper.selectByRuolo(ruolo);
+	}
+
+	public static List<Dipendente> selectAll() {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		return mapper.selectAll();
+
+	}
 
 }

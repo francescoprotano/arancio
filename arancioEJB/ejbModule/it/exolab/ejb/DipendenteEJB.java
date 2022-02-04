@@ -34,6 +34,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			res.setCodice_errore("999");
 			e.printStackTrace();
 		}
+		return res;
 	}
 
 	@Override
@@ -53,13 +54,14 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			res.setCodice_errore("999");
 			e.printStackTrace();
 		}
+		return res;
 	}
 
 	@Override
-	public Risposta delete(Integer id) {
+	public Risposta delete(Integer id_dipendente) {
 		Risposta res = new Risposta(true);
 		try {
-			DipendenteDao.delete(id);
+			DipendenteDao.delete(id_dipendente);
 		} catch (CampoRichiesto e) {
 			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -72,25 +74,52 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			res.setCodice_errore("999");
 			e.printStackTrace();
 		}
+		return res;
 	}
 
 	@Override
 	public Risposta selectByEmail(String email) {
 		Risposta res = new Risposta(true);
-		res.setData(DipendenteDao.selectByEmail(email));
-		;
+		try {
+			res.setData(DipendenteDao.selectByEmail(email));
+		} catch (CampoRichiesto e) {
+			res.setSuccesso(false);
+			res.setErrore(e.getCampo() + " è richiesto");
+			res.setCodice_errore("001");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setSuccesso(false);
+			res.setErrore("errore sconosciuto");
+			res.setCodice_errore("999");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public Risposta selectByRuolo(String ruolo) {
+		Risposta res = new Risposta(true);
+		try {
+			res.setData(DipendenteDao.selectByRuolo(ruolo));
+		} catch (CampoRichiesto e) {
+			res.setSuccesso(false);
+			res.setErrore(e.getCampo() + " è richiesto");
+			res.setCodice_errore("001");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setSuccesso(false);
+			res.setErrore("errore sconosciuto");
+			res.setCodice_errore("999");
+			e.printStackTrace();
+		}
 		return res;
 	}
 
 	@Override
 	public List<Dipendente> allDipendenti() {
-		return DipendenteDao.all();
-	}
-
-	public Risposta allDipendentiRes() {
-		Risposta res = new Risposta(true);
-		res.setData(DipendenteDao.all());
-		return res;
+		return DipendenteDao.selectAll();
 	}
 
 }

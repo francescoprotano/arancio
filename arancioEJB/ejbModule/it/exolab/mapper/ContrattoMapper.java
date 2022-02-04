@@ -7,9 +7,11 @@ import it.exolab.model.Contratto;
 
 
 public interface ContrattoMapper {
-	void insert(Contratto model);
-	void delete(int id);
-	void update(Contratto model);
-	List<Contratto> all();
+	void insert(Contratto contratto);
+	void update(Contratto contratto);
+	void delete(Integer id_contratto);
+	Contratto selectByID(Integer id_contratto);
+	List<Contratto> selectByTipologia(String tipologia);
+	List<Contratto> selectAll();
 
 }

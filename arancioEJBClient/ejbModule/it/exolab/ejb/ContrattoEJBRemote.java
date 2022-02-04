@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import it.exolab.exception.Risposta;
 import it.exolab.model.Contratto;
-
 
 @Remote
 public interface ContrattoEJBRemote {
-public void add(Contratto contratto);
 	
-	public void edit(Contratto contratto);
-	
-	public void delete(int id);
-	
+	public Risposta add(Contratto contratto);
+	public Risposta edit(Contratto contratto);
+	public Risposta delete(Integer id_contratto);
+	public Risposta selectByID(Integer id_contratto);
+	public Risposta selectByTipologia(String tipologia);
 	public List<Contratto> allContratti();
 }
