@@ -43,13 +43,6 @@ public class ContrattoDao {
 		ContrattoService.validaID(id_contratto);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
-		return null;
-	}
-
-	public static Contratto selectByID(Integer id_contratto) throws CampoRichiesto {
-		ContrattoService.validaID(id_contratto);
-		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
-		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		return mapper.selectByID(id_contratto);
 	}
 

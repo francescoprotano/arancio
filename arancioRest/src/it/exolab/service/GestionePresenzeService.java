@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionDipendenteEJB;
+import it.exolab.exception.Risposta;
 import it.exolab.model.Dipendente;
 
 @Path("/gestisci")
@@ -21,34 +22,38 @@ public class GestionePresenzeService {
 
 	@POST
 	@Path("/add")
-	public void add(Dipendente model) {
-		ConnectionDipendenteEJB.getConnection().add(model);
-	}
-
-	@GET
-	@Path("/delete")
-	public void delete(@QueryParam("codice") int id) {
-		ConnectionDipendenteEJB.getConnection().delete(id);
+	public Risposta add(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().add(dipendente);
 	}
 
 	@POST
 	@Path("/update")
-	public void update(Dipendente model) {
-		ConnectionDipendenteEJB.getConnection().edit(model);
+	public Risposta update(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().edit(dipendente);
+	}
+	
+	@GET
+	@Path("/delete")
+	public Risposta delete(@QueryParam("codice") Integer id_dipendente) {
+		return ConnectionDipendenteEJB.getConnection().delete(id_dipendente);
+	}
+
+	@GET
+	@Path("/allByEmail")
+	public Risposta allByEmail(@QueryParam("email") String email) {
+		return ConnectionDipendenteEJB.getConnection().selectByEmail(email);
+	}
+	
+	@GET
+	@Path("/allByRuolo")
+	public Risposta allByRuolo(@QueryParam("ruolo") String ruolo) {
+		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo);
 	}
 
 	@GET
 	@Path("/all")
 	public List<Dipendente> allDipendenti() {
 		return ConnectionDipendenteEJB.getConnection().allDipendenti();
-
-	}
-
-	@GET
-	@Path("/allByEmail")
-	public Dipendente allByEmail(@QueryParam("email") String email) {
-		return ConnectionDipendenteEJB.getConnection().selectByEmail(email);
-
 	}
 
 }

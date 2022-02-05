@@ -19,19 +19,17 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public Risposta add(Dipendente dipendente) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			DipendenteDao.insert(dipendente);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -39,19 +37,17 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public Risposta edit(Dipendente dipendente) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			DipendenteDao.update(dipendente);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -59,19 +55,17 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public Risposta delete(Integer id_dipendente) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			DipendenteDao.delete(id_dipendente);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -79,19 +73,17 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public Risposta selectByEmail(String email) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			res.setData(DipendenteDao.selectByEmail(email));
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -99,19 +91,17 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public Risposta selectByRuolo(String ruolo) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			res.setData(DipendenteDao.selectByRuolo(ruolo));
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;

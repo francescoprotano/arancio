@@ -19,19 +19,17 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public Risposta add(Contratto contratto) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			ContrattoDao.insert(contratto);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -39,19 +37,17 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public Risposta edit(Contratto contratto) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			ContrattoDao.update(contratto);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -59,19 +55,17 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public Risposta delete(Integer id_contratto) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			ContrattoDao.delete(id_contratto);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -79,19 +73,17 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public Risposta selectByID(Integer id_contratto) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			ContrattoDao.selectByID(id_contratto);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -99,19 +91,17 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public Risposta selectByTipologia(String tipologia) {
-		Risposta res = new Risposta(true);
+		Risposta res = new Risposta();
 		try {
 			ContrattoDao.selectByTipologia(tipologia);
 		} catch (CampoRichiesto e) {
-			res.setSuccesso(false);
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setSuccesso(false);
 			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;

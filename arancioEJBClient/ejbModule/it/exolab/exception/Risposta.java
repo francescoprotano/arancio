@@ -11,10 +11,7 @@ public class Risposta implements Serializable {
 	private Object data;
 
 	public Risposta() {
-	}
-
-	public Risposta(Boolean successo) {
-		this.successo = successo;
+		successo=true;
 	}
 
 	public Risposta(Boolean successo, String errore, String codice_errore, Object data) {
@@ -46,6 +43,7 @@ public class Risposta implements Serializable {
 	}
 
 	public void setCodice_errore(String codice_errore) {
+		successo=false;
 		this.codice_errore = codice_errore;
 	}
 
