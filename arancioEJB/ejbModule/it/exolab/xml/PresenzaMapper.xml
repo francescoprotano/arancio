@@ -5,15 +5,6 @@
 
 <mapper namespace="it.exolab.mapper.PresenzaMapper">
 
-
-
-
-	<select id="all" resultType="it.exolab.model.Presenza">
-		SELECT
-		* FROM presenze
-	</select>
-
-
 	<insert id="insert" parameterType="it.exolab.model.Presenza"
 		useGeneratedKeys="true" keyProperty="id_presenza"
 		keyColumn="id_presenza">
@@ -27,14 +18,6 @@
 		#{controllata}, #{chiusa});
 	</insert>
 
-
-	<delete id="delete" parameterType="int">
-		delete FROM presenze where
-		id_presenza = #{id_presenza}
-	</delete>
-
-
-
 	<update id="update" parameterType="it.exolab.model.Presenza">
 		update presenze set
 		data=#{data}, motivazione_assenza_fk=#{motivazione_assenza_fk},
@@ -46,5 +29,42 @@
 		#{id_presenza}
 	</update>
 
+	<delete id="delete" parameterType="int">
+		delete FROM presenze
+		where
+		id_presenza = #{id_presenza}
+	</delete>
+
+
+	<select id="selectByData" resultType="it.exolab.model.Presenza">
+		SELECT *
+		FROM presenze
+		WHERE data=#{data}
+	</select>
+
+	<select id="selectByMese" resultType="it.exolab.model.Presenza">
+		SELECT *
+		FROM presenze
+		WHERE id_mese_fk=#{id_mese_fk}
+	</select>
+
+	<select id="selectByDipendente"
+		resultType="it.exolab.model.Presenza">
+		SELECT *
+		FROM presenze
+		WHERE id_dipendente_fk=#{id_dipendente_fk}
+	</select>
+
+	<select id="selectByAssenza"
+		resultType="it.exolab.model.Presenza">
+		SELECT *
+		FROM presenze
+		WHERE motivazione_assenza_fk=#{motivazione_assenza_fk}
+	</select>
+
+	<select id="selectAll" resultType="it.exolab.model.Presenza">
+		SELECT *
+		FROM presenze
+	</select>
 
 </mapper>
