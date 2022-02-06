@@ -1,0 +1,42 @@
+<form>
+    <fieldset>
+        <legend>Inserisci Contratto</legend>
+
+
+        <label for="data_assunzione">Data Assunzione</label>
+        <input type="date" [(ngModel)]="model.data_assunzione" name="data_assunzione" /><br />
+        <br>
+
+        <form action="javascript:;">
+            <div class="form-group" *ngIf="isDeterminato">
+                <label for="date">Data Scadenza </label>
+                <input type="date" [(ngModel)]="model.data_scadenza" class="form-control" name="data_scadenza">
+            </div>
+
+            <br>
+
+            <label for="tipologia">Tipologia</label>
+            <select (change)="selectInput($event)" [(ngModel)]="model.tipologia" name="tipologia">
+                <option value="a progetto">a progetto</option>
+                <option value="determinato">determinato</option>
+                <option value="indeterminato">indeterminato</option>
+                <option value="stagionale">stagionale</option>
+               
+            </select>
+            <br />
+            <br>
+            <br>
+            <label for="id_dipendente_fk">ID Dipendente</label>
+            <input type="number" [(ngModel)]="model.id_dipendente_fk" name="id_dipendente_fk" /><br />
+
+            <br />
+
+            <br />
+
+
+            <hr />
+            <input type="button" name="buttonSalva" (click)="salva()" value="Salva" /><br />
+
+
+
+        </form>

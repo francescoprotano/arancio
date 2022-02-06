@@ -1,26 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Contratto } from '../models/contratto';
 import { Dipendente } from '../models/dipendente';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DipendenteService {
-  private listaDipendenti : Array<Dipendente> = new Array<Dipendente>();
-
+  private lavoratoreSelezionato: Dipendente = new Dipendente;
   private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/gestisci";
 
   constructor(private http: HttpClient) { }
 
+  
+  //***DIPENDENTE***
 
   public aggiungi(model: Dipendente,onSuccess:any,onFailure:any) : void {
-	  this.listaDipendenti.push(model);
     this.doPost("/add",model,onSuccess,onFailure);
   }
 
 
   public elenco2(queryString : string){
     return this.http.get<Array<Dipendente>>(this.backendURL + queryString);
+   }
+
+   public selectByEmail(email: string,onSuccess:any,onFailure:any){
+    return this.doGet("/allByEmail?email="+email,onSuccess,onFailure);
+    
    }
  
    public elimina(codice:number,onSuccess:any,onFailure:any){
@@ -35,22 +41,22 @@ export class DipendenteService {
     this.doGet("/findId?id_dipendente="+id_dipendente,onSuccess,onFailure);
   }
 
-  doPut(params: any, onSuccess: any, onFailure: any) {
-    var url = this.backendURL + "/update";
+  //***CONTRATTO***
 
+  public aggiungiContratto(model: Contratto,onSuccess:any,onFailure:any) : void {
+    this.doPost("/addContratto",model,onSuccess,onFailure);
+  }
 
+  public eliminaContratto(id_contratto:number,onSuccess:any,onFailure:any){
+    return this.doGet("/deleteContratto?codice="+id_contratto,onSuccess,onFailure);
+  }
 
-     return this.http.put(url,params).subscribe((httpResponse:any) => {
-               console.log(httpResponse);
-               console.log(params);
-     if(httpResponse.success){
-       onSuccess(httpResponse.params);
-     } else {
-       onFailure(httpResponse.err_code,httpResponse.err);
-       
-     }       
-                 
-     });
+  public elencoContratti(queryString : string){
+    return this.http.get<Array<Contratto>>(this.backendURL + queryString);
+   }
+
+   public aggiornaContratto(model: Contratto,onSuccess:any,onFailure:any)  {
+	  return this.doPost("/updateContratto",model, onSuccess,onFailure);
   }
 
    private doGet(querystring:String,onSuccess:any,onFailure:any){
@@ -58,11 +64,13 @@ export class DipendenteService {
     var url = this.backendURL + "" +querystring;
   
       return this.http.get(url).subscribe((httpResponse:any) => {
+        this.lavoratoreSelezionato = httpResponse;
                 console.log(httpResponse);
-      if(httpResponse.success){
+      if(httpResponse.successo == true){
+        
         onSuccess(httpResponse.data);
       } else {
-        onFailure(httpResponse.err_code,httpResponse.err);
+        onFailure(httpResponse.codice_errore);
         
       }
       
@@ -79,10 +87,12 @@ export class DipendenteService {
      return this.http.post(url,data).subscribe((httpResponse:any) => {
                console.log(httpResponse);
                console.log(data);
-     if(httpResponse.success){
+           
+     if(httpResponse.successo == true){
        onSuccess(httpResponse.data);
      } else {
-       onFailure(httpResponse.err_code,httpResponse.err);
+       onFailure(httpResponse.codice_errore);
+       alert("Operazione non andata a buon fine. Codice errore: "+httpResponse.codice_errore);
        
      }       
                  

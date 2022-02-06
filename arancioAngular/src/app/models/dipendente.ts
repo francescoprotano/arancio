@@ -5,5 +5,6 @@ export class Dipendente{
     data_nascita!: Date;
     email!: string;
     password!: string;
-    ruolo!: string;
+    ruolo_fk!: string;
+    contratto_corrente_fk!: Object;
 }

@@ -10,7 +10,7 @@ import { DipendenteService } from 'src/app/services/dipendente.service';
   styleUrls: ['./all-dipendenti.component.css']
 })
 export class AllDipendentiComponent implements OnInit {
-  queryString : string = "/all";
+  queryString : string = "/allJoinDipendentiEContratti";
   isEditing: boolean = false;
   enableEditIndex = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
@@ -21,7 +21,7 @@ export class AllDipendentiComponent implements OnInit {
   }
 
   onRemove(codice:number) {
-		this.service.elimina(codice,this.onRemoveSuccess.bind(this),this.onFailure.bind(this));
+		this.service.elimina(codice,this.onSuccess.bind(this),this.onFailure.bind(this));
     this.elenco2();
   }
 
@@ -38,18 +38,15 @@ export class AllDipendentiComponent implements OnInit {
     })
   }
 
-
-  onFailure(err:String,err_code:String) {
+  onSuccess(err:String,err_code:String) {
 		
   }
-  onRemoveSuccess(response:String) {
 
-		this.onLoad();
+  onFailure(err: String) {
+    alert("Operazione non andata a buon fine. Codice errore: "+err);
   }
-  onSetCompleteSuccess(response:String) {
-
-		this.onLoad();
-  }
+  
+  
 
   onLoad() {
 		this.elenco2();
@@ -73,9 +70,7 @@ export class AllDipendentiComponent implements OnInit {
 
 
 
-onSuccess(err:String,err_code:String) {
-		
-}
+
 
 }
 

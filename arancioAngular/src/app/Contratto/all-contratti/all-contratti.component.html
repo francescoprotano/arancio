@@ -1,0 +1,44 @@
+<h1>Lista Contratti</h1>
+
+<body>
+
+	<div class="container">
+		<table class="table">
+		  <thead>
+			<tr>
+			  <th scope="col">Data assunzione</th>
+			  <th scope="col">Data scadenza</th>
+			  <th scope="col">Tipologia</th>
+			  <th scope="col">Id Dipendente</th>
+			  <th scope="col">-AZIONI-</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<ng-container *ngFor="let c of listaContratti; index as i;">
+			  <tr>
+				<ng-container *ngIf="enableEditIndex != i">
+				  <td>{{c.data_assunzione | date: 'yyyy-MM-dd'}}</td>
+				  <td>{{c.data_scadenza | date: 'yyyy-MM-dd'}}</td>
+				  <td>{{c.tipologia}}</td>
+				  <td>{{c.id_dipendente_fk}}</td>
+				  <td *ngIf="enableEditIndex != i">
+					<button type="button" (click)="switchEditMode(i)">Modifica</button>
+					<input type="button" value="Cancella" (click)="onRemove(c.id_contratto)"/>
+				  </td>
+				</ng-container>
+				<ng-container *ngIf="enableEditIndex == i">
+				  <td><input [(ngModel)]="c.data_assunzione " type="date" /></td>
+				  <td><input [(ngModel)]="c.data_scadenza" type="date" /></td>
+				  <td><input [(ngModel)]="c.tipologia"  /></td>
+				  <td><input [(ngModel)]="c.id_dipendente_fk" type="number" /></td>
+				  <td><button (click)="save(c)">Conferma</button></td>
+				</ng-container>
+			  </tr>
+			</ng-container>
+		  </tbody>
+		</table>
+	  </div>
+	  <hr/>
+	  <input type="button" value="Indietro" routerLink="/adminLoggedIn">
+	
+   </body>
