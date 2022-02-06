@@ -26,7 +26,7 @@
 		WHERE id_dipendente = #{id_dipendente}
 	</delete>
 	
-	<select id="all" resultType="it.exolab.model.Dipendente">
+	<select id="selectAll" resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 	</select>
@@ -34,6 +34,12 @@
 		SELECT *
 		FROM dipendenti
 		WHERE email=#{email}
+	</select>
+	
+	<select id="selectByRuolo" resultType="it.exolab.model.Dipendente">
+		SELECT *
+		FROM dipendenti
+		WHERE ruolo_fk=#{ruolo_fk}
 	</select>
 	
 </mapper>
