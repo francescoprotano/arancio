@@ -19,7 +19,7 @@ public class PresenzaDao {
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.insert(presenza);
 		sqlSession.commit();
-		System.out.println("Presenza inserita");
+
 
 	}
 
@@ -29,7 +29,7 @@ public class PresenzaDao {
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.update(presenza);
 		sqlSession.commit();
-		System.out.println("Presenza modificata");
+
 	}
 
 	public static void delete(Integer id_presenza) throws CampoRichiesto {
@@ -38,7 +38,7 @@ public class PresenzaDao {
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.delete(id_presenza);
 		sqlSession.commit();
-		System.out.println("Presenza eliminata");
+
 	}
 
 	public static List<Presenza> selectByData(Date data) throws CampoRichiesto {

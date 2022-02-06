@@ -27,7 +27,7 @@ public class ContrattoDao {
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		mapper.update(contratto);
 		sqlSession.commit();
-		System.out.println("Contratto modificato");
+
 	}
 
 	public static void delete(Integer id_contratto) throws CampoRichiesto {
@@ -36,7 +36,7 @@ public class ContrattoDao {
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		mapper.delete(id_contratto);
 		sqlSession.commit();
-		System.out.println("Contratto eliminato");
+
 	}
 
 	public static Contratto selectByID(Integer id_contratto) throws CampoRichiesto {

@@ -16,6 +16,8 @@
   </environments>
   <mappers>
     <mapper resource="it/exolab/xml/DipendenteMapper.xml"/>
+    <mapper resource="it/exolab/xml/ContrattoMapper.xml"/>
+    <mapper resource="it/exolab/xml/PresenzaMapper.xml"/>
 
     
     

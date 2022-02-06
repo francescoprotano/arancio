@@ -12,4 +12,5 @@ public interface DipendenteMapper {
 	Dipendente selectByEmail(String email);
 	List<Dipendente> selectByRuolo(String ruolo);
 	List<Dipendente> selectAll();
+	List<Dipendente> allJoinDipendentiEContratti();
 }

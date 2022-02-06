@@ -112,4 +112,10 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		return DipendenteDao.selectAll();
 	}
 
+	@Override
+	public List<Dipendente> allJoinDipendentiEContratti() {
+		
+		return DipendenteDao.allJoinDipendentiEContratti();
+	}
+
 }

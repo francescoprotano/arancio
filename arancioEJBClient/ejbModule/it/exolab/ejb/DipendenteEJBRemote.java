@@ -16,5 +16,6 @@ public interface DipendenteEJBRemote {
 	public Risposta selectByEmail(String email);
 	public Risposta selectByRuolo(String ruolo);
 	public List<Dipendente> allDipendenti();
+	public List<Dipendente> allJoinDipendentiEContratti();
 	
 }

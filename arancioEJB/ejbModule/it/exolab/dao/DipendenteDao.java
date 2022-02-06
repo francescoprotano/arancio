@@ -19,7 +19,7 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.insert(dip);
 		sqlSession.commit();
-		System.out.println("Dipendente inserito");
+
 
 	}
 
@@ -29,7 +29,7 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.update(dip);
 		sqlSession.commit();
-		System.out.println("Dipendente modificato");
+
 	}
 
 	public static void delete(Integer id_dipendente) throws CampoRichiesto {
@@ -38,7 +38,7 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.delete(id_dipendente);
 		sqlSession.commit();
-		System.out.println("Dipendente eliminato");
+
 	}
 
 	public static Dipendente selectByEmail(String email) throws CampoRichiesto {
@@ -60,6 +60,12 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectAll();
 
+	}
+	
+	public static List<Dipendente> allJoinDipendentiEContratti(){
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		return mapper.allJoinDipendentiEContratti();
 	}
 
 }

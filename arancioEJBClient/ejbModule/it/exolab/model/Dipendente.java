@@ -16,7 +16,7 @@ public class Dipendente implements Serializable {
 	private String email;
 	private String password;
 	private String ruolo_fk;
-	private Contratto contratto_corrente_fk;
+	private Integer contratto_corrente_fk;
 	private List<Presenza> presenze = new ArrayList<>();
 	private List<DipendenteMese> dipendentiMesi = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class Dipendente implements Serializable {
 	}
 
 	public Dipendente(Integer id_dipendente, String nome, String cognome, Date data_nascita, String email,
-			String password, String ruolo_fk, Contratto contratto_corrente_fk, List<Presenza> presenze,
+			String password, String ruolo_fk, Integer contratto_corrente_fk, List<Presenza> presenze,
 			List<DipendenteMese> dipendentiMesi) {
 		super();
 		this.id_dipendente = id_dipendente;
@@ -95,11 +95,11 @@ public class Dipendente implements Serializable {
 		this.ruolo_fk = ruolo_fk;
 	}
 
-	public Contratto getContratto_corrente_fk() {
+	public Integer getContratto_corrente_fk() {
 		return contratto_corrente_fk;
 	}
 
-	public void setContratto_corrente_fk(Contratto contratto_corrente_fk) {
+	public void setContratto_corrente_fk(Integer contratto_corrente_fk) {
 		this.contratto_corrente_fk = contratto_corrente_fk;
 	}
 

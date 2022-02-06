@@ -5,6 +5,33 @@
 
 <mapper namespace="it.exolab.mapper.DipendenteMapper">
 
+	<resultMap id="dipendenteJoincontratti"
+		type="it.exolab.model.Dipendente">
+		<id column="id_dipendente" property="id_dipendente" />
+		<result property="nome" column="nome" />
+		<result property="cognome" column="cognome" />
+		<result property="data_nascita" column="data_nascita" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="ruolo_fk" column="ruolo_fk" />
+		<result property="contratto_corrente_fk" column="contratto_corrente_fk" jdbcType="JAVA_OBJECT"  />
+		<association property="contratto_corrente_fk"
+			javaType="it.exolab.model.Contratto">
+			<id property="id_contratto" column="id_contratto" />
+		</association>
+	</resultMap>
+
+	<select id="allJoinDipendentiEContratti"
+		resultMap="dipendenteJoincontratti">
+		SELECT d.id_dipendente,d.nome, d.cognome, d.data_nascita,
+		d.email,
+		d.password, d.ruolo_fk, d.contratto_corrente_fk
+		FROM dipendenti d inner join contratti c
+		ON
+		c.id_dipendente_fk = d.id_dipendente;
+	</select>
+
+
 	<insert id="insert" parameterType="it.exolab.model.Dipendente"
 		useGeneratedKeys="true" keyProperty="id_dipendente"
 		keyColumn="id_dipendente">
@@ -13,33 +40,38 @@
 		VALUES(#{nome},#{cognome}, #{data_nascita},
 		#{email},#{password},#{ruolo_fk});
 	</insert>
-	
+
 	<update id="update" parameterType="it.exolab.model.Dipendente">
 		UPDATE dipendenti
-		SET nome=#{nome}, cognome=#{cognome}, data_nascita=#{data_nascita},
+		SET
+		nome=#{nome}, cognome=#{cognome}, data_nascita=#{data_nascita},
 		email=#{email}, password=#{password}
-		WHERE id_dipendente = #{id_dipendente}
+		WHERE id_dipendente =
+		#{id_dipendente}
 	</update>
-	
+
 	<delete id="delete" parameterType="int">
 		DELETE FROM dipendenti
-		WHERE id_dipendente = #{id_dipendente}
+		WHERE
+		id_dipendente = #{id_dipendente}
 	</delete>
-	
+
 	<select id="selectAll" resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 	</select>
-	<select id="selectByEmail" resultType="it.exolab.model.Dipendente">
+	<select id="selectByEmail"
+		resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 		WHERE email=#{email}
 	</select>
-	
-	<select id="selectByRuolo" resultType="it.exolab.model.Dipendente">
+
+	<select id="selectByRuolo"
+		resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 		WHERE ruolo_fk=#{ruolo_fk}
 	</select>
-	
+
 </mapper>
