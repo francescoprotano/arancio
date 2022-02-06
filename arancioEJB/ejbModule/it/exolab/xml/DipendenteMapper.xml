@@ -9,9 +9,9 @@
 		useGeneratedKeys="true" keyProperty="id_dipendente"
 		keyColumn="id_dipendente">
 		INSERT INTO dipendenti (nome, cognome, data_nascita, email,
-		password, ruolo)
+		password, ruolo_fk)
 		VALUES(#{nome},#{cognome}, #{data_nascita},
-		#{email},#{password},#{ruolo});
+		#{email},#{password},#{ruolo_fk});
 	</insert>
 	
 	<update id="update" parameterType="it.exolab.model.Dipendente">
