@@ -33,31 +33,31 @@ public class PresenzaServiceRest {
 	}
 	
 	@DELETE
-	public Risposta delete(@QueryParam("") Integer id_mese) {
-		return ConnectionPresenzaEJB.getConnection().delete(id_mese);
+	public Risposta delete(@QueryParam("id_presenza") Integer id_presenza) {
+		return ConnectionPresenzaEJB.getConnection().delete(id_presenza);
 	}
 	
 	@GET
 	@Path("/selectByData")
-	public Risposta selectByData(@QueryParam("") Date data) {
+	public Risposta selectByData(@QueryParam("data") Date data) {
 		return ConnectionPresenzaEJB.getConnection().selectByData(data);
 	}
 	
 	@GET
 	@Path("/selectByMese")
-	public Risposta selectByMese(@QueryParam("") Integer id_mese_fk) {
+	public Risposta selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk) {
 		return ConnectionPresenzaEJB.getConnection().selectByMese(id_mese_fk);
 	}
 	
 	@GET
 	@Path("/selectByDipendente")
-	public Risposta selectByDipendente(@QueryParam("") Integer id_dipendente_fk) {
+	public Risposta selectByDipendente(@QueryParam("id_dipendente_fk") Integer id_dipendente_fk) {
 		return ConnectionPresenzaEJB.getConnection().selectByDipendente(id_dipendente_fk);
 	}
 	
 	@GET
 	@Path("/selectByAssenza")
-	public Risposta selectByAssenza(@QueryParam("") String motivazione_assenza_fk) {
+	public Risposta selectByAssenza(@QueryParam("motivazione_assenza_fk") String motivazione_assenza_fk) {
 		return ConnectionPresenzaEJB.getConnection().selectByAssenza(motivazione_assenza_fk);
 	}
 	

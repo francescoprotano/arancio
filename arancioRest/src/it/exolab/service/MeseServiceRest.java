@@ -33,13 +33,13 @@ public class MeseServiceRest {
 	}
 	
 	@DELETE
-	public Risposta delete(@QueryParam("") Integer id_mese) {
+	public Risposta delete(@QueryParam("id_mese") Integer id_mese) {
 		return ConnectionMeseEJB.getConnection().delete(id_mese);
 	}
 	
 	@GET
 	@Path("/selectByMese")
-	public Risposta selectByMese(@QueryParam("") Date mese) {
+	public Risposta selectByMese(@QueryParam("mese") Date mese) {
 		return ConnectionMeseEJB.getConnection().selectByMese(mese);
 	}
 	

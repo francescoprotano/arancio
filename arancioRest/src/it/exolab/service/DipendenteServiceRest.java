@@ -47,8 +47,8 @@ public class DipendenteServiceRest {
 	
 	@GET
 	@Path("/allByRuolo")
-	public Risposta allByRuolo(@QueryParam("ruolo") String ruolo) {
-		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo);
+	public Risposta allByRuolo(@QueryParam("ruolo_fk") String ruolo_fk) {
+		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo_fk);
 	}
 
 	@GET
