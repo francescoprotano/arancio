@@ -8,7 +8,7 @@ import { Dipendente } from '../models/dipendente';
 })
 export class DipendenteService {
   private lavoratoreSelezionato: Dipendente = new Dipendente;
-  private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/gestisci";
+  private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/dipendente";
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +35,10 @@ export class DipendenteService {
 
    public aggiorna(model: Dipendente,onSuccess:any,onFailure:any)  {
 	  return this.doPost("/update",model, onSuccess,onFailure);
+  }
+
+  public aggiornaPassword(model: Dipendente,onSuccess:any,onFailure:any)  {
+	  return this.doPost("/updatePassword?newPassword=", model, onSuccess,onFailure);
   }
 
   public cercaPerId(id_dipendente : number, onSuccess : any, onFailure : any){
