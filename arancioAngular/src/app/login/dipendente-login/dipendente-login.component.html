@@ -1,9 +1,4 @@
 
-
-<a href='#' *ngIf='authService.isLoggedIn$ | async' (click)='authService.logout()'>Log Out</a>
-<br>
-<br>
-
 <form action="action_page.php" method="post">
     <div class="imgcontainer">
       <img src="/assets/images/img_avatar2.png" alt="Avatar" class="avatar">
@@ -16,7 +11,7 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" [(ngModel)]="model.password" name="email" required>
   
-      <button type="button" *ngIf='!(authService.isLoggedIn$ | async)' (click)="login()" >Login</button>
+      <button type="button" *ngIf='!(authService.isLoggedIn$ | async)' (click)="login(model)" >Login</button>
 
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me

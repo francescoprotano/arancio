@@ -48,7 +48,7 @@ export class DipendenteService {
   }
 
   public eliminaContratto(id_contratto:number,onSuccess:any,onFailure:any){
-    return this.doGet("/deleteContratto?codice="+id_contratto,onSuccess,onFailure);
+    return this.doGet("/deleteContratto?id_contratto="+id_contratto,onSuccess,onFailure);
   }
 
   public elencoContratti(queryString : string){

@@ -31,10 +31,11 @@ export class DipendenteLoginComponent implements OnInit {
     this.timeEvent.emit(this.utenteLoggato)
   }
 
-  login() {
+  login(model: any) {
+    this.model = model;
     try {
     this.validateLogin();
-    this.selectByEmail(this.model.email, this.onLoginSuccess.bind(this), this.onLoginFailure.bind(this));
+    this.selectByEmail(model.email, this.onLoginSuccess.bind(this), this.onLoginFailure.bind(this));
   } catch (e) {
     if (e instanceof CampoRichiesto) {
       alert("il campo " + e.getField() + " è richiesto");
@@ -51,6 +52,7 @@ export class DipendenteLoginComponent implements OnInit {
     return  alert("Email o Password inseriti non corretti.")
     }
     if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'admin') {
+      this.authService.login()
       this.router.navigate(['/adminLoggedIn']);
     } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'dipendente') {
       this.router.navigate(['/dipendenteLoggedIn']);

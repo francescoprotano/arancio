@@ -1,3 +1,5 @@
+import { Contratto } from "./contratto";
+
 export class Dipendente{
     id_dipendente!: number;
     nome!: string;
@@ -6,5 +8,6 @@ export class Dipendente{
     email!: string;
     password!: string;
     ruolo_fk!: string;
-    contratto_corrente_fk!: Object;
+    contratto_corrente_fk!: number;
+    contratto!: Contratto;
 }

@@ -9,5 +9,10 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
 <h1>Benvenuti!</h1>
+<br>
+<button *ngIf='authService.isLoggedIn$ | async'>
+<a href='#'  (click)='authService.logout()'>Log Out</a>
+</button>
+<br>
 
 <router-outlet></router-outlet>

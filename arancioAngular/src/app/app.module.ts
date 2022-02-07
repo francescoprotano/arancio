@@ -13,6 +13,7 @@ import { ResponsabileLoggedinComponent } from './login/responsabile-loggedin/res
 import { DatePipe } from '@angular/common';
 import { AddContrattoComponent } from './Contratto/add-contratto/add-contratto.component';
 import { AllContrattiComponent } from './Contratto/all-contratti/all-contratti.component';
+import { AllDipendentiContractsComponent } from './Dipendente/all-dipendenti-contracts/all-dipendenti-contracts.component';
 
 
 
@@ -21,13 +22,14 @@ import { AllContrattiComponent } from './Contratto/all-contratti/all-contratti.c
   declarations: [
     AppComponent,
     AddDipendenteComponent,
-    AllDipendentiComponent,
     DipendenteLoginComponent,
+    AllDipendentiComponent,
     DipendenteLoggedinComponent,
     AdminLoggedinComponent,
     ResponsabileLoggedinComponent,
     AddContrattoComponent,
     AllContrattiComponent,
+    AllDipendentiContractsComponent,
 
   ],
   imports: [

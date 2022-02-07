@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Contratto } from 'src/app/models/contratto';
 import { Dipendente } from 'src/app/models/dipendente';
 import { DipendenteService } from 'src/app/services/dipendente.service';
 
-
 @Component({
-  selector: 'app-all-dipendenti',
-  templateUrl: './all-dipendenti.component.html',
-  styleUrls: ['./all-dipendenti.component.css']
+  selector: 'app-all-dipendenti-contracts',
+  templateUrl: './all-dipendenti-contracts.component.html',
+  styleUrls: ['./all-dipendenti-contracts.component.css']
 })
-export class AllDipendentiComponent implements OnInit {
-  queryString : string = "/all";
+export class AllDipendentiContractsComponent implements OnInit {
+  queryString : string = "/allJoinDipendentiEContratti";
   isEditing: boolean = false;
   enableEditIndex = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
+  listaContratti : Array<Contratto> = new Array<Contratto>(); 
   constructor(private service:DipendenteService,private router: Router) { }
 
   ngOnInit(): void {
-    this.elenco2();
+    this.elencoDipendenti();
   }
 
   onRemove(codice:number) {
 		this.service.elimina(codice,this.onSuccess.bind(this),this.onFailure.bind(this));
-    this.elenco2();
+    this.elencoDipendenti();
   }
 
 
@@ -31,10 +32,9 @@ export class AllDipendentiComponent implements OnInit {
       this.router.navigate([uri]));
   }
 
-  elenco2(){
+  elencoDipendenti(){
     this.service.elenco2(this.queryString).subscribe(response => {
       this.listaDipendenti = response;
-   
     })
   }
 
@@ -49,7 +49,7 @@ export class AllDipendentiComponent implements OnInit {
   
 
   onLoad() {
-		this.elenco2();
+		this.elencoDipendenti();
   }
   switchEditMode(i: any) {
     this.isEditing = true;
@@ -67,10 +67,4 @@ export class AllDipendentiComponent implements OnInit {
     this.enableEditIndex = null;
   }
   
-
-
-
-
-
 }
-

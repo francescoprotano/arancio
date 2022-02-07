@@ -28,8 +28,15 @@
 				</ng-container>
 				<ng-container *ngIf="enableEditIndex == i">
 				  <td><input [(ngModel)]="c.data_assunzione " type="date" /></td>
-				  <td><input [(ngModel)]="c.data_scadenza" type="date" /></td>
-				  <td><input [(ngModel)]="c.tipologia"  /></td>
+				  <td><input *ngIf="c.tipologia == 'indeterminato' " [disabled]="true" [(ngModel)]="c.data_scadenza" type="date" />
+				 <input *ngIf="c.tipologia != 'indeterminato' " [disabled]="false" [(ngModel)]="c.data_scadenza" type="date" /></td>
+				  <td><select (change)="selectInput($event)" [(ngModel)]="c.tipologia" name="tipologia">
+					<option value="a progetto">a progetto</option>
+					<option value="determinato">determinato</option>
+					<option value="indeterminato">indeterminato</option>
+					<option value="stagionale">stagionale</option>
+				   
+				</select></td>
 				  <td><input [(ngModel)]="c.id_dipendente_fk" type="number" /></td>
 				  <td><button (click)="save(c)">Conferma</button></td>
 				</ng-container>

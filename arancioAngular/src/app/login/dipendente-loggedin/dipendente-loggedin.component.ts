@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AllDipendentiComponent } from 'src/app/Dipendente/add-dipendente/all-dipendenti/all-dipendenti.component';
 import { dipendenteLoggato } from 'src/app/models/dipendenteLoggato';
 import { DipendenteService } from 'src/app/services/dipendente.service';
+import { LoginService } from 'src/app/services/login.service';
 import { DipendenteLoginComponent } from '../dipendente-login/dipendente-login.component';
 
 
@@ -16,7 +17,7 @@ export class DipendenteLoggedinComponent implements OnInit {
   
   model : dipendenteLoggato = new dipendenteLoggato();
   getRuoloUtente!: string;
-  constructor(private router : Router, private login : DipendenteLoginComponent) {
+  constructor(private router : Router, private login : DipendenteLoginComponent, private authService : LoginService) {
     this.login.utenteLoggato;
     
   }
@@ -28,6 +29,9 @@ export class DipendenteLoggedinComponent implements OnInit {
  
   
   ngOnInit(): void {
+    if(!this.authService.isLoggedIn$){
+      this.router.navigate(["/dipLogin"])
+    }
     this.utenteLoggedIn(this.login.utenteLoggato)
   }
 

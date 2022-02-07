@@ -18,6 +18,17 @@ export class AllContrattiComponent implements OnInit {
   ngOnInit(): void {
     this.elencoContratti()
   }
+
+  isDeterminato: boolean = false;
+  selectInput(event : any) {
+    let selected = event.target.value;
+    if (selected == "indeterminato") {
+      this.isDeterminato = false;
+    } else {
+      this.isDeterminato = true;
+    }
+  }
+
   switchEditMode(i: any) {
     this.isEditing = true;
     this.enableEditIndex = i;
