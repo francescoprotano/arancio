@@ -44,6 +44,14 @@
 		WHERE id_dipendente =
 		#{id_dipendente}
 	</update>
+	
+	<update id="updatePassword" parameterType="it.exolab.model.Dipendente">
+		UPDATE dipendenti
+		SET
+		password=#{password}
+		WHERE email =
+		#{email}
+	</update>
 
 	<delete id="delete" parameterType="int">
 		DELETE FROM dipendenti

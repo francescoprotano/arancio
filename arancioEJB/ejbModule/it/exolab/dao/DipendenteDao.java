@@ -28,6 +28,14 @@ public class DipendenteDao {
 		mapper.update(dip);
 		sqlSession.commit();
 	}
+	
+	public static void updatePassword(Dipendente dip) throws CampoRichiesto {
+		DipendenteService.validaPassword(dip);
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		mapper.updatePassword(dip);
+		sqlSession.commit();
+	}
 
 	public static void delete(Integer id_dipendente) throws CampoRichiesto {
 		DipendenteService.validaID(id_dipendente);

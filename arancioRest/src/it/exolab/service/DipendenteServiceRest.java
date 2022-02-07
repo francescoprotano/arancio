@@ -38,6 +38,12 @@ public class DipendenteServiceRest {
 	public Risposta delete(@QueryParam("codice") Integer id_dipendente) {
 		return ConnectionDipendenteEJB.getConnection().delete(id_dipendente);
 	}
+	
+	@POST
+	@Path("/updatePassword")
+	public Risposta updatePassword(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().updatePassword(dipendente);
+	}
 
 	@GET
 	@Path("/allByEmail")

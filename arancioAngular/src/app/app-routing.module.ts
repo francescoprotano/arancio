@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddContrattoComponent } from './Contratto/add-contratto/add-contratto.component';
 import { AllContrattiComponent } from './Contratto/all-contratti/all-contratti.component';
 import { AddDipendenteComponent } from './Dipendente/add-dipendente/add-dipendenti/add-dipendente.component';
-import { AllDipendentiComponent } from './Dipendente/add-dipendente/all-dipendenti/all-dipendenti.component';
+import { AllDipendentiComponent } from './Dipendente/all-dipendenti/all-dipendenti.component';
 import { AllDipendentiContractsComponent } from './Dipendente/all-dipendenti-contracts/all-dipendenti-contracts.component';
 import { AdminLoggedinComponent } from './login/admin-loggedin/admin-loggedin.component';
 import { DipendenteLoggedinComponent } from './login/dipendente-loggedin/dipendente-loggedin.component';
 import { DipendenteLoginComponent } from './login/dipendente-login/dipendente-login.component';
+import { PasswordResetComponent } from './services/password-reset/password-reset.component';
 
 const routes: Routes = [
   {path:'addDip',component:AddDipendenteComponent }
@@ -18,6 +19,7 @@ const routes: Routes = [
   ,{path: 'addContratto', component:AddContrattoComponent}
   ,{path: 'allContratti', component:AllContrattiComponent}
   ,{path: 'allDipContracts', component:AllDipendentiContractsComponent}
+  ,{path: 'resetPassword', component:PasswordResetComponent}
 
 ];
 

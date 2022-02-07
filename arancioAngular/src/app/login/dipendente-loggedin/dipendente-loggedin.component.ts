@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AllDipendentiComponent } from 'src/app/Dipendente/add-dipendente/all-dipendenti/all-dipendenti.component';
+import { AllDipendentiComponent } from 'src/app/Dipendente/all-dipendenti/all-dipendenti.component';
 import { dipendenteLoggato } from 'src/app/models/dipendenteLoggato';
 import { DipendenteService } from 'src/app/services/dipendente.service';
 import { LoginService } from 'src/app/services/login.service';

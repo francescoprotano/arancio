@@ -23,7 +23,7 @@ export class DipendenteLoginComponent implements OnInit {
 
   }
   queryString: string = "/all";
-  private backendURL: String = "http://localhost:8080/arancioRest/gestione_presenze/gestisci";
+  private backendURL: String = "http://localhost:8080/arancioRest/gestione_presenze/dipendente";
   private listaLavoratori: Array<Dipendente> = new Array<Dipendente>();
   model: Dipendente = new Dipendente();
   utenteLoggato: dipendenteLoggato = new dipendenteLoggato;

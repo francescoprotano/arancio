@@ -118,4 +118,22 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		return DipendenteDao.allJoinDipendentiEContratti();
 	}
 
+	@Override
+	public Risposta updatePassword(Dipendente dipendente) {
+		Risposta res = new Risposta();
+		try {
+			DipendenteDao.updatePassword(dipendente);
+		} catch (CampoRichiesto e) {
+			res.setErrore(e.getCampo() + " è richiesto");
+			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore("errore sconosciuto");
+			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

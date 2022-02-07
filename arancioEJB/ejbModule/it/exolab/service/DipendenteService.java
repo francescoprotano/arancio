@@ -63,4 +63,10 @@ public class DipendenteService {
 		DipendenteService.validaInsert(dip);
 	}
 
+	public static void validaPassword(Dipendente dip) throws CampoRichiesto {
+		if (dip.getPassword() == null || dip.getPassword().equals("")) {
+			throw new CampoRichiesto("password");
+		}
+	}
+
 }
