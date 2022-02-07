@@ -143,9 +143,8 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 		}
 		return res;
 	}
-
 	@Override
-	public List<Presenza> allPresenze() {
+	public List<Presenza> selectAll() {
 		return PresenzaDao.selectAll();
 	}
 

@@ -8,7 +8,7 @@
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/gestionepresenze" />
+        <property name="url" value="jdbc:mysql://localhost:3306/gestionepresenze?useSSL=false" />
         <property name="username" value="root"/>
         <property name="password" value="root"/>
       </dataSource>
@@ -18,6 +18,7 @@
     <mapper resource="it/exolab/xml/DipendenteMapper.xml"/>
     <mapper resource="it/exolab/xml/ContrattoMapper.xml"/>
     <mapper resource="it/exolab/xml/PresenzaMapper.xml"/>
+    <mapper resource="it/exolab/xml/MeseMapper.xml"/>
 
     
     

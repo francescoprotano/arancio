@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.exolab.mapper.DipendenteMapper">
+
+
+	<insert id="insert" parameterType="it.exolab.model.Mese"
+		useGeneratedKeys="true" keyProperty="id_mese" 
+		keyColumn="id_mese">
+		INSERT INTO mesi(id_mese,mese,chiuso)
+		VALUES(#{id_mese},#{mese},#{chiuso});
+	</insert>
+	
+	<update id="update" parameterType="it.exolab.model.Mese">
+	UPDATE mesi
+	SET chiuso=#{chiuso};
+	WHERE id_mese=#{id_mese};
+	</update>
+
+	<delete id="delete" parameterType="int">
+	DELETE FROM mesi
+	WHERE id_mese=#{id_mese};
+	</delete>
+	
+	<select id="selectAll" resultType="it.exolab.model.Mese">
+	SELECT *
+	FROM mesi;
+	</select>
+	
+	<select id="selectByMese" resultType="it.exolab.model.Mese">
+	SELECT *
+	FROM mesi
+	WHERE MONTH (mese)=#{mese};
+	</select>
+	
+</mapper>

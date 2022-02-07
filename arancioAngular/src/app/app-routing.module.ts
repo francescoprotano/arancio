@@ -9,7 +9,6 @@ import { AdminLoggedinComponent } from './login/admin-loggedin/admin-loggedin.co
 import { DipendenteLoggedinComponent } from './login/dipendente-loggedin/dipendente-loggedin.component';
 import { DipendenteLoginComponent } from './login/dipendente-login/dipendente-login.component';
 
-
 const routes: Routes = [
   {path:'addDip',component:AddDipendenteComponent }
   ,{path: 'allDip', component:AllDipendentiComponent}

@@ -19,8 +19,6 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.insert(dip);
 		sqlSession.commit();
-
-
 	}
 
 	public static void update(Dipendente dip) throws CampoRichiesto {
@@ -29,7 +27,6 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.update(dip);
 		sqlSession.commit();
-
 	}
 
 	public static void delete(Integer id_dipendente) throws CampoRichiesto {
@@ -38,7 +35,6 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.delete(id_dipendente);
 		sqlSession.commit();
-
 	}
 
 	public static Dipendente selectByEmail(String email) throws CampoRichiesto {
