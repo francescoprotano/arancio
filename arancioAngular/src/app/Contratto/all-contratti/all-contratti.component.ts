@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contratto } from 'src/app/models/contratto';
-import { DipendenteService } from 'src/app/services/dipendente.service';
+import { ContrattoService } from 'src/app/services/contratto.service';
 
 @Component({
   selector: 'app-all-contratti',
@@ -13,7 +13,7 @@ export class AllContrattiComponent implements OnInit {
   queryString : string = "/allContratti";
   isEditing: boolean = false;
   enableEditIndex = null;
-  constructor(private service:DipendenteService,private router: Router) { }
+  constructor(private service:ContrattoService,private router: Router) { }
 
   ngOnInit(): void {
     this.elencoContratti()

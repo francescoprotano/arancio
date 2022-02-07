@@ -45,23 +45,7 @@ export class DipendenteService {
     this.doGet("/findId?id_dipendente="+id_dipendente,onSuccess,onFailure);
   }
 
-  //***CONTRATTO***
-
-  public aggiungiContratto(model: Contratto,onSuccess:any,onFailure:any) : void {
-    this.doPost("/addContratto",model,onSuccess,onFailure);
-  }
-
-  public eliminaContratto(id_contratto:number,onSuccess:any,onFailure:any){
-    return this.doGet("/deleteContratto?id_contratto="+id_contratto,onSuccess,onFailure);
-  }
-
-  public elencoContratti(queryString : string){
-    return this.http.get<Array<Contratto>>(this.backendURL + queryString);
-   }
-
-   public aggiornaContratto(model: Contratto,onSuccess:any,onFailure:any)  {
-	  return this.doPost("/updateContratto",model, onSuccess,onFailure);
-  }
+  
 
    private doGet(querystring:String,onSuccess:any,onFailure:any){
     

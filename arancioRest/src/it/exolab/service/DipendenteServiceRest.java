@@ -71,4 +71,10 @@ public class DipendenteServiceRest {
 		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEContratti();
 	}
 	
+	@GET
+	@Path("/allJoinDipendentiEPresenze")
+	public List<Dipendente> allJoinDipendentiEPresenze() {
+		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEPresenze();
+	}
+	
 }

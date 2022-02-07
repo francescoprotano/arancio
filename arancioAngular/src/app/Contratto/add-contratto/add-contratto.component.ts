@@ -4,7 +4,7 @@ import { CampoRichiesto } from 'src/app/exceptions/campo-richiesto';
 import { DataErrata } from 'src/app/exceptions/data-errata';
 import { DataIncompatibile } from 'src/app/exceptions/data-incompatibile';
 import { Contratto } from 'src/app/models/contratto';
-import { DipendenteService } from 'src/app/services/dipendente.service';
+import { ContrattoService } from 'src/app/services/contratto.service';
 
 @Component({
   selector: 'app-add-contratto',
@@ -14,7 +14,7 @@ import { DipendenteService } from 'src/app/services/dipendente.service';
 export class AddContrattoComponent implements OnInit {
   model: Contratto = new Contratto();
   today = new Date()
-  constructor(private servizio: DipendenteService, private router : Router) { }
+  constructor(private servizio: ContrattoService, private router : Router) { }
 
 
   isDeterminato: boolean = false;
