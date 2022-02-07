@@ -14,7 +14,8 @@
 		<result property="email" column="email" />
 		<result property="password" column="password" />
 		<result property="ruolo_fk" column="ruolo_fk" />
-		<association property="contratto" javaType="it.exolab.model.Contratto">
+		<association property="contratto"
+			javaType="it.exolab.model.Contratto">
 			<id property="id_contratto" column="id_contratto" />
 			<id property="data_assunzione" column="data_assunzione" />
 			<id property="data_scadenza" column="data_scadenza" />
@@ -22,9 +23,40 @@
 		</association>
 	</resultMap>
 
-	<select id="allJoinDipendentiEContratti" resultMap="dipendenteJoincontratti">
+	<resultMap id="dipendenteJoinpresenze"
+		type="it.exolab.model.Dipendente">
+		<id column="id_dipendente" property="id_dipendente" />
+		<result property="nome" column="nome" />
+		<result property="cognome" column="cognome" />
+		<result property="data_nascita" column="data_nascita" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="ruolo_fk" column="ruolo_fk" />
+		<collection property="presenze"
+			javaType="java.util.ArrayList">
+			<id property="id_presenza" column="id_presenza" />
+			<id property="id_dipendente_fk" column="id_dipendente_fk" />
+			<id property="data" column="data" />
+			<id property="ore_lavorate" column="ore_lavorate" />
+			<id property="ore_assenza" column="ore_assenza" />
+			<id property="motivazione_assenza_fk"
+				column="motivazione_assenza_fk" />
+			<id property="id_mese_fk" column="id_mese_fk" />
+		</collection>
+	</resultMap>
+
+	<select id="allJoinDipendentiEContratti"
+		resultMap="dipendenteJoincontratti">
 		SELECT *
-		FROM dipendenti d inner join contratti c ON c.id_dipendente_fk = d.id_dipendente;
+		FROM dipendenti d inner join contratti c ON
+		c.id_dipendente_fk = d.id_dipendente;
+	</select>
+	
+	<select id="allJoinDipendentiEPresenze"
+		resultMap="dipendenteJoinpresenze">
+		SELECT *
+		FROM dipendenti d inner join presenze p ON
+		p.id_dipendente_fk = d.id_dipendente;
 	</select>
 
 	<insert id="insert" parameterType="it.exolab.model.Dipendente"
@@ -44,8 +76,9 @@
 		WHERE id_dipendente =
 		#{id_dipendente}
 	</update>
-	
-	<update id="updatePassword" parameterType="it.exolab.model.Dipendente">
+
+	<update id="updatePassword"
+		parameterType="it.exolab.model.Dipendente">
 		UPDATE dipendenti
 		SET
 		password=#{password}

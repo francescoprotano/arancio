@@ -14,4 +14,5 @@ public interface DipendenteMapper {
 	List<Dipendente> selectByRuolo(String ruolo);
 	List<Dipendente> selectAll();
 	List<Dipendente> allJoinDipendentiEContratti();
+	List<Dipendente> allJoinDipendentiEPresenze();
 }

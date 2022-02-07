@@ -18,5 +18,6 @@ public interface DipendenteEJBRemote {
 	public Risposta selectByRuolo(String ruolo);
 	public List<Dipendente> allDipendenti();
 	public List<Dipendente> allJoinDipendentiEContratti();
+	public List<Dipendente> allJoinDipendentiEPresenze();
 	
 }

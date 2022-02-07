@@ -136,4 +136,10 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		return res;
 	}
 
+	@Override
+	public List<Dipendente> allJoinDipendentiEPresenze() {
+		
+		return DipendenteDao.allJoinDipendentiEPresenze();
+	}
+
 }

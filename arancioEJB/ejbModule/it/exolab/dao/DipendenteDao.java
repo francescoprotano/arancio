@@ -71,5 +71,11 @@ public class DipendenteDao {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEContratti();
 	}
+	
+	public static List<Dipendente> allJoinDipendentiEPresenze(){
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		return mapper.allJoinDipendentiEPresenze();
+	}
 
 }
