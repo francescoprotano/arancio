@@ -14,23 +14,18 @@
 		<result property="email" column="email" />
 		<result property="password" column="password" />
 		<result property="ruolo_fk" column="ruolo_fk" />
-		<result property="contratto_corrente_fk" column="contratto_corrente_fk" jdbcType="JAVA_OBJECT"  />
-		<association property="contratto_corrente_fk"
-			javaType="it.exolab.model.Contratto">
+		<association property="contratto" javaType="it.exolab.model.Contratto">
 			<id property="id_contratto" column="id_contratto" />
+			<id property="data_assunzione" column="data_assunzione" />
+			<id property="data_scadenza" column="data_scadenza" />
+			<id property="tipologia" column="tipologia" />
 		</association>
 	</resultMap>
 
-	<select id="allJoinDipendentiEContratti"
-		resultMap="dipendenteJoincontratti">
-		SELECT d.id_dipendente,d.nome, d.cognome, d.data_nascita,
-		d.email,
-		d.password, d.ruolo_fk, d.contratto_corrente_fk
-		FROM dipendenti d inner join contratti c
-		ON
-		c.id_dipendente_fk = d.id_dipendente;
+	<select id="allJoinDipendentiEContratti" resultMap="dipendenteJoincontratti">
+		SELECT *
+		FROM dipendenti d inner join contratti c ON c.id_dipendente_fk = d.id_dipendente;
 	</select>
-
 
 	<insert id="insert" parameterType="it.exolab.model.Dipendente"
 		useGeneratedKeys="true" keyProperty="id_dipendente"
