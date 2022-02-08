@@ -14,7 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionMeseEJB;
-import it.exolab.exception.Risposta;
+import it.exolab.exception.RispostaMese;
 import it.exolab.model.Mese;
 
 @Path("/mese")
@@ -23,23 +23,23 @@ import it.exolab.model.Mese;
 public class MeseServiceRest {
 	
 	@POST
-	public Risposta add(Mese mese) {
+	public RispostaMese add(Mese mese) {
 		return ConnectionMeseEJB.getConnection().add(mese);
 	}
 	
 	@PUT
-	public Risposta update(Mese mese) {
+	public RispostaMese update(Mese mese) {
 		return ConnectionMeseEJB.getConnection().edit(mese);
 	}
 	
 	@DELETE
-	public Risposta delete(@QueryParam("id_mese") Integer id_mese) {
+	public RispostaMese delete(@QueryParam("id_mese") Integer id_mese) {
 		return ConnectionMeseEJB.getConnection().delete(id_mese);
 	}
 	
 	@GET
 	@Path("/selectByMese")
-	public Risposta selectByMese(@QueryParam("mese") Date mese) {
+	public RispostaMese selectByMese(@QueryParam("mese") Date mese) {
 		return ConnectionMeseEJB.getConnection().selectByMese(mese);
 	}
 	

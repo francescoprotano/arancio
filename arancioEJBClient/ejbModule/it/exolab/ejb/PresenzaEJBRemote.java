@@ -5,19 +5,19 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import it.exolab.exception.Risposta;
+import it.exolab.exception.RispostaPresenza;
 import it.exolab.model.Presenza;
 
 @Remote
 public interface PresenzaEJBRemote {
 	
-	public Risposta add(Presenza presenza);
-	public Risposta edit(Presenza presenza);
-	public Risposta delete(Integer id_presenza);
-	public Risposta selectByData(Date data);
-	public Risposta selectByMese(Integer id_mese_fk);
-	public Risposta selectByDipendente(Integer id_dipendente_fk);
-	public Risposta selectByAssenza(String motivazione_assenza_fk);
+	public RispostaPresenza add(Presenza presenza);
+	public RispostaPresenza edit(Presenza presenza);
+	public RispostaPresenza delete(Integer id_presenza);
+	public RispostaPresenza selectByData(Date data);
+	public RispostaPresenza selectByMese(Integer id_mese_fk);
+	public RispostaPresenza selectByDipendente(Integer id_dipendente_fk);
+	public RispostaPresenza selectByAssenza(String motivazione_assenza_fk);
 	public List<Presenza> selectAll();
 	
 }

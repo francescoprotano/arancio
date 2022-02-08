@@ -11,7 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionContrattoEJB;
-import it.exolab.exception.Risposta;
+import it.exolab.exception.RispostaContratto;
 import it.exolab.model.Contratto;
 
 @Path("/contratto")
@@ -28,31 +28,31 @@ public class ContrattoServiceRest {
 		
 		@POST
 		@Path("/addContratto")
-		public Risposta add(Contratto contratto) {
+		public RispostaContratto add(Contratto contratto) {
 			return ConnectionContrattoEJB.getConnection().add(contratto);
 		}
 		
 		@POST
 		@Path("/updateContratto")
-		public Risposta update(Contratto contratto) {
+		public RispostaContratto update(Contratto contratto) {
 			return ConnectionContrattoEJB.getConnection().edit(contratto);
 		}
 		
 		@GET
 		@Path("/deleteContratto")
-		public Risposta deleteContratto(@QueryParam("id_contratto") Integer id_contratto) {
+		public RispostaContratto deleteContratto(@QueryParam("id_contratto") Integer id_contratto) {
 			return ConnectionContrattoEJB.getConnection().delete(id_contratto);
 		}
 		
 		@GET
 		@Path("/allById")
-		public Risposta allContrattiById(@QueryParam("id_contratto") Integer id_contratto) {
+		public RispostaContratto allContrattiById(@QueryParam("id_contratto") Integer id_contratto) {
 			return ConnectionContrattoEJB.getConnection().selectByID(id_contratto);
 		}
 		
 		@GET
 		@Path("/allByTipologia")
-		public Risposta allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
+		public RispostaContratto allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
 			return ConnectionContrattoEJB.getConnection().selectByTipologia(tipologia);
 		}
 

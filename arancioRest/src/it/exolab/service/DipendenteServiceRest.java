@@ -11,7 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionDipendenteEJB;
-import it.exolab.exception.Risposta;
+import it.exolab.exception.RispostaDipendente;
 import it.exolab.model.Dipendente;
 
 @Path("/dipendente")
@@ -23,37 +23,37 @@ public class DipendenteServiceRest {
 	
 	@POST
 	@Path("/add")
-	public Risposta add(Dipendente dipendente) {
+	public RispostaDipendente add(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().add(dipendente);
 	}
 
 	@POST
 	@Path("/update")
-	public Risposta update(Dipendente dipendente) {
+	public RispostaDipendente update(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().edit(dipendente);
 	}
 	
 	@GET
 	@Path("/delete")
-	public Risposta delete(@QueryParam("codice") Integer id_dipendente) {
+	public RispostaDipendente delete(@QueryParam("codice") Integer id_dipendente) {
 		return ConnectionDipendenteEJB.getConnection().delete(id_dipendente);
 	}
 	
 	@POST
 	@Path("/updatePassword")
-	public Risposta updatePassword(Dipendente dipendente) {
+	public RispostaDipendente updatePassword(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().updatePassword(dipendente);
 	}
 
 	@GET
 	@Path("/allByEmail")
-	public Risposta allByEmail(@QueryParam("email") String email) {
+	public RispostaDipendente allByEmail(@QueryParam("email") String email) {
 		return ConnectionDipendenteEJB.getConnection().selectByEmail(email);
 	}
 	
 	@GET
 	@Path("/allByRuolo")
-	public Risposta allByRuolo(@QueryParam("ruolo_fk") String ruolo_fk) {
+	public RispostaDipendente allByRuolo(@QueryParam("ruolo_fk") String ruolo_fk) {
 		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo_fk);
 	}
 

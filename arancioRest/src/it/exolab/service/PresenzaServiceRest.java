@@ -14,7 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionPresenzaEJB;
-import it.exolab.exception.Risposta;
+import it.exolab.exception.RispostaPresenza;
 import it.exolab.model.Presenza;
 
 @Path("/presenza")
@@ -23,41 +23,41 @@ import it.exolab.model.Presenza;
 public class PresenzaServiceRest {
 	
 	@POST
-	public Risposta add(Presenza presenza) {
+	public RispostaPresenza add(Presenza presenza) {
 	return ConnectionPresenzaEJB.getConnection().add(presenza);	
 	}
 	
 	@PUT
-	public Risposta update(Presenza presenza) {
+	public RispostaPresenza update(Presenza presenza) {
 		return ConnectionPresenzaEJB.getConnection().edit(presenza);
 	}
 	
 	@DELETE
-	public Risposta delete(@QueryParam("id_presenza") Integer id_presenza) {
+	public RispostaPresenza delete(@QueryParam("id_presenza") Integer id_presenza) {
 		return ConnectionPresenzaEJB.getConnection().delete(id_presenza);
 	}
 	
 	@GET
 	@Path("/selectByData")
-	public Risposta selectByData(@QueryParam("data") Date data) {
+	public RispostaPresenza selectByData(@QueryParam("data") Date data) {
 		return ConnectionPresenzaEJB.getConnection().selectByData(data);
 	}
 	
 	@GET
 	@Path("/selectByMese")
-	public Risposta selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk) {
+	public RispostaPresenza selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk) {
 		return ConnectionPresenzaEJB.getConnection().selectByMese(id_mese_fk);
 	}
 	
 	@GET
 	@Path("/selectByDipendente")
-	public Risposta selectByDipendente(@QueryParam("id_dipendente_fk") Integer id_dipendente_fk) {
+	public RispostaPresenza selectByDipendente(@QueryParam("id_dipendente_fk") Integer id_dipendente_fk) {
 		return ConnectionPresenzaEJB.getConnection().selectByDipendente(id_dipendente_fk);
 	}
 	
 	@GET
 	@Path("/selectByAssenza")
-	public Risposta selectByAssenza(@QueryParam("motivazione_assenza_fk") String motivazione_assenza_fk) {
+	public RispostaPresenza selectByAssenza(@QueryParam("motivazione_assenza_fk") String motivazione_assenza_fk) {
 		return ConnectionPresenzaEJB.getConnection().selectByAssenza(motivazione_assenza_fk);
 	}
 	
