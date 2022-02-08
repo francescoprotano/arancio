@@ -36,7 +36,7 @@ public class MeseDAO extends BaseDAO<MeseMapper>{
 		inserisciDipendeti_Mesi();
 	}
 	
-	public void inserisciDipendeti_Mesi() {
+	public void inserisciDipendeti_Mesi() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
 		Integer id_mese = mapper.selectLastID();

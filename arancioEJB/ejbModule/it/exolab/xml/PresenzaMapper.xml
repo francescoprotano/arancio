@@ -9,22 +9,22 @@
 		useGeneratedKeys="true" keyProperty="id_presenza"
 		keyColumn="id_presenza">
 		INSERT into
-		presenze (data,
+		presenze (id_dipendente_fk,data, ore_lavorate, ore_assenza,
 		motivazione_assenza_fk,
-		id_dipendente_fk, compilabile, controllata, chiusa)
+		 id_mese_fk)
 		VALUES
-		(#{data},
-		#{motivazione_assenza_fk}, #{id_dipendente_fk}, #{compilabile},
-		#{controllata}, #{chiusa});
+		(#{id_dipendente_fk},
+		#{data}, #{ore_lavorate}, #{ore_assenza},
+		#{motivazione_assenza_fk}, #{id_mese_fk});
 	</insert>
 
 	<update id="update" parameterType="it.exolab.model.Presenza">
 		update presenze set
 		data=#{data}, motivazione_assenza_fk=#{motivazione_assenza_fk},
 		id_dipendente_fk=#{id_dipendente_fk},
-		compilabile=#{compilabile},
-		controllata=#{controllata},
-		chiusa=#{chiusa}
+		ore_lavorate=#{ore_lavorate},
+		ore_assenza=#{ore_assenza},
+		id_mese_fk=#{id_mese_fk}
 		where id_presenza =
 		#{id_presenza}
 	</update>
