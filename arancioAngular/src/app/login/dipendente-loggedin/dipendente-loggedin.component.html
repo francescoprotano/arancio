@@ -1,14 +1,55 @@
-<fieldset style="text-align: center">
-  <h1>Benvenuto/a ADMIN!</h1>
+<h1>Ciao {{utente.nome}}</h1>
+
+
+
+<body>
+
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID Dipendente</th>
+          <th scope="col">ID Presenza</th>
+          <th scope="col">Data</th>
+          <th scope="col">Ore lavorate</th>
+          <th scope="col">Ore assenza</th>
+          <th scope="col">Motivazione assenza</th>
+          <th scope="col">ID mese</th>
+          <th scope="col">-AZIONI-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let p of listaPresenze; index as i;">
+
+          <tr>
+            <th scope="row">{{p.id_presenza}}</th>
+            <td>{{utente.id_dipendente}}</td>
+            <ng-container *ngIf="enableEditIndex != i">
+              <td>{{p.data | date: 'yyyy-MM-dd' }}</td>
+              <td>{{p.ore_lavorate}}</td>
+              <td>{{p.ore_assenza}}</td>
+              <td>{{p.motivazione_assenza_fk}}</td>
+              <td>{{p.id_mese_fk}}</td>
+            </ng-container>
+            <td *ngIf="enableEditIndex != i">
+              <button type="button" (click)="switchEditMode(i)">Modifica</button>
+            </td>
+            <ng-container *ngIf="enableEditIndex == i">
+
+              <td><input [(ngModel)]="p.data" type="date" /></td>
+              <td><input [(ngModel)]="p.ore_lavorate" /></td>
+              <td><input [(ngModel)]="p.ore_assenza" /></td>
+              <td><input [(ngModel)]="p.motivazione_assenza_fk" /></td>
+              <td><input [(ngModel)]="p.id_mese_fk" /></td>
+              <td><button (click)="save(p)">Conferma</button></td>
+            </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <hr />
+  
   <br>
-  <form action="/action_page.php">
-   <br>
-    <input type="button" id="fname" name="fname" value="Aggiungi Dipendente"  ><br>
-<br>
-    <input type="button" id="lname" name="lname" value="Visualizza lista Dipendenti" (click)="elencoDipendenti()" ><br><br>
-    <input type="submit" value="Submit">
-  </form>
-  <br><br><br>
-  
-  
-  </fieldset>
+  <input type="button" value="Aggiungi presenzaa" routerLink="/adminLoggedIn">
+
+</body>

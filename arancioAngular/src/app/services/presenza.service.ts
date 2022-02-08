@@ -1,0 +1,63 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Dipendente } from '../models/dipendente';
+import { Presenza } from '../models/presenza';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PresenzaService {
+  private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/presenza";
+  private presenzaSelezionata: Presenza = new Presenza;
+
+  constructor(private http: HttpClient) { }
+
+
+  public aggiornaPresenza(model: Presenza,onSuccess:any,onFailure:any)  {
+	  return this.doPost("/updatePresenza",model, onSuccess,onFailure);
+  }
+  public elencoPresenze(queryString : string){
+    return this.http.get<Array<Presenza>>(this.backendURL + queryString);
+   }
+
+  private doGet(querystring:String,onSuccess:any,onFailure:any){
+    
+    var url = this.backendURL + "" +querystring;
+  
+      return this.http.get(url).subscribe((httpResponse:any) => {
+        this.presenzaSelezionata = httpResponse;
+                console.log(httpResponse);
+      if(httpResponse.successo == true){
+        
+        onSuccess(httpResponse.data);
+      } else {
+        onFailure(httpResponse.codice_errore);
+        
+      }
+      
+                  
+      });
+}
+
+  private doPost(querystring:any, data:any, onSuccess:any,onFailure:any){
+    
+    var url = this.backendURL + "" + querystring;
+
+
+
+     return this.http.post(url,data).subscribe((httpResponse:any) => {
+               console.log(httpResponse);
+               console.log(data);
+           
+     if(httpResponse.successo == true){
+       onSuccess(httpResponse.data);
+     } else {
+       onFailure(httpResponse.codice_errore);
+       alert("Operazione non andata a buon fine. Codice errore: "+httpResponse.codice_errore);
+       
+     }       
+                 
+     });
+
+}
+}

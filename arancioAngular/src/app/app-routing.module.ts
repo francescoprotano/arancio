@@ -9,6 +9,7 @@ import { AdminLoggedinComponent } from './login/admin-loggedin/admin-loggedin.co
 import { DipendenteLoggedinComponent } from './login/dipendente-loggedin/dipendente-loggedin.component';
 import { DipendenteLoginComponent } from './login/dipendente-login/dipendente-login.component';
 import { PasswordResetComponent } from './services/password-reset/password-reset.component';
+import { AddMeseComponent } from './Mese/add-mese/add-mese.component';
 
 const routes: Routes = [
   {path:'addDip',component:AddDipendenteComponent }
@@ -20,6 +21,7 @@ const routes: Routes = [
   ,{path: 'allContratti', component:AllContrattiComponent}
   ,{path: 'allDipContracts', component:AllDipendentiContractsComponent}
   ,{path: 'resetPassword', component:PasswordResetComponent}
+  ,{path: 'addMese', component:AddMeseComponent}
 
 ];
 

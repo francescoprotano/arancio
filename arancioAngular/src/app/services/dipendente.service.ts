@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contratto } from '../models/contratto';
 import { Dipendente } from '../models/dipendente';
+import { Presenza } from '../models/presenza';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,8 @@ export class DipendenteService {
    public aggiorna(model: Dipendente,onSuccess:any,onFailure:any)  {
 	  return this.doPost("/update",model, onSuccess,onFailure);
   }
+
+  
 
   public aggiornaPassword(model: Dipendente,onSuccess:any,onFailure:any)  {
 	  return this.doPost("/updatePassword?newPassword=", model, onSuccess,onFailure);

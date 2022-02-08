@@ -16,13 +16,13 @@
 	ORDER BY id_mese DESC
 	LIMIT 1;
 	</select>
-	<select id="selectAllID" resultType="int">
+	<select id="selectAllID" resultType="it.exolab.model.Dipendente">
 	SELECT id_dipendente
 	FROM dipendenti
 	</select>
-	<insert id="inserisciDipendeti_Mesi" parameterType="int">
+	<insert id="inserisciDipendenti_Mesi" parameterType="it.exolab.model.DipendenteMese">
 	INSERT INTO dipendenti_mesi(id_dipendente_fk,id_mese_fk)
-	VALUES(#{id_dipendente},#{id_mese});
+	VALUES(#{id_dipendente_fk},#{id_mese_fk});
 	</insert>
 	
 	<update id="update" parameterType="it.exolab.model.Mese">

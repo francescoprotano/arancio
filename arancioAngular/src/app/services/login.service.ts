@@ -20,6 +20,7 @@ export class LoginService {
   logout() {
     // logic
     localStorage.setItem('loggedIn', 'false');
+    sessionStorage.clear();
     this.isLoggedIn$.next(false);
   }
 

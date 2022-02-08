@@ -23,11 +23,13 @@ import it.exolab.model.Mese;
 public class MeseServiceRest {
 	
 	@POST
+	@Path("/add")
 	public RispostaMese add(Mese mese) {
 		return ConnectionMeseEJB.getConnection().add(mese);
 	}
 	
-	@PUT
+	@POST
+	@Path("/update")
 	public RispostaMese update(Mese mese) {
 		return ConnectionMeseEJB.getConnection().edit(mese);
 	}

@@ -15,6 +15,7 @@ import { AddContrattoComponent } from './Contratto/add-contratto/add-contratto.c
 import { AllContrattiComponent } from './Contratto/all-contratti/all-contratti.component';
 import { AllDipendentiContractsComponent } from './Dipendente/all-dipendenti-contracts/all-dipendenti-contracts.component';
 import { PasswordResetComponent } from './services/password-reset/password-reset.component';
+import { AddMeseComponent } from './Mese/add-mese/add-mese.component';
 
 
 
@@ -32,6 +33,7 @@ import { PasswordResetComponent } from './services/password-reset/password-reset
     AllContrattiComponent,
     AllDipendentiContractsComponent,
     PasswordResetComponent,
+    AddMeseComponent,
 
   ],
   imports: [

@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.MeseMapper;
+import it.exolab.model.Dipendente;
+import it.exolab.model.DipendenteMese;
 import it.exolab.model.Mese;
 import it.exolab.util.MyBatisUtils;
 
@@ -38,10 +40,12 @@ public class MeseDAO extends BaseDAO<MeseMapper>{
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
 		Integer id_mese = mapper.selectLastID();
-		List<Integer> id_dipendenti=mapper.selectAllID();
-		
-		for (Integer id_dipendente : id_dipendenti) {
-			mapper.inserisciDipendeti_Mesi(id_mese, id_dipendente);
+		List<Dipendente> id_dipendenti=mapper.selectAllID();
+		DipendenteMese dipMes = new DipendenteMese();
+		dipMes.setId_mese_fk(id_mese);
+		for (Dipendente id_dipendente : id_dipendenti) {
+			dipMes.setId_dipendente_fk(id_dipendente.getId_dipendente());
+			mapper.inserisciDipendenti_Mesi(dipMes);
 			sqlSession.commit();
 		}
 	}

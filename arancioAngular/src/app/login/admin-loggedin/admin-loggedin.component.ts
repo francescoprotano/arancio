@@ -42,6 +42,10 @@ aggiungiContratto(){
   this.router.navigate(["/addContratto"])
 }
 
+aggiungiMese(){
+  this.router.navigate(["/addMese"])
+}
+
 elencoContratti(){
   this.router.navigate(["/allContratti"])
 }

@@ -6,6 +6,7 @@ import { Dipendente } from 'src/app/models/dipendente';
 import { dipendenteLoggato } from 'src/app/models/dipendenteLoggato';
 import { DipendenteService } from 'src/app/services/dipendente.service';
 import { LoginService } from 'src/app/services/login.service';
+import { DipendenteLoggedinComponent } from '../dipendente-loggedin/dipendente-loggedin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,44 +20,54 @@ import { LoginService } from 'src/app/services/login.service';
 export class DipendenteLoginComponent implements OnInit {
   @Output() timeEvent = new EventEmitter();
 
-  constructor(public authService: LoginService, private router: Router, private apiservice: DipendenteService, private http: HttpClient) {
+  constructor(public authService: LoginService, private router: Router, private apiservice: DipendenteService, private http: HttpClient, private dip: DipendenteLoggedinComponent) {
 
   }
   queryString: string = "/all";
   private backendURL: String = "http://localhost:8080/arancioRest/gestione_presenze/dipendente";
   private listaLavoratori: Array<Dipendente> = new Array<Dipendente>();
   model: Dipendente = new Dipendente();
-  utenteLoggato: dipendenteLoggato = new dipendenteLoggato;
+  utente: Dipendente = new Dipendente();
+  utenteLoggato: Dipendente = new Dipendente;
+
+
   ngOnInit(): void {
+    this.utente = JSON.parse(sessionStorage.getItem("utente") || '{}');
     this.timeEvent.emit(this.utenteLoggato)
+    if (this.utente.ruolo_fk == 'dipendente') {
+      this.router.navigate(["/dipendenteLoggedIn"])
+    }
   }
 
   login(model: any) {
     this.model = model;
     try {
-    this.validateLogin();
-    this.selectByEmail(model.email, this.onLoginSuccess.bind(this), this.onLoginFailure.bind(this));
-  } catch (e) {
-    if (e instanceof CampoRichiesto) {
-      alert("il campo " + e.getField() + " è richiesto");
-    }
+      this.validateLogin();
+      this.selectByEmail(model.email, this.onLoginSuccess.bind(this), this.onLoginFailure.bind(this));
+    } catch (e) {
+      if (e instanceof CampoRichiesto) {
+        alert("il campo " + e.getField() + " è richiesto");
+      }
 
-    return false;
-  }
-  return true;
+      return false;
+    }
+    return true;
   }
 
   verifica(utenteLoggato: any) {
-  
-    if(utenteLoggato == null){
-    return  alert("Email o Password inseriti non corretti.")
+
+    if (utenteLoggato == null) {
+      return alert("Email o Password inseriti non corretti.")
     }
     if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'admin') {
       this.authService.login()
       this.router.navigate(['/adminLoggedIn']);
     } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'dipendente') {
+      this.authService.login()
+      sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
       this.router.navigate(['/dipendenteLoggedIn']);
     } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'resonsabile') {
+      this.authService.login()
       this.router.navigate(['/responsabileLoggedIn']);
     } else {
       alert("Impossibile accedere")
@@ -98,7 +109,7 @@ export class DipendenteLoginComponent implements OnInit {
     });
   }
 
-  onLoginSuccess(result: dipendenteLoggato) {
+  onLoginSuccess(result: Dipendente) {
     this.utenteLoggato = result;
 
 
