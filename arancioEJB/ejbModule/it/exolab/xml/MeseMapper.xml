@@ -21,7 +21,7 @@
 	FROM dipendenti
 	</select>
 	<insert id="inserisciDipendeti_Mesi" parameterType="int">
-	INSERT INTOdipendenti_mesi(id_dipendente_fk,id_mese_fk)
+	INSERT INTO dipendenti_mesi(id_dipendente_fk,id_mese_fk)
 	VALUES(#{id_dipendente},#{id_mese});
 	</insert>
 	
