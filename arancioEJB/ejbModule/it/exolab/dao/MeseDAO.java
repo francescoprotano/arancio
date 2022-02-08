@@ -90,7 +90,6 @@ public class MeseDAO extends BaseDAO<MeseMapper>{
 	}
 
 	private void validaMese(Mese mese) throws CampoRichiesto {
-		validaID(mese.getId_mese());
 		validaData(mese.getMese());
 	}
 
