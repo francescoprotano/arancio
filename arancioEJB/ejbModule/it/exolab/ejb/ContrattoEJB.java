@@ -7,101 +7,127 @@ import javax.ejb.Stateless;
 
 import it.exolab.dao.ContrattoDao;
 import it.exolab.exception.CampoRichiesto;
-import it.exolab.exception.Risposta;
+import it.exolab.exception.ErroreGenerico;
+import it.exolab.exception.RispostaContratto;
 import it.exolab.model.Contratto;
 
 @Stateless
 @LocalBean
-public class ContrattoEJB implements ContrattoEJBRemote {
+public class ContrattoEJB extends BaseEJB implements ContrattoEJBRemote {
 
 	public ContrattoEJB() {
 	}
 
 	@Override
-	public Risposta add(Contratto contratto) {
-		Risposta res = new Risposta();
+	public RispostaContratto add(Contratto contratto) {
+		RispostaContratto res = new RispostaContratto();
 		try {
-			ContrattoDao.insert(contratto);
+			ContrattoDao.getIstanza().insert(contratto);
+			res.setData(contratto);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta edit(Contratto contratto) {
-		Risposta res = new Risposta();
+	public RispostaContratto edit(Contratto contratto) {
+		RispostaContratto res = new RispostaContratto();
 		try {
-			ContrattoDao.update(contratto);
+			ContrattoDao.getIstanza().update(contratto);
+			res.setData(contratto);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta delete(Integer id_contratto) {
-		Risposta res = new Risposta();
+	public RispostaContratto delete(Integer id_contratto) {
+		RispostaContratto res = new RispostaContratto();
 		try {
-			ContrattoDao.delete(id_contratto);
+			ContrattoDao.getIstanza().delete(id_contratto);
+			res.setData(id_contratto);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta selectByID(Integer id_contratto) {
-		Risposta res = new Risposta();
+	public RispostaContratto selectByID(Integer id_contratto) {
+		RispostaContratto res = new RispostaContratto();
 		try {
-			ContrattoDao.selectByID(id_contratto);
+			ContrattoDao.getIstanza().selectByID(id_contratto);
+			res.setData(id_contratto);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta selectByTipologia(String tipologia) {
-		Risposta res = new Risposta();
+	public RispostaContratto selectByTipologia(String tipologia) {
+		RispostaContratto res = new RispostaContratto();
 		try {
-			ContrattoDao.selectByTipologia(tipologia);
+			ContrattoDao.getIstanza().selectByTipologia(tipologia);
+			res.setData(tipologia);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -109,7 +135,7 @@ public class ContrattoEJB implements ContrattoEJBRemote {
 
 	@Override
 	public List<Contratto> allContratti() {
-		return ContrattoDao.selectAll();
+		return ContrattoDao.getIstanza().selectAll();
 	}
 
 }

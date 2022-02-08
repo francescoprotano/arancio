@@ -2,7 +2,7 @@ package it.exolab.exception;
 
 import java.io.Serializable;
 
-public class Risposta implements Serializable {
+public class Risposta<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Boolean successo;

@@ -7,101 +7,148 @@ import javax.ejb.Stateless;
 
 import it.exolab.dao.DipendenteDao;
 import it.exolab.exception.CampoRichiesto;
-import it.exolab.exception.Risposta;
+import it.exolab.exception.ErroreGenerico;
+import it.exolab.exception.RispostaDipendente;
 import it.exolab.model.Dipendente;
 
 @Stateless
 @LocalBean
-public class DipendenteEJB implements DipendenteEJBRemote {
+public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 
 	public DipendenteEJB() {
 	}
 
 	@Override
-	public Risposta add(Dipendente dipendente) {
-		Risposta res = new Risposta();
+	public RispostaDipendente add(Dipendente dipendente) {
+		RispostaDipendente res = new RispostaDipendente();
 		try {
-			DipendenteDao.insert(dipendente);
+			DipendenteDao.getIstanza().insert(dipendente);
+			res.setData(dipendente);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta edit(Dipendente dipendente) {
-		Risposta res = new Risposta();
+	public RispostaDipendente edit(Dipendente dipendente) {
+		RispostaDipendente res = new RispostaDipendente();
 		try {
-			DipendenteDao.update(dipendente);
+			DipendenteDao.getIstanza().update(dipendente);
+			res.setData(dipendente);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	@Override
+	public RispostaDipendente updatePassword(Dipendente dipendente) {
+		RispostaDipendente res = new RispostaDipendente();
+		try {
+			DipendenteDao.getIstanza().updatePassword(dipendente);
+			res.setData(dipendente);
+		} catch (CampoRichiesto e) {
+			res.setErrore(e.getCampo() + " è richiesto");
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta delete(Integer id_dipendente) {
-		Risposta res = new Risposta();
+	public RispostaDipendente delete(Integer id_dipendente) {
+		RispostaDipendente res = new RispostaDipendente();
 		try {
-			DipendenteDao.delete(id_dipendente);
+			DipendenteDao.getIstanza().delete(id_dipendente);
+			res.setData("");
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta selectByEmail(String email) {
-		Risposta res = new Risposta();
+	public RispostaDipendente selectByEmail(String email) {
+		RispostaDipendente res = new RispostaDipendente();
 		try {
-			res.setData(DipendenteDao.selectByEmail(email));
+			res.setData(DipendenteDao.getIstanza().selectByEmail(email));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 	@Override
-	public Risposta selectByRuolo(String ruolo) {
-		Risposta res = new Risposta();
+	public RispostaDipendente selectByRuolo(String ruolo) {
+		RispostaDipendente res = new RispostaDipendente();
 		try {
-			res.setData(DipendenteDao.selectByRuolo(ruolo));
+			res.setData(DipendenteDao.getIstanza().selectByRuolo(ruolo));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
+			e.printStackTrace();
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
 		return res;
@@ -109,37 +156,19 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 
 	@Override
 	public List<Dipendente> allDipendenti() {
-		return DipendenteDao.selectAll();
+		return DipendenteDao.getIstanza().selectAll();
 	}
 
 	@Override
 	public List<Dipendente> allJoinDipendentiEContratti() {
 		
-		return DipendenteDao.allJoinDipendentiEContratti();
-	}
-
-	@Override
-	public Risposta updatePassword(Dipendente dipendente) {
-		Risposta res = new Risposta();
-		try {
-			DipendenteDao.updatePassword(dipendente);
-		} catch (CampoRichiesto e) {
-			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore("001"); // successo viene impostato a false dentro il setCodice_errore
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			res.setErrore("errore sconosciuto");
-			res.setCodice_errore("999"); // successo viene impostato a false dentro il setCodice_errore
-			e.printStackTrace();
-		}
-		return res;
+		return DipendenteDao.getIstanza().allJoinDipendentiEContratti();
 	}
 
 	@Override
 	public List<Dipendente> allJoinDipendentiEPresenze() {
 		
-		return DipendenteDao.allJoinDipendentiEPresenze();
+		return DipendenteDao.getIstanza().allJoinDipendentiEPresenze();
 	}
 
 }

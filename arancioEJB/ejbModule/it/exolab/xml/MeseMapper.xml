@@ -10,6 +10,20 @@
 		INSERT INTO mesi(id_mese,mese,chiuso)
 		VALUES(#{id_mese},#{mese},#{chiuso});
 	</insert>
+	<select id="selectLastID" resultType="int">
+	SELECT id_mese
+	FROM mesi
+	ORDER BY id_mese DESC
+	LIMIT 1;
+	</select>
+	<select id="selectAllID" resultType="int">
+	SELECT id_dipendente
+	FROM dipendenti
+	</select>
+	<insert id="inserisciDipendeti_Mesi" parameterType="int">
+	INSERT INTOdipendenti_mesi(id_dipendente_fk,id_mese_fk)
+	VALUES(#{id_dipendente},#{id_mese});
+	</insert>
 	
 	<update id="update" parameterType="it.exolab.model.Mese">
 	UPDATE mesi

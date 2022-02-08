@@ -5,77 +5,138 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import it.exolab.exception.CampoRichiesto;
+import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.DipendenteMapper;
 
 import it.exolab.model.Dipendente;
-import it.exolab.service.DipendenteService;
 import it.exolab.util.MyBatisUtils;
 
-public class DipendenteDao {
+public class DipendenteDao extends BaseDAO<DipendenteMapper>{
+	
+	private static DipendenteDao istanza=null;
+	
+	private DipendenteDao() {
+	}
+	
+	public static DipendenteDao getIstanza() {
+		if(istanza==null) {
+			istanza=new DipendenteDao();
+		}
+		return istanza;
+	}
 
-	public static void insert(Dipendente dip) throws CampoRichiesto {
-		DipendenteService.validaInsert(dip);
+	public void insert(Dipendente dip) throws CampoRichiesto, ErroreGenerico {
+		validaInsert(dip);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.insert(dip);
 		sqlSession.commit();
 	}
 
-	public static void update(Dipendente dip) throws CampoRichiesto {
-		DipendenteService.validaUpdate(dip);
+	public void update(Dipendente dip) throws CampoRichiesto, ErroreGenerico {
+		validaUpdate(dip);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.update(dip);
 		sqlSession.commit();
 	}
-	
-	public static void updatePassword(Dipendente dip) throws CampoRichiesto {
-		DipendenteService.validaPassword(dip);
+
+	public void updatePassword(Dipendente dip) throws CampoRichiesto, ErroreGenerico {
+		validaPassword(dip.getPassword());
+		validaEmail(dip.getEmail());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.updatePassword(dip);
 		sqlSession.commit();
 	}
 
-	public static void delete(Integer id_dipendente) throws CampoRichiesto {
-		DipendenteService.validaID(id_dipendente);
+	public void delete(Integer id_dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaID(id_dipendente);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		mapper.delete(id_dipendente);
 		sqlSession.commit();
 	}
 
-	public static Dipendente selectByEmail(String email) throws CampoRichiesto {
-		DipendenteService.validaEmail(email);
+	public Dipendente selectByEmail(String email) throws CampoRichiesto, ErroreGenerico {
+		validaEmail(email);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectByEmail(email);
 	}
 
-	public static List<Dipendente> selectByRuolo(String ruolo) throws CampoRichiesto {
-		DipendenteService.validaRuolo(ruolo);
+	public List<Dipendente> selectByRuolo(String ruolo) throws CampoRichiesto, ErroreGenerico {
+		validaRuolo(ruolo);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectByRuolo(ruolo);
 	}
 
-	public static List<Dipendente> selectAll() {
+	public List<Dipendente> selectAll() {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectAll();
 
 	}
-	
-	public static List<Dipendente> allJoinDipendentiEContratti(){
+
+	public List<Dipendente> allJoinDipendentiEContratti() {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEContratti();
 	}
-	
-	public static List<Dipendente> allJoinDipendentiEPresenze(){
+
+	public List<Dipendente> allJoinDipendentiEPresenze() {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEPresenze();
+	}
+
+	// ------------------------VALIDAZIONI----------------------------------//
+
+	private void validaID(Integer id_dipendente) throws CampoRichiesto {
+		if (id_dipendente == null || id_dipendente.equals("")) {
+			throw new CampoRichiesto("id dipendente");
+		}
+	}
+
+	private void validaEmail(String email) throws CampoRichiesto {
+		if (email == null || email.equals("")) {
+			throw new CampoRichiesto("email");
+		}
+	}
+	
+	private void validaPassword(String password) throws CampoRichiesto {
+		if (password == null || password.equals("")) {
+			throw new CampoRichiesto("password");
+		}
+	}
+
+	private void validaRuolo(String ruolo) throws CampoRichiesto {
+		if (ruolo == null || ruolo.equals("")) {
+			throw new CampoRichiesto("ruolo");
+		}
+	}
+
+	private void validaInsert(Dipendente dip) throws CampoRichiesto {
+		validaEmail(dip.getEmail());
+		validaPassword(dip.getPassword());
+		validaRuolo(dip.getRuolo_fk());
+	}
+
+	private void validaUpdate(Dipendente dip) throws CampoRichiesto {
+		if (dip.getId_dipendente() == null || dip.getId_dipendente().equals("")) {
+			throw new CampoRichiesto("id dipendente");
+		}
+		if (dip.getNome() == null || dip.getNome().equals("")) {
+			throw new CampoRichiesto("nome");
+		}
+		if (dip.getCognome() == null || dip.getCognome().equals("")) {
+			throw new CampoRichiesto("cognome");
+		}
+		if (dip.getData_nascita() == null || dip.getData_nascita().equals("")) {
+			throw new CampoRichiesto("data di nascita");
+		}
+		validaInsert(dip);
 	}
 
 }
