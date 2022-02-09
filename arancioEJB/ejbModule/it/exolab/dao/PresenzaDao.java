@@ -26,12 +26,18 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 	}
 
 	public void insert(Presenza presenza) throws CampoRichiesto, ErroreGenerico {
+		presenza.setId_mese_fk(ricercaIdDelMese(presenza.getData()));;
 		validaPresenza(presenza);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		mapper.insert(presenza);
 		sqlSession.commit();
-
+	}
+	
+	private Integer ricercaIdDelMese(Date data) {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
+		return mapper.ricercaIdDelMese(data);
 	}
 
 	public void update(Presenza presenza) throws CampoRichiesto, ErroreGenerico {

@@ -67,4 +67,10 @@
 		FROM presenze
 	</select>
 
+	<select id="ricercaIdDelMese" resultType="int">
+	SELECT id_mese
+	FROM mesi
+	WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data});
+	</select>
+
 </mapper>
