@@ -119,9 +119,6 @@ validateForward() {
   if (this.presenza.motivazione_assenza_fk == null || this.presenza.motivazione_assenza_fk == '') {
     throw new CampoRichiesto('motivazione assenza');
   }
-  if (this.presenza.id_mese_fk == null || this.presenza.id_mese_fk == 0) {
-    throw new CampoRichiesto('Id mese');
-  }
 
 
 }

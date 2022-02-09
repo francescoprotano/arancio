@@ -37,6 +37,8 @@
                     <th scope="col">Chiuso?</th>
                     <th scope="col">-AZIONI-</th>
                 </tr>
+                
+
             </thead>
             <tbody>
                 <ng-container *ngFor="let m of listaMesi; index as i;">
@@ -49,14 +51,26 @@
                             <td>{{m.chiuso}}</td>
 
                         </ng-container>
+
+                        <ng-container *ngIf="enableEditIndex == i">
+                            <td>{{m.chiuso}}</td>
+
+                        </ng-container>
+
+
+                        
                         <td *ngIf="enableEditIndex != i">
                             <button type="button" (click)="switchEditMode(i)">Modifica</button>
                             <button type="button" (click)="onRemove(m.id_mese)">Cancella</button>
                         </td>
                         <ng-container *ngIf="enableEditIndex == i">
 
-                            <td><input type="number" [(ngModel)]="model.id_mese" name="id_mese" /></td>
-                            <td><input type="number" [(ngModel)]="model.mese" name="mese" /></td>
+                            <tr *ngIf="enableEditIndex == i">
+
+                                <td>{{m.id_mese}}</td>
+                                <td>{{m.mese | date: 'dd-MM-yyyy'}}</td>
+                            </tr>
+
                             <td><select [(ngModel)]="model.chiuso" name="chiuso">
                                     <option value="true">SI</option>
                                     <option value="false">NO</option>

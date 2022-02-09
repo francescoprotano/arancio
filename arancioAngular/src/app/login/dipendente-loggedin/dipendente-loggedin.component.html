@@ -15,7 +15,7 @@
         <th scope="col">Ore lavorate</th>
         <th scope="col">Ore assenza</th>
         <th scope="col">Motivazione assenza</th>
-        <th scope="col">ID mese</th>
+
         <th scope="col">-AZIONI-</th>
       </tr>
     </thead>
@@ -30,7 +30,6 @@
           <option value="permesso">permesso</option>
           <option value="presente">presente</option>
         </select></td>
-      <td><input type="number" [(ngModel)]="presenza.id_mese_fk" name="id_mese_fk" /></td>
       <input type="button" name="buttonSalva" (click)="salva()" value="Salva" /><br />
     </tbody>
   </table>
