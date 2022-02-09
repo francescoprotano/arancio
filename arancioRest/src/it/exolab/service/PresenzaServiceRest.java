@@ -23,11 +23,13 @@ import it.exolab.model.Presenza;
 public class PresenzaServiceRest {
 	
 	@POST
+	@Path("/add")
 	public RispostaPresenza add(Presenza presenza) {
 	return ConnectionPresenzaEJB.getConnection().add(presenza);	
 	}
 	
-	@PUT
+	@POST
+	@Path("/update")
 	public RispostaPresenza update(Presenza presenza) {
 		return ConnectionPresenzaEJB.getConnection().edit(presenza);
 	}

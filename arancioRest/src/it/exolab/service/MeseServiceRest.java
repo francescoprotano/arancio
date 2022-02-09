@@ -34,7 +34,8 @@ public class MeseServiceRest {
 		return ConnectionMeseEJB.getConnection().edit(mese);
 	}
 	
-	@DELETE
+	@GET
+	@Path("/delete")
 	public RispostaMese delete(@QueryParam("id_mese") Integer id_mese) {
 		return ConnectionMeseEJB.getConnection().delete(id_mese);
 	}

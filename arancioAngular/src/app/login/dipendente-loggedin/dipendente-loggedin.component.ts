@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CampoRichiesto } from 'src/app/exceptions/campo-richiesto';
+import { DataErrata } from 'src/app/exceptions/data-errata';
 import { Dipendente } from 'src/app/models/dipendente';
 import { dipendenteLoggato } from 'src/app/models/dipendenteLoggato';
 import { Presenza } from 'src/app/models/presenza';
@@ -23,10 +25,13 @@ export class DipendenteLoggedinComponent implements OnInit {
   enableEditIndex = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
   listaPresenze : Array<Presenza> = new Array<Presenza>(); 
+  nuovePresenze : Array<Presenza> = new Array<Presenza>(); 
+  presenza: Presenza = new Presenza();
+
  user : any = sessionStorage.getItem("utente")|| '{}';
  utente : Dipendente= new Dipendente();
 
- 
+
  
 
   constructor(private router : Router,  private authService : LoginService, private service:PresenzaService) {
@@ -34,6 +39,7 @@ export class DipendenteLoggedinComponent implements OnInit {
 
   }
 
+  
  getStorage(){
    this.utente = JSON.parse(sessionStorage.getItem("utente")|| '{}');
  }
@@ -42,8 +48,6 @@ export class DipendenteLoggedinComponent implements OnInit {
     if(!this.authService.isLoggedIn$){
       this.router.navigate(["/dipLogin"])
     }
-
-    
     this.elencoPresenze()
     this.getStorage()
   }
@@ -51,6 +55,11 @@ export class DipendenteLoggedinComponent implements OnInit {
   switchEditMode(i: any) {
     this.isEditing = true;
     this.enableEditIndex = i;
+  }
+
+  cancel(){
+    this.isEditing = false;
+    this.enableEditIndex = null;
   }
 
   save(p : Presenza) {
@@ -66,12 +75,58 @@ export class DipendenteLoggedinComponent implements OnInit {
    
     })
   }
- onSuccess(err:String,err_code:String) {
-		
+ 
+
+
+salva() {
+  try {
+    this.presenza.id_dipendente_fk = this.utente.id_dipendente;
+    this.validateForward();
+    this.service.aggiungiPresenza(this.presenza, this.onSuccess.bind(this), this.onFailure.bind(this));
+    console.log(this.presenza)
+    this.router.navigate(['/dipendenteLoggedIn'])
+  } catch (e) {
+    if (e instanceof CampoRichiesto) {
+      alert("il campo " + e.getField() + " è richiesto");
+    }
+    if (e instanceof DataErrata) {
+      alert("il campo " + e.getField() + " inserito si riferisce ad una data futura!");
+    }
+
+    return false;
+  }
+
+  return true;
 }
 
+onSuccess() {
+  alert("Presenza inserita con successo!");
+}
 onFailure(err: String) {
   alert("Operazione non andata a buon fine. Codice errore: "+err);
 }
+
+validateForward() {
+  if (this.presenza.data == null) {
+    throw new CampoRichiesto('data');
+  }
+  if (this.presenza.ore_lavorate == null) {
+    throw new CampoRichiesto('ore lavorate');
+  }
+  if (this.presenza.ore_assenza == null) {
+    throw new CampoRichiesto('ore assenza');
+  }
+  if (this.presenza.motivazione_assenza_fk == null || this.presenza.motivazione_assenza_fk == '') {
+    throw new CampoRichiesto('motivazione assenza');
+  }
+  if (this.presenza.id_mese_fk == null || this.presenza.id_mese_fk == 0) {
+    throw new CampoRichiesto('Id mese');
+  }
+
+
+}
+
+
+
 
 }

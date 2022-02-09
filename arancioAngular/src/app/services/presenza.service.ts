@@ -14,11 +14,15 @@ export class PresenzaService {
 
 
   public aggiornaPresenza(model: Presenza,onSuccess:any,onFailure:any)  {
-	  return this.doPost("/updatePresenza",model, onSuccess,onFailure);
+	  return this.doPost("/update",model, onSuccess,onFailure);
   }
   public elencoPresenze(queryString : string){
     return this.http.get<Array<Presenza>>(this.backendURL + queryString);
    }
+
+   public aggiungiPresenza(model: Presenza,onSuccess:any,onFailure:any) : void {
+    this.doPost("/add",model,onSuccess,onFailure);
+  }
 
   private doGet(querystring:String,onSuccess:any,onFailure:any){
     

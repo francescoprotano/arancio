@@ -61,16 +61,18 @@ export class DipendenteLoginComponent implements OnInit {
     }
     if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'admin') {
       this.authService.login()
+      sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
       this.router.navigate(['/adminLoggedIn']);
     } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'dipendente') {
       this.authService.login()
       sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
       this.router.navigate(['/dipendenteLoggedIn']);
-    } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'resonsabile') {
+    } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'responsabile') {
       this.authService.login()
+      sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
       this.router.navigate(['/responsabileLoggedIn']);
     } else {
-      alert("Impossibile accedere")
+      alert("Impossibile accedere. Username o password errati.")
     }
   }
   validateLogin() {

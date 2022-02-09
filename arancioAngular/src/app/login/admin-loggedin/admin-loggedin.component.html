@@ -1,13 +1,14 @@
 <fieldset style="text-align: center">
-    <h1>Benvenuto/a ADMIN!</h1>
+    <h1>Ciao {{utente.nome}}!</h1>
     <br>
+    <h2>Sei autenticato con privilegi di {{utente.ruolo_fk}}</h2>
     <form action="/action_page.php">
         <br><br>
         <input type="button" id="fname" name="fname" value="Aggiungi Dipendente" (click)="aggiungiDipendente()">
         <br><br>
         <input type="button" id="fname" name="fname" value="Aggiungi Contratto" (click)="aggiungiContratto()">
         <br><br>
-        <input type="button" id="fname" name="fname" value="Aggiungi Mese" (click)="aggiungiMese()">
+        <input type="button" id="fname" name="fname" value="Aggiungi o Visualizza Mese" (click)="aggiungiMese()">
         <br><br>
         <input type="button" id="lname" name="lname" value="Visualizza lista Dipendenti" (click)="elencoDipendenti()">
         <br><br>
