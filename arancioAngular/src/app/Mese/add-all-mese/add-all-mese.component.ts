@@ -6,16 +6,28 @@ import { MeseService } from 'src/app/services/mese.service';
 
 @Component({
   selector: 'app-add-mese',
-  templateUrl: './add-mese.component.html',
-  styleUrls: ['./add-mese.component.css']
+  templateUrl: './add-all-mese.component.html',
+  styleUrls: ['./add-all-mese.component.css']
 })
 export class AddMeseComponent implements OnInit {
+  queryString : string = "/all";
   model: Mese = new Mese();
   today = new Date()
+  listaMesi : Array<Mese> = new Array<Mese>(); 
+  isEditing: boolean = false;
+  enableEditIndex = null;
   constructor(private servizio: MeseService, private router : Router) { }
 
 
   ngOnInit(): void {
+    this.elencoMesi()
+  }
+
+  elencoMesi(){
+    this.servizio.elencoMesi(this.queryString).subscribe(response => {
+      this.listaMesi = response;
+   
+    })
   }
 
   salva() {
@@ -35,8 +47,29 @@ export class AddMeseComponent implements OnInit {
     return true;
   }
 
+  switchEditMode(i: any) {
+    this.isEditing = true;
+    this.enableEditIndex = i;
+  }
+
+  save(m : Mese) {
+    this.isEditing = false;
+    this.enableEditIndex = null;
+    this.servizio.aggiornaMese(m,this.onSuccess,this.onFailure)
+  }
+
+  onRemove(codice:number) {
+		this.servizio.eliminaMese(codice,this.onSuccess.bind(this),this.onFailure.bind(this));
+    this.elencoMesi();
+  }
+
+  cancel() {
+    this.isEditing = false;
+    this.enableEditIndex = null;
+  }
+
   onSuccess() {
-    alert("Mese inserito con successo!");
+    alert("Operazione eseguita con successo!");
   }
   onFailure(err: String) {
     alert("Operazione non andata a buon fine. Codice errore: "+err);

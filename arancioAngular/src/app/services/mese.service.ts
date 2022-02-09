@@ -17,7 +17,7 @@ public aggiungiMese(model: Mese,onSuccess:any,onFailure:any) : void {
 }
 
 public eliminaMese(id_mese:number,onSuccess:any,onFailure:any){
-  return this.doGet("/deleteMese?id_mese="+id_mese,onSuccess,onFailure);
+  return this.doGet("/delete?id_mese="+id_mese,onSuccess,onFailure);
 }
 
 public elencoMesi(queryString : string){
@@ -66,6 +66,25 @@ private doPost(querystring:any, data:any, onSuccess:any,onFailure:any){
    }       
                
    });
+}
+
+private doDelete(querystring:String,onSuccess:any,onFailure:any){
+    
+  var url = this.backendURL + "" +querystring;
+
+    return this.http.delete(url).subscribe((httpResponse:any) => {
+      this.meseSelezionato = httpResponse;
+              console.log(httpResponse);
+    if(httpResponse.successo == true){
+      
+      onSuccess(httpResponse.data);
+    } else {
+      onFailure(httpResponse.codice_errore);
+      
+    }
+    
+                
+    });
 }
 
 }

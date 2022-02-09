@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddMeseComponent } from './add-mese.component';
+import { AddMeseComponent } from './add-all-mese.component';
 
 describe('AddMeseComponent', () => {
   let component: AddMeseComponent;

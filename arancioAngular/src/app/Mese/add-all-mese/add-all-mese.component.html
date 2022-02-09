@@ -1,0 +1,74 @@
+
+
+<body>
+
+
+    <legend style="color: brown;">Inserisci Mese</legend>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">ID mese</th>
+                <th scope="col">MESE</th>
+                <th scope="col">Chiuso?</th>
+                <th scope="col">-AZIONI-</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <td><input type="number" [(ngModel)]="model.id_mese" name="id_mese" /></td>
+            <td><input type="number" [(ngModel)]="model.mese" name="mese" /></td>
+            <td><select [(ngModel)]="model.chiuso" name="chiuso">
+                    <option value="true">SI</option>
+                    <option value="false">NO</option>
+                </select></td>
+            <input type="button" name="buttonSalva" (click)="salva()" value="Salva" /><br />
+        </tbody>
+    </table>
+    <br><br><br>
+    <div class="container">
+        <legend style="color: brown;">Lista Mesi</legend>
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th scope="col">ID mese</th>
+                    <th scope="col">MESE</th>
+                    <th scope="col">Chiuso?</th>
+                    <th scope="col">-AZIONI-</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let m of listaMesi; index as i;">
+
+                    <tr>
+
+                        <ng-container *ngIf="enableEditIndex != i">
+                            <td>{{m.id_mese}}</td>
+                            <td>{{m.mese | date: 'dd-MM-yyyy'}}</td>
+                            <td>{{m.chiuso}}</td>
+
+                        </ng-container>
+                        <td *ngIf="enableEditIndex != i">
+                            <button type="button" (click)="switchEditMode(i)">Modifica</button>
+                            <button type="button" (click)="onRemove(m.id_mese)">Cancella</button>
+                        </td>
+                        <ng-container *ngIf="enableEditIndex == i">
+
+                            <td><input type="number" [(ngModel)]="model.id_mese" name="id_mese" /></td>
+                            <td><input type="number" [(ngModel)]="model.mese" name="mese" /></td>
+                            <td><select [(ngModel)]="model.chiuso" name="chiuso">
+                                    <option value="true">SI</option>
+                                    <option value="false">NO</option>
+                                </select></td>
+
+                            <td><button (click)="save(m)">Conferma</button></td>
+                            <td><button (click)="cancel()">Annulla</button></td>
+                        </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+
+    <br>

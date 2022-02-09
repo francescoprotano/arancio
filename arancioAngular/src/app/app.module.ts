@@ -15,7 +15,8 @@ import { AddContrattoComponent } from './Contratto/add-contratto/add-contratto.c
 import { AllContrattiComponent } from './Contratto/all-contratti/all-contratti.component';
 import { AllDipendentiContractsComponent } from './Dipendente/all-dipendenti-contracts/all-dipendenti-contracts.component';
 import { PasswordResetComponent } from './services/password-reset/password-reset.component';
-import { AddMeseComponent } from './Mese/add-mese/add-mese.component';
+import { AddMeseComponent } from './Mese/add-all-mese/add-all-mese.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -34,13 +35,15 @@ import { AddMeseComponent } from './Mese/add-mese/add-mese.component';
     AllDipendentiContractsComponent,
     PasswordResetComponent,
     AddMeseComponent,
+    
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [DipendenteLoggedinComponent,AllDipendentiComponent, DatePipe],
   bootstrap: [AppComponent]
