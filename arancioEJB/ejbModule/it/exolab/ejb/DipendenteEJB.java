@@ -92,7 +92,7 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 		RispostaDipendente res = new RispostaDipendente();
 		try {
 			DipendenteDao.getIstanza().delete(id_dipendente);
-			res.setData("");
+			res.setData(id_dipendente);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
