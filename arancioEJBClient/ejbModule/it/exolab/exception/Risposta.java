@@ -8,13 +8,13 @@ public class Risposta<T> implements Serializable {
 	private Boolean successo;
 	private String errore;
 	private String codice_errore;
-	private Object data;
+	private T data;
 
 	public Risposta() {
 		successo=true;
 	}
 
-	public Risposta(Boolean successo, String errore, String codice_errore, Object data) {
+	public Risposta(Boolean successo, String errore, String codice_errore, T data) {
 		super();
 		this.successo = successo;
 		this.errore = errore;
@@ -47,11 +47,11 @@ public class Risposta<T> implements Serializable {
 		this.codice_errore = codice_errore;
 	}
 
-	public Object getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 
