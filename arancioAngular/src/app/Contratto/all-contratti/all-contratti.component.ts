@@ -12,7 +12,7 @@ export class AllContrattiComponent implements OnInit {
   listaContratti : Array<Contratto> = new Array<Contratto>(); 
   queryString : string = "/allContratti";
   isEditing: boolean = false;
-  enableEditIndex = null;
+  enableEditIndex: any = null;
   constructor(private service:ContrattoService,private router: Router) { }
 
   ngOnInit(): void {

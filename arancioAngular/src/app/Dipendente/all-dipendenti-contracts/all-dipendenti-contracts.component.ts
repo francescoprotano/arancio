@@ -12,7 +12,7 @@ import { DipendenteService } from 'src/app/services/dipendente.service';
 export class AllDipendentiContractsComponent implements OnInit {
   queryString : string = "/allJoinDipendentiEContratti";
   isEditing: boolean = false;
-  enableEditIndex = null;
+  enableEditIndex: any = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
   listaContratti : Array<Contratto> = new Array<Contratto>(); 
   constructor(private service:DipendenteService,private router: Router) { }

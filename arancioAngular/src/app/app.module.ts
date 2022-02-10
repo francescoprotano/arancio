@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddDipendenteComponent } from './Dipendente/add-dipendente/add-dipendenti/add-dipendente.component';
@@ -16,7 +15,9 @@ import { AllContrattiComponent } from './Contratto/all-contratti/all-contratti.c
 import { AllDipendentiContractsComponent } from './Dipendente/all-dipendenti-contracts/all-dipendenti-contracts.component';
 import { PasswordResetComponent } from './services/password-reset/password-reset.component';
 import { AddMeseComponent } from './Mese/add-all-mese/add-all-mese.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InserisciControllaPresenzeComponent } from './login/dipendente-loggedin/inserisci-controlla-presenze/inserisci-controlla-presenze.component';
+import { PasswordChangeComponent } from './services/password-change/password-change.component';
 
 
 
@@ -35,6 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AllDipendentiContractsComponent,
     PasswordResetComponent,
     AddMeseComponent,
+    InserisciControllaPresenzeComponent,
+    PasswordChangeComponent
     
 
   ],
