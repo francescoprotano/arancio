@@ -69,13 +69,13 @@
 
                                 <td>{{m.id_mese}}</td>
                                 <td>{{m.mese | date: 'dd-MM-yyyy'}}</td>
-                            </tr>
+                            
 
                             <td><select [(ngModel)]="m.chiuso" name="chiuso">
                                     <option value="true">SI</option>
                                     <option value="false">NO</option>
                                 </select></td>
-
+                            </tr>
                             <td><button (click)="save(m)">Conferma</button></td>
                             <td><button (click)="cancel()">Annulla</button></td>
                         </ng-container>

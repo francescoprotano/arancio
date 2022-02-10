@@ -53,6 +53,8 @@ export class AddMeseComponent implements OnInit {
   }
 
   save(mese : Mese) {
+    console.log(mese);
+    
     this.isEditing = false;
     this.enableEditIndex = null;
     this.servizio.aggiornaMese(mese,this.onSuccess,this.onFailure)
