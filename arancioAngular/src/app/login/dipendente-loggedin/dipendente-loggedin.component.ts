@@ -22,7 +22,7 @@ export class DipendenteLoggedinComponent implements OnInit {
   model : Dipendente = new Dipendente();
   getRuoloUtente!: string;
   isEditing: boolean = false;
-  enableEditIndex = null;
+  enableEditIndex: any = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
   listaPresenze : Array<Presenza> = new Array<Presenza>(); 
   nuovePresenze : Array<Presenza> = new Array<Presenza>(); 

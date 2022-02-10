@@ -57,5 +57,9 @@ elencoContratti(){
   this.router.navigate(["/allContratti"])
 }
 
+cambiaPassword(){
+  this.router.navigate(["/changePassword"])
+}
+
 
 }

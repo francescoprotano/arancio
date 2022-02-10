@@ -15,7 +15,7 @@ export class AddMeseComponent implements OnInit {
   today = new Date()
   listaMesi : Array<Mese> = new Array<Mese>(); 
   isEditing: boolean = false;
-  enableEditIndex = null;
+  enableEditIndex: any = null;
   constructor(private servizio: MeseService, private router : Router) { }
 
 
@@ -52,10 +52,10 @@ export class AddMeseComponent implements OnInit {
     this.enableEditIndex = i;
   }
 
-  save(m : Mese) {
+  save(mese : Mese) {
     this.isEditing = false;
     this.enableEditIndex = null;
-    this.servizio.aggiornaMese(m,this.onSuccess,this.onFailure)
+    this.servizio.aggiornaMese(mese,this.onSuccess,this.onFailure)
   }
 
   onRemove(codice:number) {

@@ -12,7 +12,7 @@ import { DipendenteService } from 'src/app/services/dipendente.service';
 export class AllDipendentiComponent implements OnInit {
   queryString : string = "/all";
   isEditing: boolean = false;
-  enableEditIndex = null;
+  enableEditIndex: any = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
   constructor(private service:DipendenteService,private router: Router) { }
 
