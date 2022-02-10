@@ -112,7 +112,7 @@ public class ContrattoEJB extends BaseEJB implements ContrattoEJBRemote {
 
 	@Override
 	public RispostaContratto selectByTipologia(String tipologia) {
-		//da testare
+		//da testare e controllare
 		RispostaContratto res = new RispostaContratto();
 		try {
 			ContrattoDao.getIstanza().selectByTipologia(tipologia);
