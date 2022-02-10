@@ -101,8 +101,7 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	public RispostaMese selectByMese(Date mese) {
 		RispostaMese res = new RispostaMese();
 		try {
-			MeseDAO.getIstanza().selectByMese(mese);
-			res.setData(mese);
+			res.setData(MeseDAO.getIstanza().selectByMese(mese));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il

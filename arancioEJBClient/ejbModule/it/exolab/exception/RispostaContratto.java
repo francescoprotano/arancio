@@ -11,8 +11,8 @@ public class RispostaContratto extends Risposta<Contratto> {
 	private List<Contratto> contratti;
 	private Integer id_contratto;
 
-	public void setData(List<Contratto> selectByTipologia) {
-		contratti = selectByTipologia;
+	public void setData(List<Contratto> contratti) {
+		this.contratti = contratti;
 	}
 
 	public List<Contratto> getContratti() {

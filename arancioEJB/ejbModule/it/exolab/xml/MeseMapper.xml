@@ -44,7 +44,7 @@
 	<select id="selectByMese" resultType="it.exolab.model.Mese">
 	SELECT *
 	FROM mesi
-	WHERE MONTH (mese)=#{mese};
+	WHERE MONTH(mese)=#{mese};
 	</select>
 	
 </mapper>

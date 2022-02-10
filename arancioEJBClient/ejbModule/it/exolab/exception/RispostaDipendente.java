@@ -19,8 +19,8 @@ public class RispostaDipendente extends Risposta<Dipendente> {
 		return id_dipendente;
 	}
 
-	public void setData(List<Dipendente> selectByRuolo) {
-		dipendenti = selectByRuolo;
+	public void setData(List<Dipendente> dipendenti) {
+		this.dipendenti = dipendenti;
 	}
 
 	public List<Dipendente> getDipendenti() {
