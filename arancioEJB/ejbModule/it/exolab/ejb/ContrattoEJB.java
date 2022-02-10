@@ -92,7 +92,7 @@ public class ContrattoEJB extends BaseEJB implements ContrattoEJBRemote {
 		RispostaContratto res = new RispostaContratto();
 		try {
 			ContrattoDao.getIstanza().selectByID(id_contratto);
-			res.setData(id_contratto);
+			res.setData(ContrattoDao.getIstanza().selectByID(id_contratto));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
@@ -115,7 +115,7 @@ public class ContrattoEJB extends BaseEJB implements ContrattoEJBRemote {
 		RispostaContratto res = new RispostaContratto();
 		try {
 			ContrattoDao.getIstanza().selectByTipologia(tipologia);
-			res.setData(tipologia);
+			res.setData(ContrattoDao.getIstanza().selectByTipologia(tipologia));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore
