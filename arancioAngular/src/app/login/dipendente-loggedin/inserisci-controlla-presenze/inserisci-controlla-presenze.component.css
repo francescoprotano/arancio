@@ -1,0 +1,10 @@
+legend {
+    margin:0 auto;
+}
+
+#success_message{ display: none;}
+
+table,
+td {
+  border: 1px solid black;
+}

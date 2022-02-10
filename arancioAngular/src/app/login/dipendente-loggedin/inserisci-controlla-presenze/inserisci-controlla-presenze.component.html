@@ -1,0 +1,90 @@
+<h1>Ciao {{utente.nome}}</h1>
+<br>
+<h2>Sei autenticato con privilegi di {{utente.ruolo_fk}}</h2>
+
+
+<body>
+
+
+  <legend style="color: brown;">Inserisci Presenza</legend>
+  <table class="table">
+    <thead>
+      <tr>
+
+        <th scope="col">Data</th>
+        <th scope="col">Ore lavorate</th>
+        <th scope="col">Ore assenza</th>
+        <th scope="col">Motivazione assenza</th>
+
+        <th scope="col">-AZIONI-</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <td><input type="date" [(ngModel)]="presenza.data" name="data" /></td>
+      <td><input type="number" [(ngModel)]="presenza.ore_lavorate" name="ore_lavorate" /></td>
+      <td><input type="number" [(ngModel)]="presenza.ore_assenza" name="ore_assenza" /></td>
+      <td><select [(ngModel)]="presenza.motivazione_assenza_fk" name="motivazione_assenza_fk">
+          <option value="ferie">ferie</option>
+          <option value="malattia">malattia</option>
+          <option value="permesso">permesso</option>
+          <option value="presente">presente</option>
+        </select></td>
+      <input type="button" name="buttonSalva" (click)="salva()" value="Salva" /><br />
+    </tbody>
+  </table>
+  <br><br><br>
+  <div class="container">
+    <legend style="color: brown;">Le mie Presenze</legend>
+    <table class="table">
+      <thead>
+        <tr>
+          
+          <th scope="col">Data</th>
+          <th scope="col">Ore lavorate</th>
+          <th scope="col">Ore assenza</th>
+          <th scope="col">Motivazione assenza</th>
+
+          <th scope="col">-AZIONI-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let p of listaPresenze; index as i;">
+
+          <tr>
+           
+            <ng-container *ngIf="enableEditIndex != i">
+              <td>{{p.data | date: 'dd-MM-yyyy' }}</td>
+              <td>{{p.ore_lavorate}}</td>
+              <td>{{p.ore_assenza}}</td>
+              <td>{{p.motivazione_assenza_fk}}</td>
+
+            </ng-container>
+            <td *ngIf="enableEditIndex != i">
+              <button type="button" (click)="switchEditMode(i)">Modifica</button>
+            </td>
+            <ng-container *ngIf="enableEditIndex == i">
+
+              <td><input [(ngModel)]="p.data" type="date" /></td>
+              <td><input [(ngModel)]="p.ore_lavorate" type="number" /></td>
+              <td><input [(ngModel)]="p.ore_assenza" type="number" /></td>
+              <td> <select [(ngModel)]="p.motivazione_assenza_fk">
+                  <option value="ferie">ferie</option>
+                  <option value="malattia">malattia</option>
+                  <option value="permesso">permesso</option>
+                  <option value="presente">presente</option>
+                </select></td>
+              
+              <td><button (click)="save(p)">Conferma</button></td>
+              <td><button (click)="cancel()">Annulla</button></td>
+            </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <hr />
+
+  <br>
+
+
+  <hr>
