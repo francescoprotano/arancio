@@ -27,7 +27,7 @@
 	
 	<update id="update" parameterType="it.exolab.model.Mese">
 	UPDATE mesi
-	SET chiuso=#{chiuso};
+	SET chiuso=#{chiuso}
 	WHERE id_mese=#{id_mese};
 	</update>
 
