@@ -15,4 +15,5 @@ public interface DipendenteMapper {
 	List<Dipendente> selectAll();
 	List<Dipendente> allJoinDipendentiEContratti();
 	List<Dipendente> allJoinDipendentiEPresenze();
+	Dipendente login(Dipendente dipendente);
 }

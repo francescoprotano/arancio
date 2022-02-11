@@ -111,10 +111,10 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendente selectByEmail(String email) {
+	public RispostaDipendente login(Dipendente dipendente) {
 		RispostaDipendente res = new RispostaDipendente();
 		try {
-			res.setData(DipendenteDao.getIstanza().selectByEmail(email));
+			res.setData(DipendenteDao.getIstanza().login(dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il setCodice_errore

@@ -58,11 +58,14 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper>{
 		sqlSession.commit();
 	}
 
-	public Dipendente selectByEmail(String email) throws CampoRichiesto, ErroreGenerico {
-		validaEmail(email);
+	public Dipendente login(Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaEmail(dipendente.getEmail());
+		validaPassword(dipendente.getPassword());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		return mapper.selectByEmail(email);
+		dipendente=mapper.login(dipendente);
+		dipendente.setPassword(null);
+		return dipendente;
 	}
 
 	public List<Dipendente> selectByRuolo(String ruolo) throws CampoRichiesto, ErroreGenerico {

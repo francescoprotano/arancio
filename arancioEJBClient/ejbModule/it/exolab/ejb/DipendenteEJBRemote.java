@@ -14,7 +14,7 @@ public interface DipendenteEJBRemote {
 	public RispostaDipendente edit(Dipendente dipendente);
 	public RispostaDipendente delete(Integer id_dipendente);
 	public RispostaDipendente updatePassword(Dipendente dipendente);
-	public RispostaDipendente selectByEmail(String email);
+	public RispostaDipendente login(Dipendente dipendente);
 	public RispostaDipendente selectByRuolo(String ruolo);
 	public List<Dipendente> allDipendenti();
 	public List<Dipendente> allJoinDipendentiEContratti();

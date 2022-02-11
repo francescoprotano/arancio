@@ -46,9 +46,9 @@ public class DipendenteServiceRest {
 	}
 
 	@GET
-	@Path("/allByEmail")
-	public RispostaDipendente allByEmail(@QueryParam("email") String email) {
-		return ConnectionDipendenteEJB.getConnection().selectByEmail(email);
+	@Path("/login")
+	public RispostaDipendente login(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().login(dipendente);
 	}
 	
 	@GET
