@@ -47,7 +47,10 @@ form {
     width: 20%;
     border-radius: 30%;
   }
-  
+  body  {
+    background-image: url("/assets/images/background.jpg");
+    background-color: lightgray;  
+  }
   /* Add padding to containers */
   .container {
     padding: 16px;

@@ -1,21 +1,23 @@
+<div class="position-absolute top-50 start-50 translate-middle">
+
 <form>
     <fieldset>
         <legend>Inserisci Contratto</legend>
 
 
-        <label for="data_assunzione">Data Assunzione</label>
+        <label for="data_assunzione">Data Assunzione</label><br>
         <input type="date" [(ngModel)]="model.data_assunzione" name="data_assunzione" /><br />
         <br>
 
         <form action="javascript:;">
             <div class="form-group" *ngIf="isDeterminato">
-                <label for="date">Data Scadenza </label>
+                <label for="date">Data Scadenza </label><br>
                 <input type="date" [(ngModel)]="model.data_scadenza" class="form-control" name="data_scadenza">
             </div>
 
             <br>
 
-            <label for="tipologia">Tipologia</label>
+            <label for="tipologia">Tipologia</label><br>
             <select (change)="selectInput($event)" [(ngModel)]="model.tipologia" name="tipologia">
                 <option value="a progetto">a progetto</option>
                 <option value="determinato">determinato</option>
@@ -26,7 +28,7 @@
             <br />
             <br>
             <br>
-            <label for="id_dipendente_fk">ID Dipendente</label>
+            <label for="id_dipendente_fk">ID Dipendente</label><br>
             <input type="number" [(ngModel)]="model.id_dipendente_fk" name="id_dipendente_fk" /><br />
 
             <br />
@@ -35,9 +37,11 @@
 
 
             <hr />
-            <input type="button" name="buttonSalva" (click)="salva()" value="Salva" /><br />
+            <input type="button" class="btn btn-success" name="buttonSalva" (click)="salva()" value="Salva" /><br />
 
             <hr/>
-            <input type="button" value="Indietro" routerLink="/adminLoggedIn">
+            <input type="button" class="btn btn-danger" value="Annulla" routerLink="/adminLoggedIn">
 
         </form>
+
+ 

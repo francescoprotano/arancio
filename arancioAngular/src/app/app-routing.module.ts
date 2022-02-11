@@ -11,6 +11,7 @@ import { DipendenteLoginComponent } from './login/dipendente-login/dipendente-lo
 import { PasswordResetComponent } from './services/password-reset/password-reset.component';
 import { AddMeseComponent } from './Mese/add-all-mese/add-all-mese.component';
 import { PasswordChangeComponent } from './services/password-change/password-change.component';
+import { InserisciControllaPresenzeComponent } from './login/dipendente-loggedin/inserisci-controlla-presenze/inserisci-controlla-presenze.component';
 
 const routes: Routes = [
   {path:'addDip',component:AddDipendenteComponent }
@@ -24,6 +25,7 @@ const routes: Routes = [
   ,{path: 'resetPassword', component:PasswordResetComponent}
   ,{path: 'addMese', component:AddMeseComponent}
   ,{path: 'changePassword', component:PasswordChangeComponent}
+  ,{path: 'insCheckPresenze', component:InserisciControllaPresenzeComponent}
 
 ];
 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contratto } from '../models/contratto';
 import { Dipendente } from '../models/dipendente';
+import { Risposta } from '../models/risposta';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Dipendente } from '../models/dipendente';
 export class ContrattoService {
   private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/contratto";
   private lavoratoreSelezionato: Dipendente = new Dipendente;
-
+  risp : Array<Risposta> = new Array<Risposta>()
   constructor(private http: HttpClient) { }
 
 //***CONTRATTO***
@@ -26,8 +27,25 @@ public elencoContratti(queryString : string){
   return this.http.get<Array<Contratto>>(this.backendURL + queryString);
  }
 
+ public byTipologiaX(tipologia:string,callback:any){
+  return this.doGetC("/allByTipologia?tipologia="+tipologia,callback);
+ }
+
+ public byTipologia(queryString:string){
+  return this.http.get<Array<Contratto>>(this.backendURL + queryString);
+ }
+
  public aggiornaContratto(model: Contratto,onSuccess:any,onFailure:any)  {
   return this.doPost("/updateContratto",model, onSuccess,onFailure);
+}
+
+private doGetC(querystring:String,callback: any){
+  var url = this.backendURL + "" +querystring;
+    return this.http.get(url).subscribe((httpResponse:any) => {
+              console.log("dogetc"+JSON.stringify(httpResponse));
+              
+    callback(httpResponse)         
+    });
 }
 
 private doGet(querystring:String,onSuccess:any,onFailure:any){
@@ -38,10 +56,11 @@ private doGet(querystring:String,onSuccess:any,onFailure:any){
       this.lavoratoreSelezionato = httpResponse;
               console.log(httpResponse);
     if(httpResponse.successo == true){
+      console.log(httpResponse.data);
       
-      onSuccess(httpResponse.data);
+      onSuccess(Risposta);
     } else {
-      onFailure(httpResponse.codice_errore);
+      onFailure(Risposta);
       
     }
     

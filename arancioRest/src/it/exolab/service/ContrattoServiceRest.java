@@ -52,7 +52,7 @@ public class ContrattoServiceRest {
 		
 		@GET
 		@Path("/allByTipologia")
-		public RispostaContratto allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
+		public List<Contratto> allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
 			return ConnectionContrattoEJB.getConnection().selectByTipologia(tipologia);
 		}
 

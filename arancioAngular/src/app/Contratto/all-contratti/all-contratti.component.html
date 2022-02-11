@@ -2,6 +2,8 @@
 
 <body>
 
+	
+	
 	<div class="container">
 		<table class="table">
 		  <thead>
@@ -15,6 +17,7 @@
 		  </thead>
 		  <tbody>
 			<ng-container *ngFor="let c of listaContratti; index as i;">
+				
 			  <tr>
 				<ng-container *ngIf="enableEditIndex != i">
 				  <td>{{c.data_assunzione | date: 'yyyy-MM-dd'}}</td>
@@ -37,15 +40,66 @@
 					<option value="stagionale">stagionale</option>
 				   
 				</select></td>
+
+				
+
 				  <td><input [(ngModel)]="c.id_dipendente_fk" type="number" /></td>
 				  <td><button (click)="save(c)">Conferma</button></td>
+
+				  
 				</ng-container>
 			  </tr>
+			 
+				
 			</ng-container>
 		  </tbody>
 		</table>
 	  </div>
 	  <hr/>
+	 
+	  <h3>Cerca per Tipologia:</h3>
+	
+	  <ng-container>
+		<td><select [(ngModel)]="tipologia" name="tipologia">
+		  <option value="a progetto">a progetto</option>
+		  <option value="determinato">determinato</option>
+		  <option value="indeterminato">indeterminato</option>
+		  <option value="stagionale">stagionale</option>
+		 
+	  </select></td>
+	
+  
+		<td><button (click)="byTipologia(tipologia)">Conferma</button></td>
+		<br>
+		<thead>
+		  <tr>
+			<th scope="col">Data assunzione</th>
+			<th scope="col">Data scadenza</th>
+			<th scope="col">Tipologia</th>
+			<th scope="col">Id Dipendente</th>
+			<th scope="col">-AZIONI-</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <ng-container *ngFor="let c of listaByTipologia; index as i;">
+			  
+			<tr>
+			  <ng-container *ngIf="enableEditIndex != i">
+				<td>{{c.data_assunzione | date: 'yyyy-MM-dd'}}</td>
+				<td>{{c.data_scadenza | date: 'yyyy-MM-dd'}}</td>
+				<td>{{c.tipologia}}</td>
+				<td>{{c.id_dipendente_fk}}</td>
+				<td *ngIf="enableEditIndex != i">
+				  <button type="button" (click)="switchEditMode(i)">Modifica</button>
+				  <input type="button" value="Cancella" (click)="onRemove(c.id_contratto)"/>
+				</td>
+			  </ng-container>
+			  </tr>
+		  </ng-container>
+  
+		
+	  </ng-container>
+	  <br><br>
 	  <input type="button" value="Indietro" routerLink="/adminLoggedIn">
 	
    </body>

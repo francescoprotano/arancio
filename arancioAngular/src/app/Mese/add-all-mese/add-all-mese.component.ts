@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CampoRichiesto } from 'src/app/exceptions/campo-richiesto';
 import { Mese } from 'src/app/models/mese';
 import { MeseService } from 'src/app/services/mese.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-add-mese',
@@ -16,7 +17,7 @@ export class AddMeseComponent implements OnInit {
   listaMesi : Array<Mese> = new Array<Mese>(); 
   isEditing: boolean = false;
   enableEditIndex: any = null;
-  constructor(private servizio: MeseService, private router : Router) { }
+  constructor(private servizio: MeseService, private router : Router, private location: Location) { }
 
 
   ngOnInit(): void {
@@ -83,6 +84,10 @@ export class AddMeseComponent implements OnInit {
       throw new CampoRichiesto('mese');
     }
 
+  }
+
+  back(): void {
+    this.location.back()
   }
 
 }

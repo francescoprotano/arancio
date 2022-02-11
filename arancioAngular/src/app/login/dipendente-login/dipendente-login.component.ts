@@ -20,7 +20,7 @@ import { DipendenteLoggedinComponent } from '../dipendente-loggedin/dipendente-l
 export class DipendenteLoginComponent implements OnInit {
   @Output() timeEvent = new EventEmitter();
 
-  constructor(public authService: LoginService, private router: Router, private apiservice: DipendenteService, private http: HttpClient, private dip: DipendenteLoggedinComponent) {
+  constructor(public authService: LoginService, private router: Router, private apiservice: DipendenteService, private http: HttpClient) {
 
   }
   queryString: string = "/all";
@@ -37,6 +37,7 @@ export class DipendenteLoginComponent implements OnInit {
     if (this.utente.ruolo_fk == 'dipendente') {
       this.router.navigate(["/dipendenteLoggedIn"])
     }
+    this.authService.logout();
   }
 
   login(model: any) {

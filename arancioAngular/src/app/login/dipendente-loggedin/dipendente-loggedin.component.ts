@@ -8,6 +8,7 @@ import { Presenza } from 'src/app/models/presenza';
 import { DipendenteService } from 'src/app/services/dipendente.service';
 import { LoginService } from 'src/app/services/login.service';
 import { PresenzaService } from 'src/app/services/presenza.service';
+import { DipendenteLoginComponent } from '../dipendente-login/dipendente-login.component';
 
 
 
@@ -34,93 +35,37 @@ export class DipendenteLoggedinComponent implements OnInit {
 
  
 
-  constructor(private router : Router,  private authService : LoginService, private service:PresenzaService) {
+  constructor(private router : Router,  private authService : LoginService, private service:PresenzaService, private login : DipendenteLoginComponent) {
     
 
   }
 
-  
- getStorage(){
-   this.utente = JSON.parse(sessionStorage.getItem("utente")|| '{}');
- }
-  
+  getStorage(){
+    this.utente = JSON.parse(sessionStorage.getItem("utente")|| '{}');
+  }
+
+ 
+
   ngOnInit(): void {
     if(!this.authService.isLoggedIn$){
       this.router.navigate(["/dipLogin"])
     }
-    this.elencoPresenze()
+    this.utenteLoggedIn(this.login.utenteLoggato)
     this.getStorage()
   }
 
-  switchEditMode(i: any) {
-    this.isEditing = true;
-    this.enableEditIndex = i;
-  }
 
-  cancel(){
-    this.isEditing = false;
-    this.enableEditIndex = null;
-  }
+ utenteLoggedIn(utenteLoggato : any){
+   return this.model.email = utenteLoggato;
 
-  save(p : Presenza) {
-    this.isEditing = false;
-    this.enableEditIndex = null;
-    this.service.aggiornaPresenza(p,this.onSuccess,this.onFailure)
-  }
+ }
 
-
-  elencoPresenze(){
-    this.service.elencoPresenze(this.queryString).subscribe(response => {
-      this.listaPresenze = response;
-   
-    })
-  }
- 
-
-
-salva() {
-  try {
-    this.presenza.id_dipendente_fk = this.utente.id_dipendente;
-    this.validateForward();
-    this.service.aggiungiPresenza(this.presenza, this.onSuccess.bind(this), this.onFailure.bind(this));
-    console.log(this.presenza)
-    this.router.navigate(['/dipendenteLoggedIn'])
-  } catch (e) {
-    if (e instanceof CampoRichiesto) {
-      alert("il campo " + e.getField() + " è richiesto");
-    }
-    if (e instanceof DataErrata) {
-      alert("il campo " + e.getField() + " inserito si riferisce ad una data futura!");
-    }
-
-    return false;
-  }
-
-  return true;
+cambiaPassword(){
+  this.router.navigate(["/changePassword"])
 }
 
-onSuccess() {
-  alert("Presenza inserita con successo!");
-}
-onFailure(err: String) {
-  alert("Operazione non andata a buon fine. Codice errore: "+err);
-}
-
-validateForward() {
-  if (this.presenza.data == null) {
-    throw new CampoRichiesto('data');
-  }
-  if (this.presenza.ore_lavorate == null) {
-    throw new CampoRichiesto('ore lavorate');
-  }
-  if (this.presenza.ore_assenza == null) {
-    throw new CampoRichiesto('ore assenza');
-  }
-  if (this.presenza.motivazione_assenza_fk == null || this.presenza.motivazione_assenza_fk == '') {
-    throw new CampoRichiesto('motivazione assenza');
-  }
-
-
+insCheckPresenze(){
+  this.router.navigate(["/insCheckPresenze"])
 }
 
 

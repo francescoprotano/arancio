@@ -1,6 +1,13 @@
+
+<div class="position-absolute top-50 start-50 translate-middle">
+
 <form>
+    
     <fieldset>
-        <legend>Inserisci Dipendente</legend>
+
+
+        
+        <legend><strong> Dipendente </strong></legend>
 
         <label>Nome</label><br />
         <input type="text" [(ngModel)]="model.nome" name="nome" /><br />
@@ -31,9 +38,10 @@
 
 
         <hr />
-        <input type="button" name="buttonSalva" (click)="salva()" value="Salva" /><br />
+        <input type="button" class="btn btn-success" name="buttonSalva" (click)="salva()" value="Salva" /><br />
 
     </fieldset>
     <hr/>
-    <input type="button" value="Indietro" routerLink="/adminLoggedIn">
+    <input type="button" class="btn btn-danger" value="Annulla" routerLink="/adminLoggedIn">
 </form>
+</div>

@@ -110,8 +110,8 @@ public class ContrattoEJB extends BaseEJB implements ContrattoEJBRemote {
 	}
 
 	@Override
-	public RispostaContratto selectByTipologia(String tipologia) {
-		//da testare e controllare
+	public List<Contratto> selectByTipologia(String tipologia) {
+		
 		RispostaContratto res = new RispostaContratto();
 		try {
 			res.setData(ContrattoDao.getIstanza().selectByTipologia(tipologia));
@@ -129,7 +129,13 @@ public class ContrattoEJB extends BaseEJB implements ContrattoEJBRemote {
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il setCodice_errore
 			e.printStackTrace();
 		}
-		return res;
+		try {
+			return ContrattoDao.getIstanza().selectByTipologia(tipologia);
+		} catch (CampoRichiesto | ErroreGenerico e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

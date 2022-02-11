@@ -1,17 +1,13 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Benvenuto/a!</strong> Questo sito e' ancora in fase di sviluppo. Ci scusiamo per eventuali disagi dovuti ad eventuali bug. :)
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 
 <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
 <img src="/assets/images/arancio.jpg" alt="arancio" class="arancio">
 <img src="/assets/images/orangeline.png" alt="arancio" class="arancio">
 <br>
-<button *ngIf='authService.isLoggedIn$ | async'>
+<button class="btn btn-light" *ngIf='authService.isLoggedIn$ | async'>
 <a href='#'  (click)='authService.logout()'>Log Out</a>
 </button>
 <br>

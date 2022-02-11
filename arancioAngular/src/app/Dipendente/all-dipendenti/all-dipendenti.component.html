@@ -3,7 +3,7 @@
 <body>
 
 	<div class="container">
-		<table class="table">
+		<table class="table table-hover">
 		  <thead>
 			<tr>
 			  <th scope="col">ID Dipendente</th>
@@ -30,8 +30,8 @@
 				  <td>{{d.ruolo_fk}}</td>
 				  <td>{{d.contratto_corrente_fk}}</td>
 				  <td *ngIf="enableEditIndex != i">
-					<button type="button" (click)="switchEditMode(i)">Modifica</button>
-					<input type="button" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
+					<button type="button" class="btn btn-info" (click)="switchEditMode(i)">Modifica</button>
+					<input type="button" class="btn btn-danger" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
 				  </td>
 				</ng-container>
 				<ng-container *ngIf="enableEditIndex == i">
@@ -42,8 +42,8 @@
 				  <td><input [(ngModel)]="d.password" /></td>
 				  <td><input [(ngModel)]="d.ruolo_fk" /></td>
 				  <td><input [(ngModel)]="d.contratto_corrente_fk" /></td>
-				  <td><button (click)="save(d)">Conferma</button></td>
-				  <td><button (click)="cancel()">Annulla</button></td>
+				  <td><button class="btn btn-success" (click)="save(d)">Conferma</button></td>
+				  <td><button class="btn btn-warning" (click)="cancel()">Annulla</button></td>
 				</ng-container>
 			  </tr>
 			</ng-container>
@@ -51,6 +51,6 @@
 		</table>
 	  </div>
 	  <hr/>
-	  <input type="button" value="Indietro" routerLink="/adminLoggedIn">
+	  <input type="button" class="btn btn-primary" value="Indietro" routerLink="/adminLoggedIn">
 	
    </body>

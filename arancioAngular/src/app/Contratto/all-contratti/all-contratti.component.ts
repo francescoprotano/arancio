@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contratto } from 'src/app/models/contratto';
+import { Risposta } from 'src/app/models/risposta';
 import { ContrattoService } from 'src/app/services/contratto.service';
 
 @Component({
@@ -10,9 +11,13 @@ import { ContrattoService } from 'src/app/services/contratto.service';
 })
 export class AllContrattiComponent implements OnInit {
   listaContratti : Array<Contratto> = new Array<Contratto>(); 
+  listaByTipologia : Array<Contratto> = new Array<Contratto>(); 
   queryString : string = "/allContratti";
+  queryStringTipologia : string = "/allByTipologia?tipologia=";
   isEditing: boolean = false;
   enableEditIndex: any = null;
+  contratto : Contratto = new Contratto()
+  tipologia : string;
   constructor(private service:ContrattoService,private router: Router) { }
 
   ngOnInit(): void {
@@ -44,6 +49,32 @@ export class AllContrattiComponent implements OnInit {
    
     })
   }
+
+  byTipologiaX(tipologia : string) {
+    console.log(tipologia)
+    this.service.byTipologiaX(tipologia, this.responseTipologia.bind(this))  
+}
+
+byTipologia(tipologia : string) {
+  this.service.byTipologia(this.queryStringTipologia+tipologia).subscribe(response => {
+    console.log(response)
+    if(response == null){
+      alert("C'e' stato un errore interno. Riprova piu' tardi. CODICE ERRORE: response = null ")
+    }
+    this.listaByTipologia = response
+ 
+  })
+}
+
+responseTipologia(risposta:any){
+  if(risposta.successo){
+    alert('rispsota della lista' + risposta.data)
+    this.listaByTipologia=risposta.data
+  } else {
+    alert(risposta.errore)
+  }
+}
+
   onSuccess(response:String) {
 
 	
@@ -59,4 +90,5 @@ export class AllContrattiComponent implements OnInit {
     this.service.aggiornaContratto(c,this.onSuccess,this.onFailure)
   }
 
+  
 }
