@@ -60,6 +60,8 @@ byTipologia(tipologia : string) {
     console.log(response)
     if(response == null){
       alert("C'e' stato un errore interno. Riprova piu' tardi. CODICE ERRORE: response = null ")
+    }else if(response.length==0){
+      alert("Nessun dipendente con questo tipo di contratto.")
     }
     this.listaByTipologia = response
  
