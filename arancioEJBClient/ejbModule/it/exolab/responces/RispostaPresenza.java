@@ -1,4 +1,4 @@
-package it.exolab.exception;
+package it.exolab.responces;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ public class RispostaPresenza extends Risposta<Presenza> {
 
 	private Integer id_presenza;
 	private List<Presenza> presenze;
-	
 	
 	public void setData(Integer id_presenza) {
 		this.id_presenza=id_presenza;

@@ -14,8 +14,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionPresenzaEJB;
-import it.exolab.exception.RispostaPresenza;
 import it.exolab.model.Presenza;
+import it.exolab.responces.RispostaPresenza;
 
 @Path("/presenza")
 @Consumes(MediaType.APPLICATION_JSON)

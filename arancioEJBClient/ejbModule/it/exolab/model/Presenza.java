@@ -16,13 +16,12 @@ public class Presenza implements Serializable {
 	private Integer ore_assenza;
 	private String motivazione_assenza_fk;
 	private Integer id_mese_fk;
-	private List<Mese> mesi = new ArrayList<Mese>();
 
 	public Presenza() {
 	}
 
 	public Presenza(Integer id_presenza, Integer id_dipendente_fk, Date data, Integer ore_lavorate, Integer ore_assenza,
-			String motivazione_assenza_fk, Integer id_mese_fk, List<Mese> mesi) {
+			String motivazione_assenza_fk, Integer id_mese_fk) {
 		super();
 		this.id_presenza = id_presenza;
 		this.id_dipendente_fk = id_dipendente_fk;
@@ -31,7 +30,6 @@ public class Presenza implements Serializable {
 		this.ore_assenza = ore_assenza;
 		this.motivazione_assenza_fk = motivazione_assenza_fk;
 		this.id_mese_fk = id_mese_fk;
-		this.mesi = mesi;
 	}
 
 	public Integer getId_presenza() {
@@ -90,19 +88,11 @@ public class Presenza implements Serializable {
 		this.id_mese_fk = id_mese_fk;
 	}
 
-	public List<Mese> getMesi() {
-		return mesi;
-	}
-
-	public void setMesi(List<Mese> mesi) {
-		this.mesi = mesi;
-	}
-
 	@Override
 	public String toString() {
 		return "Presenza [id_presenza=" + id_presenza + ", id_dipendente_fk=" + id_dipendente_fk + ", data=" + data
 				+ ", ore_lavorate=" + ore_lavorate + ", ore_assenza=" + ore_assenza + ", motivazione_assenza_fk="
-				+ motivazione_assenza_fk + ", id_mese_fk=" + id_mese_fk + ", mesi=" + mesi + "]";
+				+ motivazione_assenza_fk + ", id_mese_fk=" + id_mese_fk + "]";
 	}
 
 }

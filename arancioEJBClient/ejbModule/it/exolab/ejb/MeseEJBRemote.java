@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import it.exolab.exception.RispostaMese;
 import it.exolab.model.Mese;
+import it.exolab.responces.RispostaMese;
 
 @Remote
 public interface MeseEJBRemote {

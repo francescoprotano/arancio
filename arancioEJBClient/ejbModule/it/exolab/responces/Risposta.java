@@ -1,4 +1,4 @@
-package it.exolab.exception;
+package it.exolab.responces;
 
 import java.io.Serializable;
 

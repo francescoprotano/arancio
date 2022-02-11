@@ -11,8 +11,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionContrattoEJB;
-import it.exolab.exception.RispostaContratto;
 import it.exolab.model.Contratto;
+import it.exolab.responces.RispostaContratto;
 
 @Path("/contratto")
 @Consumes(MediaType.APPLICATION_JSON)

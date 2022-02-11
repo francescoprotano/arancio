@@ -90,27 +90,18 @@
 		SELECT *
 		FROM dipendenti
 	</select>
-	<select id="selectByEmail"
-		resultType="it.exolab.model.Dipendente">
-		SELECT *
-		FROM dipendenti
-		WHERE email=#{email}
-	</select>
-
 	<select id="selectByRuolo"
 		resultType="it.exolab.model.Dipendente">
 		SELECT *
 		FROM dipendenti
 		WHERE ruolo_fk=#{ruolo_fk}
 	</select>
-
 	<select id="allJoinDipendentiEContratti"
 		resultMap="dipendenteJoincontratti">
 		SELECT *
 		FROM dipendenti d inner join contratti c ON
 		c.id_dipendente_fk = d.id_dipendente;
 	</select>
-
 	<select id="allJoinDipendentiEPresenze"
 		resultMap="dipendenteJoinpresenze">
 		SELECT *
