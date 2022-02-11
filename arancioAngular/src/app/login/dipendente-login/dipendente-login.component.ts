@@ -44,7 +44,7 @@ export class DipendenteLoginComponent implements OnInit {
     this.model = model;
     try {
       this.validateLogin();
-      this.selectByEmail(model.email, this.onLoginSuccess.bind(this), this.onLoginFailure.bind(this));
+      this.authService.loginAuth(this.model, this.onLoginSuccess.bind(this), this.onLoginFailure.bind(this));
     } catch (e) {
       if (e instanceof CampoRichiesto) {
         alert("il campo " + e.getField() + " è richiesto");
@@ -54,6 +54,7 @@ export class DipendenteLoginComponent implements OnInit {
     }
     return true;
   }
+  
 
   verifica(utenteLoggato: any) {
 
@@ -94,9 +95,9 @@ export class DipendenteLoginComponent implements OnInit {
 
 
 
-  public selectByEmail(email: string, onSuccess: any, onFailure: any) {
+  public selectByEmail(dipendente: Dipendente, onSuccess: any, onFailure: any) {
 
-    var url = this.backendURL + "" + "/allByEmail?email=" + email;
+    var url = this.backendURL + "" + "/allByEmail?dipendente=" + dipendente;
 
     return this.http.get(url).subscribe((httpResponse: any) => {
 

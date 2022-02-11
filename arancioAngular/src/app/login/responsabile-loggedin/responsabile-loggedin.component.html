@@ -1,1 +1,21 @@
-<p>responsabile-loggedin works!</p>
+<fieldset style="text-align: center">
+    <h1>Ciao {{utente.nome}}!</h1>
+    <br>
+    <h2>Sei autenticato con privilegi di {{utente.ruolo_fk}}</h2>
+    <form action="/action_page.php">
+        
+        <br><br>
+        <input type="button" class="btn btn-primary" id="fname" name="fname" value="Aggiungi o Visualizza Mese" (click)="aggiungiMese()">
+        <br><br>
+        <input type="button" class="btn btn-primary" id="lname" name="lname" value="Visualizza lista Dipendenti" (click)="elencoDipendenti()">
+        <br><br>
+        <input type="button" class="btn btn-primary" id="lname" name="lname" value="Visualizza lista Dipendenti con Contratto" (click)="elencoDipendentiConContratto()">
+        <br><br>
+        <input type="button" class="btn btn-primary" id="lname" name="lname" value="Visualizza lista Contratti" (click)="elencoContratti()">
+        <br><br>
+        <input type="button" class="btn btn-primary" id="lname" name="lname" value="Cambia Password" (click)="cambiaPassword()">
+    </form>
+    <br><br><br>
+
+
+</fieldset>
