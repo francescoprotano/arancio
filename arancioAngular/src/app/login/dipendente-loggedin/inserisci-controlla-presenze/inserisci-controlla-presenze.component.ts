@@ -45,8 +45,8 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     if (!this.authService.isLoggedIn$) {
       this.router.navigate(["/dipLogin"])
     }
-    this.elencoPresenze()
     this.getStorage()
+    this.elencoPresenze(this.utente.id_dipendente)
   }
 
   switchEditMode(i: any) {
@@ -66,11 +66,10 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   }
 
 
-  elencoPresenze() {
-    this.service.elencoPresenze(this.queryString).subscribe(response => {
-      this.listaPresenze = response;
-
-    })
+  elencoPresenze(user_id: any) {
+    user_id = this.utente.id_dipendente
+    this.service.elencoPresenzeIndividual(user_id, this.onSuccess.bind(this), this.onFailure.bind(this))
+  
   }
 
 
@@ -96,8 +95,8 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     return true;
   }
 
-  onSuccess() {
-    alert("Presenza inserita con successo!");
+  onSuccess(response:any) {
+    this.listaPresenze = response;
   }
   onFailure(err: String) {
     alert("Operazione non andata a buon fine. Codice errore: " + err);

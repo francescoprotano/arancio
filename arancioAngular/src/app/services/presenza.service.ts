@@ -9,17 +9,19 @@ import { Presenza } from '../models/presenza';
 export class PresenzaService {
   private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/presenza";
   private presenzaSelezionata: Presenza = new Presenza;
-
+  user : any = sessionStorage.getItem("utente")|| '{}';
   constructor(private http: HttpClient) { }
 
 
   public aggiornaPresenza(model: Presenza,onSuccess:any,onFailure:any)  {
 	  return this.doPost("/update",model, onSuccess,onFailure);
   }
-  public elencoPresenze(queryString : string){
+  public elencoPresenzeX(queryString : string){
     return this.http.get<Array<Presenza>>(this.backendURL + queryString);
    }
-
+   public elencoPresenzeIndividual(id_dipendente_fk : number,onSuccess:any,onFailure:any) : void {
+    this.doGet("/selectByDipendente?id_dipendente_fk="+id_dipendente_fk,onSuccess,onFailure);
+  }
    public aggiungiPresenza(model: Presenza,onSuccess:any,onFailure:any) : void {
     this.doPost("/add",model,onSuccess,onFailure);
   }
@@ -33,7 +35,7 @@ export class PresenzaService {
                 console.log(httpResponse);
       if(httpResponse.successo == true){
         
-        onSuccess(httpResponse.data);
+        onSuccess(httpResponse.presenze);
       } else {
         onFailure(httpResponse.codice_errore);
         

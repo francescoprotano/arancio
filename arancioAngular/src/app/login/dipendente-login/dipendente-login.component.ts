@@ -54,24 +54,20 @@ export class DipendenteLoginComponent implements OnInit {
     }
     return true;
   }
-  
+
 
   verifica(utenteLoggato: any) {
 
     if (utenteLoggato == null) {
       return alert("Email o Password inseriti non corretti.")
     }
-    if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'admin') {
-      this.authService.login()
-      sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
+    this.authService.login()
+    sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
+    if (utenteLoggato.ruolo_fk == 'admin') {
       this.router.navigate(['/adminLoggedIn']);
-    } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'dipendente') {
-      this.authService.login()
-      sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
+    } else if (utenteLoggato.ruolo_fk == 'dipendente') {
       this.router.navigate(['/dipendenteLoggedIn']);
-    } else if (utenteLoggato.email == this.model.email && utenteLoggato.password == this.model.password && utenteLoggato.ruolo_fk == 'responsabile') {
-      this.authService.login()
-      sessionStorage.setItem("utente", JSON.stringify(utenteLoggato))
+    } else if (utenteLoggato.ruolo_fk == 'responsabile') {
       this.router.navigate(['/responsabileLoggedIn']);
     } else {
       alert("Impossibile accedere. Username o password errati.")
@@ -94,27 +90,9 @@ export class DipendenteLoginComponent implements OnInit {
   }
 
 
-
-  public selectByEmail(dipendente: Dipendente, onSuccess: any, onFailure: any) {
-
-    var url = this.backendURL + "" + "/allByEmail?dipendente=" + dipendente;
-
-    return this.http.get(url).subscribe((httpResponse: any) => {
-
-      this.utenteLoggato = httpResponse
-
-      if (httpResponse.successo == true) {
-        onSuccess(httpResponse.data);
-        this.verifica(this.utenteLoggato)
-      } else {
-        onFailure(httpResponse.codiceErrore, httpResponse.errore);
-
-      }
-    });
-  }
-
   onLoginSuccess(result: Dipendente) {
     this.utenteLoggato = result;
+    this.verifica(this.utenteLoggato);
 
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contratto } from 'src/app/models/contratto';
-import { Risposta } from 'src/app/models/risposta';
+import { Location } from '@angular/common'
 import { ContrattoService } from 'src/app/services/contratto.service';
 
 @Component({
@@ -18,10 +18,14 @@ export class AllContrattiComponent implements OnInit {
   enableEditIndex: any = null;
   contratto : Contratto = new Contratto()
   tipologia : string;
-  constructor(private service:ContrattoService,private router: Router) { }
+  constructor(private service:ContrattoService,private router: Router, private location: Location) { }
 
   ngOnInit(): void {
     this.elencoContratti()
+  }
+
+  back(): void {
+    this.location.back()
   }
 
   isDeterminato: boolean = false;

@@ -5,6 +5,7 @@ import { Dipendente } from 'src/app/models/dipendente';
 import { DipendenteService } from 'src/app/services/dipendente.service';
 import { DatePipe } from '@angular/common'
 import { DataErrata } from 'src/app/exceptions/data-errata';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-add-dipendente',
@@ -19,7 +20,7 @@ export class AddDipendenteComponent implements OnInit {
 
 
 
-  constructor(private servizio: DipendenteService, private router: Router, public datePipe: DatePipe) {
+  constructor(private servizio: DipendenteService, private router: Router, public datePipe: DatePipe, private location: Location) {
 
   }
 
@@ -29,7 +30,9 @@ export class AddDipendenteComponent implements OnInit {
 
   }
 
-
+  back(): void {
+    this.location.back()
+  }
 
   salva() {
     try {
