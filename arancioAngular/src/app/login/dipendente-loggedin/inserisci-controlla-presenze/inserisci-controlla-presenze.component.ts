@@ -22,7 +22,6 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   enableEditIndex: any = null;
   listaDipendenti: Array<Dipendente> = new Array<Dipendente>();
   listaPresenze: Array<Presenza> = new Array<Presenza>();
-  nuovePresenze: Array<Presenza> = new Array<Presenza>();
   presenza: Presenza = new Presenza();
 
   user: any = sessionStorage.getItem("utente") || '{}';
@@ -47,6 +46,9 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     }
     this.getStorage()
     this.elencoPresenze(this.utente.id_dipendente)
+    if (this.utente.ruolo_fk == 'responsabile') {
+      this.elencoTuttePresenze();
+    }
   }
 
   switchEditMode(i: any) {
@@ -69,7 +71,11 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   elencoPresenze(user_id: any) {
     user_id = this.utente.id_dipendente
     this.service.elencoPresenzeIndividual(user_id, this.onSuccess.bind(this), this.onFailure.bind(this))
-  
+
+  }
+
+  elencoTuttePresenze() {
+    this.service.elencoPresenze(this.onSuccess.bind(this), this.onFailure.bind(this))
   }
 
 
@@ -95,7 +101,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     return true;
   }
 
-  onSuccess(response:any) {
+  onSuccess(response: any) {
     this.listaPresenze = response;
   }
   onFailure(err: String) {

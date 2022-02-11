@@ -30,8 +30,8 @@
 				  <td>{{d.ruolo_fk}}</td>
 				  <td>{{d.contratto_corrente_fk}}</td>
 				  <td *ngIf="enableEditIndex != i">
-					<button type="button" class="btn btn-info" (click)="switchEditMode(i)">Modifica</button>
-					<input type="button" class="btn btn-danger" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
+					<button  *ngIf="utente.ruolo_fk == 'admin'" type="button" class="btn btn-info" (click)="switchEditMode(i)">Modifica</button>
+					<input *ngIf="utente.ruolo_fk == 'admin'" type="button" class="btn btn-danger" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
 				  </td>
 				</ng-container>
 				<ng-container *ngIf="enableEditIndex == i">
@@ -51,6 +51,7 @@
 		</table>
 	  </div>
 	  <hr/>
-	  <input type="button" class="btn btn-primary" value="Indietro" routerLink="/adminLoggedIn">
+
+	  <input type="button" class="btn btn-primary" value="Indietro" (click)="back()">
 	
    </body>

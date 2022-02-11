@@ -43,8 +43,8 @@ export class ResponsabileLoggedinComponent implements OnInit {
 
  }
 
-aggiungiMese(){
-  this.router.navigate(["/addMese"])
+revisionaPresenze(){
+  this.router.navigate(["/insCheckPresenze"])
 }
 
 elencoContratti(){

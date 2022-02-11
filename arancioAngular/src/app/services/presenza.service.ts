@@ -16,8 +16,8 @@ export class PresenzaService {
   public aggiornaPresenza(model: Presenza,onSuccess:any,onFailure:any)  {
 	  return this.doPost("/update",model, onSuccess,onFailure);
   }
-  public elencoPresenzeX(queryString : string){
-    return this.http.get<Array<Presenza>>(this.backendURL + queryString);
+  public elencoPresenze(onSuccess:any,onFailure:any){
+     this.doGet("/all",onSuccess,onFailure);
    }
    public elencoPresenzeIndividual(id_dipendente_fk : number,onSuccess:any,onFailure:any) : void {
     this.doGet("/selectByDipendente?id_dipendente_fk="+id_dipendente_fk,onSuccess,onFailure);

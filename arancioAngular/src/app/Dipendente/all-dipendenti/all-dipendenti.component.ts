@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Dipendente } from 'src/app/models/dipendente';
 import { DipendenteService } from 'src/app/services/dipendente.service';
+import { Location } from '@angular/common'
 
 
 @Component({
@@ -14,15 +15,27 @@ export class AllDipendentiComponent implements OnInit {
   isEditing: boolean = false;
   enableEditIndex: any = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
-  constructor(private service:DipendenteService,private router: Router) { }
+  user: any = sessionStorage.getItem("utente") || '{}';
+  utente: Dipendente = new Dipendente();
+  constructor(private service:DipendenteService,private router: Router, private location: Location) { }
 
   ngOnInit(): void {
+    this.getStorage();
     this.elenco2();
   }
+
+  getStorage() {
+    this.utente = JSON.parse(sessionStorage.getItem("utente") || '{}');
+  }
+
 
   onRemove(codice:number) {
 		this.service.elimina(codice,this.onSuccess.bind(this),this.onFailure.bind(this));
     this.elenco2();
+  }
+
+  setStatus(stato:number){
+    
   }
 
 
@@ -68,7 +81,9 @@ export class AllDipendentiComponent implements OnInit {
   }
   
 
-
+  back(): void {
+    this.location.back()
+  }
 
 
 
