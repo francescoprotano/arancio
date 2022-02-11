@@ -12,6 +12,7 @@ import { PasswordResetComponent } from './services/password-reset/password-reset
 import { AddMeseComponent } from './Mese/add-all-mese/add-all-mese.component';
 import { PasswordChangeComponent } from './services/password-change/password-change.component';
 import { InserisciControllaPresenzeComponent } from './login/dipendente-loggedin/inserisci-controlla-presenze/inserisci-controlla-presenze.component';
+import { ResponsabileLoggedinComponent } from './login/responsabile-loggedin/responsabile-loggedin.component';
 
 const routes: Routes = [
   {path:'addDip',component:AddDipendenteComponent }
@@ -26,6 +27,7 @@ const routes: Routes = [
   ,{path: 'addMese', component:AddMeseComponent}
   ,{path: 'changePassword', component:PasswordChangeComponent}
   ,{path: 'insCheckPresenze', component:InserisciControllaPresenzeComponent}
+  ,{path: 'responsabileLoggedIn', component: ResponsabileLoggedinComponent}
 
 ];
 

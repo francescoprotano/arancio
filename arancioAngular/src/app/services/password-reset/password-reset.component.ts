@@ -5,6 +5,7 @@ import { CampoRichiesto } from 'src/app/exceptions/campo-richiesto';
 import { Dipendente } from 'src/app/models/dipendente';
 import { dipendenteLoggato } from 'src/app/models/dipendenteLoggato';
 import { DipendenteService } from '../dipendente.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-password-reset',
@@ -18,7 +19,7 @@ utenteLoggato: dipendenteLoggato = new dipendenteLoggato();
 newDipendentePassword : Dipendente = new Dipendente();
   private backendURL: String = "http://localhost:8080/arancioRest/gestione_presenze/dipendente";
 
-  constructor(private router: Router, private apiservice: DipendenteService, private http: HttpClient) { }
+  constructor(private router: Router, private apiservice: DipendenteService, private http: HttpClient, private location: Location) { }
 
   ngOnInit(): void {
   }
@@ -97,6 +98,9 @@ newDipendentePassword : Dipendente = new Dipendente();
     alert(err + " : " + err_code);
   }
 
+  back(): void {
+    this.location.back()
+  }
 
 
 }

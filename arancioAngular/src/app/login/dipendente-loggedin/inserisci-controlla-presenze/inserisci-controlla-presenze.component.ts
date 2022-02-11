@@ -22,7 +22,6 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   enableEditIndex: any = null;
   listaDipendenti: Array<Dipendente> = new Array<Dipendente>();
   listaPresenze: Array<Presenza> = new Array<Presenza>();
-  nuovePresenze: Array<Presenza> = new Array<Presenza>();
   presenza: Presenza = new Presenza();
 
   user: any = sessionStorage.getItem("utente") || '{}';
@@ -45,8 +44,11 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     if (!this.authService.isLoggedIn$) {
       this.router.navigate(["/dipLogin"])
     }
-    this.elencoPresenze()
     this.getStorage()
+    this.elencoPresenze(this.utente.id_dipendente)
+    if (this.utente.ruolo_fk == 'responsabile') {
+      this.elencoTuttePresenze();
+    }
   }
 
   switchEditMode(i: any) {
@@ -66,11 +68,14 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   }
 
 
-  elencoPresenze() {
-    this.service.elencoPresenze(this.queryString).subscribe(response => {
-      this.listaPresenze = response;
+  elencoPresenze(user_id: any) {
+    user_id = this.utente.id_dipendente
+    this.service.elencoPresenzeIndividual(user_id, this.onSuccess.bind(this), this.onFailure.bind(this))
 
-    })
+  }
+
+  elencoTuttePresenze() {
+    this.service.elencoPresenze(this.onSuccess.bind(this), this.onFailure.bind(this))
   }
 
 
@@ -96,8 +101,8 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     return true;
   }
 
-  onSuccess() {
-    alert("Presenza inserita con successo!");
+  onSuccess(response: any) {
+    this.listaPresenze = response;
   }
   onFailure(err: String) {
     alert("Operazione non andata a buon fine. Codice errore: " + err);
