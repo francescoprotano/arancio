@@ -9,8 +9,8 @@ import javax.ejb.Stateless;
 import it.exolab.dao.PresenzaDao;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
-import it.exolab.exception.RispostaPresenza;
 import it.exolab.model.Presenza;
+import it.exolab.responces.RispostaPresenza;
 
 @Stateless
 @LocalBean

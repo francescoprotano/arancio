@@ -14,8 +14,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionMeseEJB;
-import it.exolab.exception.RispostaMese;
 import it.exolab.model.Mese;
+import it.exolab.responces.RispostaMese;
 
 @Path("/mese")
 @Consumes(MediaType.APPLICATION_JSON)

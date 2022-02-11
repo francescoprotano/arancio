@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import it.exolab.exception.RispostaPresenza;
 import it.exolab.model.Presenza;
+import it.exolab.responces.RispostaPresenza;
 
 @Remote
 public interface PresenzaEJBRemote {

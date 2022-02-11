@@ -8,8 +8,8 @@ import javax.ejb.Stateless;
 import it.exolab.dao.ContrattoDao;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
-import it.exolab.exception.RispostaContratto;
 import it.exolab.model.Contratto;
+import it.exolab.responces.RispostaContratto;
 
 @Stateless
 @LocalBean

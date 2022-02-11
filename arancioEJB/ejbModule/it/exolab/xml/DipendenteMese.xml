@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.exolab.mapper.DipendenteMeseMapper">
+
+	<update id="update" parameterType="it.exolab.model.DipendenteMeseMapper">
+		UPDATE dipendenti_mesi
+		SET stato=#{stato}
+		WHERE id_dipendente_fk=#{id_dipendente_fk} AND  id_mese_fk=#{id_mese_fk}
+	</update>
+	
+	<delete id="delete" parameterType="it.exolab.model.DipendenteMeseMapper">
+		DELETE FROM dipendenti_mesi
+		WHERE id_dipendente_fk=#{id_dipendente_fk} AND  id_mese_fk=#{id_mese_fk}
+	</delete>
+	
+	<select id="selectOne">
+	SELECT *
+	FROM dipendenti_mesi
+	WHERE id_dipendente_fk=#{id_dipendente_fk} AND  id_mese_fk=#{id_mese_fk}
+	</select>
+	<select id="selectAll">
+	SELECT *
+	FROM dipendenti_mesi
+	</select>
+	<select id="selectByDipendente">
+	SELECT *
+	FROM dipendenti_mesi
+	WHERE id_dipendente_fk=#{id_dipendente_fk}
+	</select>
+	<select id="selectByMese">
+	SELECT *
+	FROM dipendenti_mesi
+	WHERE id_mese_fk=#{id_mese_fk}
+	</select>
+	<select id="selectByStato">
+	SELECT *
+	FROM dipendenti_mesi
+	WHERE stato=#{stato}
+	</select>
+	
+</mapper>

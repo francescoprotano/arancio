@@ -5,22 +5,23 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import it.exolab.exception.CampoRichiesto;
+import it.exolab.exception.CredenzialiErrate;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.DipendenteMapper;
 
 import it.exolab.model.Dipendente;
 import it.exolab.util.MyBatisUtils;
 
-public class DipendenteDao extends BaseDAO<DipendenteMapper>{
-	
-	private static DipendenteDao istanza=null;
-	
+public class DipendenteDao extends BaseDAO<DipendenteMapper> {
+
+	private static DipendenteDao istanza = null;
+
 	private DipendenteDao() {
 	}
-	
+
 	public static DipendenteDao getIstanza() {
-		if(istanza==null) {
-			istanza=new DipendenteDao();
+		if (istanza == null) {
+			istanza = new DipendenteDao();
 		}
 		return istanza;
 	}
@@ -58,12 +59,12 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper>{
 		sqlSession.commit();
 	}
 
-	public Dipendente login(Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+	public Dipendente login(Dipendente dipendente) throws CampoRichiesto, CredenzialiErrate, ErroreGenerico {
 		validaEmail(dipendente.getEmail());
 		validaPassword(dipendente.getPassword());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		Dipendente dipendenteLog=mapper.login(dipendente);
+		Dipendente dipendenteLog = mapper.login(dipendente);
 		validaCredenziali(dipendente, dipendenteLog);
 		dipendenteLog.setPassword(null);
 		return dipendenteLog;
@@ -96,12 +97,12 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper>{
 	}
 
 	// ------------------------VALIDAZIONI----------------------------------//
-	
-	private void validaCredenziali(Dipendente dipendente, Dipendente dipendenteLog) throws CampoRichiesto {
-		if(!dipendente.getEmail().equals(dipendenteLog.getEmail())) {
-			throw new CampoRichiesto("mail errata");
-		}else if(!dipendente.getPassword().equals(dipendenteLog.getPassword())) {
-			throw new CampoRichiesto("password errata");
+
+	private void validaCredenziali(Dipendente dipendente, Dipendente dipendenteLog) throws CredenzialiErrate {
+		if (!dipendente.getEmail().equals(dipendenteLog.getEmail())) {
+			throw new CredenzialiErrate("mail errata");
+		} else if (!dipendente.getPassword().equals(dipendenteLog.getPassword())) {
+			throw new CredenzialiErrate("password errata");
 		}
 	}
 
@@ -116,7 +117,7 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper>{
 			throw new CampoRichiesto("email");
 		}
 	}
-	
+
 	private void validaPassword(String password) throws CampoRichiesto {
 		if (password == null || password.equals("")) {
 			throw new CampoRichiesto("password");

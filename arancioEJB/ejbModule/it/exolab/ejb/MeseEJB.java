@@ -9,8 +9,8 @@ import javax.ejb.Stateless;
 import it.exolab.dao.MeseDAO;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
-import it.exolab.exception.RispostaMese;
 import it.exolab.model.Mese;
+import it.exolab.responces.RispostaMese;
 
 @Stateless
 @LocalBean

@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import it.exolab.exception.RispostaContratto;
 import it.exolab.model.Contratto;
+import it.exolab.responces.RispostaContratto;
 
 @Remote
 public interface ContrattoEJBRemote {
