@@ -45,7 +45,7 @@ public class DipendenteServiceRest {
 		return ConnectionDipendenteEJB.getConnection().updatePassword(dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/login")
 	public RispostaDipendente login(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().login(dipendente);

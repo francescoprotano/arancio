@@ -63,9 +63,10 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper>{
 		validaPassword(dipendente.getPassword());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		dipendente=mapper.login(dipendente);
-		dipendente.setPassword(null);
-		return dipendente;
+		Dipendente dipendenteLog=mapper.login(dipendente);
+		validaCredenziali(dipendente, dipendenteLog);
+		dipendenteLog.setPassword(null);
+		return dipendenteLog;
 	}
 
 	public List<Dipendente> selectByRuolo(String ruolo) throws CampoRichiesto, ErroreGenerico {
@@ -95,6 +96,14 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper>{
 	}
 
 	// ------------------------VALIDAZIONI----------------------------------//
+	
+	private void validaCredenziali(Dipendente dipendente, Dipendente dipendenteLog) throws CampoRichiesto {
+		if(!dipendente.getEmail().equals(dipendenteLog.getEmail())) {
+			throw new CampoRichiesto("mail errata");
+		}else if(!dipendente.getPassword().equals(dipendenteLog.getPassword())) {
+			throw new CampoRichiesto("password errata");
+		}
+	}
 
 	private void validaID(Integer id_dipendente) throws CampoRichiesto {
 		if (id_dipendente == null || id_dipendente.equals("")) {

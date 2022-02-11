@@ -14,7 +14,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Exolab SRL/git/arancio/JAR/arancioEJBclient_001.jar">
+	<classpathentry kind="lib" path="C:/Users/Exolab SRL/git/arancio/JAR/arancioEJBclient_003.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

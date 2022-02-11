@@ -45,19 +45,7 @@
 		</collection>
 	</resultMap>
 
-	<select id="allJoinDipendentiEContratti"
-		resultMap="dipendenteJoincontratti">
-		SELECT *
-		FROM dipendenti d inner join contratti c ON
-		c.id_dipendente_fk = d.id_dipendente;
-	</select>
-	
-	<select id="allJoinDipendentiEPresenze"
-		resultMap="dipendenteJoinpresenze">
-		SELECT *
-		FROM dipendenti d inner join presenze p ON
-		p.id_dipendente_fk = d.id_dipendente;
-	</select>
+
 
 	<insert id="insert" parameterType="it.exolab.model.Dipendente"
 		useGeneratedKeys="true" keyProperty="id_dipendente"
@@ -91,6 +79,12 @@
 		WHERE
 		id_dipendente = #{id_dipendente}
 	</delete>
+	
+	<select id="login" resultType="it.exolab.model.Dipendente">
+		SELECT *
+		FROM dipendenti
+		WHERE email=#{email}
+	</select>
 
 	<select id="selectAll" resultType="it.exolab.model.Dipendente">
 		SELECT *
@@ -108,6 +102,20 @@
 		SELECT *
 		FROM dipendenti
 		WHERE ruolo_fk=#{ruolo_fk}
+	</select>
+
+	<select id="allJoinDipendentiEContratti"
+		resultMap="dipendenteJoincontratti">
+		SELECT *
+		FROM dipendenti d inner join contratti c ON
+		c.id_dipendente_fk = d.id_dipendente;
+	</select>
+
+	<select id="allJoinDipendentiEPresenze"
+		resultMap="dipendenteJoinpresenze">
+		SELECT *
+		FROM dipendenti d inner join presenze p ON
+		p.id_dipendente_fk = d.id_dipendente;
 	</select>
 
 </mapper>
