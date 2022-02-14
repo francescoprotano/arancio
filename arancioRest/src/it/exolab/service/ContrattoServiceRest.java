@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionContrattoEJB;
 import it.exolab.model.Contratto;
+import it.exolab.responces.RispostaContratti;
 import it.exolab.responces.RispostaContratto;
 
 @Path("/contratto")
@@ -22,7 +23,7 @@ public class ContrattoServiceRest {
 	
 		@GET
 		@Path("/allContratti")
-		public List<Contratto> allContratti() {
+		public RispostaContratti allContratti() {
 			return ConnectionContrattoEJB.getConnection().allContratti();
 		}
 		
@@ -40,8 +41,8 @@ public class ContrattoServiceRest {
 		
 		@GET
 		@Path("/deleteContratto")
-		public RispostaContratto deleteContratto(@QueryParam("id_contratto") Integer id_contratto) {
-			return ConnectionContrattoEJB.getConnection().delete(id_contratto);
+		public RispostaContratto deleteContratto(Contratto contratto) {
+			return ConnectionContrattoEJB.getConnection().delete(contratto);
 		}
 		
 		@GET
@@ -52,7 +53,7 @@ public class ContrattoServiceRest {
 		
 		@GET
 		@Path("/allByTipologia")
-		public List<Contratto> allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
+		public RispostaContratti allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
 			return ConnectionContrattoEJB.getConnection().selectByTipologia(tipologia);
 		}
 
