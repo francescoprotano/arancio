@@ -17,7 +17,11 @@ export class AddMeseComponent implements OnInit {
   listaMesi : Array<Mese> = new Array<Mese>(); 
   isEditing: boolean = false;
   enableEditIndex: any = null;
-  constructor(private servizio: MeseService, private router : Router, private location: Location) { }
+ monthControl = document.querySelector('input[type="mesi"]');
+ mesi : string;
+  constructor(private servizio: MeseService, private router : Router, private location: Location) { 
+    
+  }
 
 
   ngOnInit(): void {
@@ -51,6 +55,11 @@ export class AddMeseComponent implements OnInit {
   switchEditMode(i: any) {
     this.isEditing = true;
     this.enableEditIndex = i;
+  }
+
+  selectMonth(mesi : any){
+    
+    console.log(this.mesi)
   }
 
   save(mese : Mese) {

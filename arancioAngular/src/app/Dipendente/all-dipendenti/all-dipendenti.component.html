@@ -6,7 +6,6 @@
 		<table class="table table-hover">
 		  <thead>
 			<tr>
-			  <th scope="col">ID Dipendente</th>
 			  <th scope="col">Nome</th>
 			  <th scope="col">Cognome</th>
 			  <th scope="col">Data di Nascita</th>
@@ -20,7 +19,7 @@
 		  <tbody>
 			<ng-container *ngFor="let d of listaDipendenti; index as i;">
 			  <tr>
-				<th scope="row">{{d.id_dipendente}}</th>
+
 				<ng-container *ngIf="enableEditIndex != i">
 				  <td>{{d.nome}}</td>
 				  <td>{{d.email}}</td>

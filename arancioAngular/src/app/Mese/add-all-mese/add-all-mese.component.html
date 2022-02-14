@@ -8,7 +8,7 @@
         <thead>
             <tr>
 
-                <th scope="col">ID mese</th>
+               
                 <th scope="col">MESE</th>
                 <th scope="col">Chiuso?</th>
                 <th scope="col">-AZIONI-</th>
@@ -16,7 +16,7 @@
         </thead>
         <tbody>
 
-            <td><input type="number" [(ngModel)]="model.id_mese" name="id_mese" /></td>
+            
             <td><input type="date" [(ngModel)]="model.mese" name="mese" /></td>
             <td><select [(ngModel)]="model.chiuso" name="chiuso">
                     <option value="true">SI</option>
@@ -32,7 +32,7 @@
             <thead>
                 <tr>
 
-                    <th scope="col">ID mese</th>
+
                     <th scope="col">MESE</th>
                     <th scope="col">Chiuso?</th>
                     <th scope="col">-AZIONI-</th>
@@ -40,20 +40,39 @@
                 
 
             </thead>
+            
+            <select name="mesi" class="datefield month"  [(ngModel)]="mesi" (click)="selectMonth(mesi)">
+                <option disabled value="">Seleziona Mese</option>
+                <option value="01">Jan</option>
+                <option value="02">Feb</option>
+                <option value="03">Mar</option>
+                <option value="04">Apr</option>
+                <option value="05">May</option>
+                <option value="06">Jun</option>
+                <option value="07">Jul</option>
+                <option value="08">Aug</option>
+                <option value="09">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+            </select>
+
+        
+
             <tbody>
                 <ng-container *ngFor="let m of listaMesi; index as i;">
 
                     <tr>
 
                         <ng-container *ngIf="enableEditIndex != i">
-                            <td>{{m.id_mese}}</td>
+
                             <td>{{m.mese | date: 'dd-MM-yyyy'}}</td>
                             <td>{{m.chiuso}}</td>
 
                         </ng-container>
 
                         <ng-container *ngIf="enableEditIndex == i">
-                            <td>{{m.id_mese}}</td>
+
                             <td>{{m.mese | date: 'dd-MM-yyyy'}}</td>
                             <td>{{m.chiuso}}</td>
                            
