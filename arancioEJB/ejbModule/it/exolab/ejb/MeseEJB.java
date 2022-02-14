@@ -1,7 +1,6 @@
 package it.exolab.ejb;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -11,6 +10,7 @@ import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.model.Mese;
 import it.exolab.responces.RispostaMese;
+import it.exolab.responces.RispostaMesi;
 
 @Stateless
 @LocalBean
@@ -72,11 +72,11 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public RispostaMese delete(Integer id_mese) {
+	public RispostaMese delete(Mese mese) {
 		RispostaMese res = new RispostaMese();
 		try {
-			MeseDAO.getIstanza().delete(id_mese);
-			res.setData(id_mese);
+			MeseDAO.getIstanza().delete(mese);
+			res.setData(mese);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -123,8 +123,23 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public List<Mese> allMesi() {
-		return MeseDAO.getIstanza().selectAll();
+	public RispostaMesi allMesi() {
+		RispostaMesi res = new RispostaMesi();
+		try {
+			res.setData(MeseDAO.getIstanza().selectAll());
+		} catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }

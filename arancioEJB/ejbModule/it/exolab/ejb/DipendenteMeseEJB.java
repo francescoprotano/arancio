@@ -8,6 +8,7 @@ import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.model.DipendenteMese;
 import it.exolab.responces.RispostaDipendenteMese;
+import it.exolab.responces.RispostaDipendentiMesi;
 
 @Stateless
 @LocalBean
@@ -94,15 +95,10 @@ public class DipendenteMeseEJB implements DipendenteMeseEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenteMese selectAll() {
-		RispostaDipendenteMese res = new RispostaDipendenteMese();
+	public RispostaDipendentiMesi selectAll() {
+		RispostaDipendentiMesi res = new RispostaDipendentiMesi();
 		try {
-			res.setData(DipendenteMeseDao.getIstanza().selectAll();
-		} catch (CampoRichiesto e) {
-			res.setErrore(e.getCampo() + " è richiesto");
-			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
-																// setCodice_errore
-			e.printStackTrace();
+			res.setData(DipendenteMeseDao.getIstanza().selectAll());
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
@@ -119,10 +115,10 @@ public class DipendenteMeseEJB implements DipendenteMeseEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenteMese selectByDipendente(DipendenteMese dipendenteMese) {
-		RispostaDipendenteMese res = new RispostaDipendenteMese();
+	public RispostaDipendentiMesi selectByDipendente(DipendenteMese dipendenteMese) {
+		RispostaDipendentiMesi res = new RispostaDipendentiMesi();
 		try {
-			res.setData(DipendenteMeseDao.getIstanza().selectByDipendente(dipendenteMese.getId_dipendente_fk());
+			res.setData(DipendenteMeseDao.getIstanza().selectByDipendente(dipendenteMese.getId_dipendente_fk()));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -143,8 +139,8 @@ public class DipendenteMeseEJB implements DipendenteMeseEJBRemote {
 		return res;	}
 
 	@Override
-	public RispostaDipendenteMese selectByMese(DipendenteMese dipendenteMese) {
-		RispostaDipendenteMese res = new RispostaDipendenteMese();
+	public RispostaDipendentiMesi selectByMese(DipendenteMese dipendenteMese) {
+		RispostaDipendentiMesi res = new RispostaDipendentiMesi();
 		try {
 			res.setData(DipendenteMeseDao.getIstanza().selectByMese(dipendenteMese.getId_mese_fk()));
 		} catch (CampoRichiesto e) {
@@ -168,8 +164,8 @@ public class DipendenteMeseEJB implements DipendenteMeseEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenteMese selectByStato(DipendenteMese dipendenteMese) {
-		RispostaDipendenteMese res = new RispostaDipendenteMese();
+	public RispostaDipendentiMesi selectByStato(DipendenteMese dipendenteMese) {
+		RispostaDipendentiMesi res = new RispostaDipendentiMesi();
 		try {
 			res.setData(DipendenteMeseDao.getIstanza().selectByStato(dipendenteMese.getStato()));
 		} catch (CampoRichiesto e) {

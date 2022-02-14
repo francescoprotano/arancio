@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import it.exolab.connection.ConnectionDipendenteMese;
 import it.exolab.model.DipendenteMese;
 import it.exolab.responces.RispostaDipendenteMese;
+import it.exolab.responces.RispostaDipendentiMesi;
 
 @Path("/dipendenteMese")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -36,25 +37,25 @@ public class DipendenteMeseServiceRest {
 
 	@GET
 	@Path("/selectAll")
-	public RispostaDipendenteMese selectAll() {
+	public RispostaDipendentiMesi selectAll() {
 		return ConnectionDipendenteMese.getConnection().selectAll();
 	}
 
 	@GET
 	@Path("/selectByDipendente")
-	public RispostaDipendenteMese selectByDipendente(DipendenteMese dipendenteMese) {
+	public RispostaDipendentiMesi selectByDipendente(DipendenteMese dipendenteMese) {
 		return ConnectionDipendenteMese.getConnection().selectByDipendente(dipendenteMese);
 	}
 
 	@GET
 	@Path("/selectByMese")
-	public RispostaDipendenteMese selectByMese(DipendenteMese dipendenteMese) {
+	public RispostaDipendentiMesi selectByMese(DipendenteMese dipendenteMese) {
 		return ConnectionDipendenteMese.getConnection().selectByMese(dipendenteMese);
 	}
 
 	@GET
 	@Path("/selectByStato")
-	public RispostaDipendenteMese selectByStato(DipendenteMese dipendenteMese) {
+	public RispostaDipendentiMesi selectByStato(DipendenteMese dipendenteMese) {
 		return ConnectionDipendenteMese.getConnection().selectByStato(dipendenteMese);
 	}
 

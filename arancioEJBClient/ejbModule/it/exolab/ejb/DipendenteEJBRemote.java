@@ -1,7 +1,5 @@
 package it.exolab.ejb;
 
-import java.util.List;
-
 import javax.ejb.Remote;
 
 import it.exolab.model.Dipendente;
@@ -19,8 +17,8 @@ public interface DipendenteEJBRemote {
 	public RispostaDipendente login(Dipendente dipendente);
 	public RispostaDipendenti selectByRuolo(String ruolo);
 	
-	public List<Dipendente> allDipendenti();
-	public List<Dipendente> allJoinDipendentiEContratti();
-	public List<Dipendente> allJoinDipendentiEPresenze();
+	public RispostaDipendenti allDipendenti();
+	public RispostaDipendenti allJoinDipendentiEContratti();
+	public RispostaDipendenti allJoinDipendentiEPresenze();
 	
 }

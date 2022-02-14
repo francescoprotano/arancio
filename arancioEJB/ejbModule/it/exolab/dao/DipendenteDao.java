@@ -77,20 +77,20 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper> {
 		return mapper.selectByRuolo(ruolo);
 	}
 
-	public List<Dipendente> selectAll() {
+	public List<Dipendente> selectAll() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectAll();
 
 	}
 
-	public List<Dipendente> allJoinDipendentiEContratti() {
+	public List<Dipendente> allJoinDipendentiEContratti() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEContratti();
 	}
 
-	public List<Dipendente> allJoinDipendentiEPresenze() {
+	public List<Dipendente> allJoinDipendentiEPresenze() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEPresenze();

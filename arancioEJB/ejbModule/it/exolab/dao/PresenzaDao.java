@@ -49,11 +49,11 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public void delete(Integer id_presenza) throws CampoRichiesto, ErroreGenerico {
-		validaID(id_presenza);
+	public void delete(Presenza presenza) throws CampoRichiesto, ErroreGenerico {
+		validaID(presenza.getId_presenza());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
-		mapper.delete(id_presenza);
+		mapper.delete(presenza.getId_presenza());
 		sqlSession.commit();
 
 	}
@@ -89,7 +89,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public List<Presenza> selectAll() {
+	public List<Presenza> selectAll() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		return mapper.selectAll();

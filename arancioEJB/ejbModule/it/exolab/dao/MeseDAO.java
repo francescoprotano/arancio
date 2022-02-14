@@ -58,11 +58,11 @@ public class MeseDAO extends BaseDAO<MeseMapper>{
 		sqlSession.commit();
 	}
 
-	public void delete(Integer id_mese) throws CampoRichiesto, ErroreGenerico {
-		validaID(id_mese);
+	public void delete(Mese mese) throws CampoRichiesto, ErroreGenerico {
+		validaID(mese.getId_mese());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
-		mapper.delete(id_mese);
+		mapper.delete(mese.getId_mese());
 		sqlSession.commit();
 	}
 
@@ -73,7 +73,7 @@ public class MeseDAO extends BaseDAO<MeseMapper>{
 		return mapper.selectByMese(mese);
 	}
 
-	public List<Mese> selectAll() {
+	public List<Mese> selectAll() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
 		return mapper.selectAll();

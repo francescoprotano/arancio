@@ -1,7 +1,5 @@
 package it.exolab.ejb;
 
-import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
@@ -180,20 +178,63 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public List<Dipendente> allDipendenti() {
-		return DipendenteDao.getIstanza().selectAll();
+	public RispostaDipendenti allDipendenti() {
+		RispostaDipendenti res = new RispostaDipendenti();
+		try {
+			res.setData(DipendenteDao.getIstanza().selectAll());
+		} catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
-	public List<Dipendente> allJoinDipendentiEContratti() {
-
-		return DipendenteDao.getIstanza().allJoinDipendentiEContratti();
+	public RispostaDipendenti allJoinDipendentiEContratti() {
+		RispostaDipendenti res = new RispostaDipendenti();
+		try {
+			res.setData(DipendenteDao.getIstanza().allJoinDipendentiEContratti());
+		} catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
-	public List<Dipendente> allJoinDipendentiEPresenze() {
-
-		return DipendenteDao.getIstanza().allJoinDipendentiEPresenze();
+	public RispostaDipendenti allJoinDipendentiEPresenze() {
+		RispostaDipendenti res = new RispostaDipendenti();
+		try {
+			res.setData(DipendenteDao.getIstanza().allJoinDipendentiEPresenze());
+		} catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }
