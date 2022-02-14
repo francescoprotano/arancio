@@ -11,6 +11,7 @@ import it.exolab.exception.CredenzialiErrate;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.model.Dipendente;
 import it.exolab.responces.RispostaDipendente;
+import it.exolab.responces.RispostaDipendenti;
 
 @Stateless
 @LocalBean
@@ -98,11 +99,11 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendente delete(Integer id_dipendente) {
+	public RispostaDipendente delete(Dipendente dipendente) {
 		RispostaDipendente res = new RispostaDipendente();
 		try {
-			DipendenteDao.getIstanza().delete(id_dipendente);
-			res.setData(id_dipendente);
+			DipendenteDao.getIstanza().delete(dipendente);
+			res.setData(dipendente);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -154,8 +155,8 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendente selectByRuolo(String ruolo) {
-		RispostaDipendente res = new RispostaDipendente();
+	public RispostaDipendenti selectByRuolo(String ruolo) {
+		RispostaDipendenti res = new RispostaDipendenti();
 		try {
 			res.setData(DipendenteDao.getIstanza().selectByRuolo(ruolo));
 		} catch (CampoRichiesto e) {

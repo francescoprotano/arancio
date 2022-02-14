@@ -51,11 +51,11 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper> {
 		sqlSession.commit();
 	}
 
-	public void delete(Integer id_dipendente) throws CampoRichiesto, ErroreGenerico {
-		validaID(id_dipendente);
+	public void delete(Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaID(dipendente.getId_dipendente());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
-		mapper.delete(id_dipendente);
+		mapper.delete(dipendente.getId_dipendente());
 		sqlSession.commit();
 	}
 

@@ -58,8 +58,7 @@
 	  <hr/>
 	 
 	  <h3>Cerca per Tipologia:</h3>
-	
-	  <ng-container>
+	  
 		<td><select [(ngModel)]="tipologia" name="tipologia">
 		  <option value="a progetto">a progetto</option>
 		  <option value="determinato">determinato</option>
@@ -71,6 +70,8 @@
   
 		<td><button (click)="byTipologia(tipologia)">Conferma</button></td>
 		<br>
+		<table class="table">
+			<ng-container>
 		<thead>
 		  <tr>
 			<th scope="col">Data assunzione</th>
@@ -101,5 +102,5 @@
 	  </ng-container>
 	  <br><br>
 	  <input type="button" class="btn btn-danger" (click)="back()" value="Annulla" >
-	
+	</table>
    </body>

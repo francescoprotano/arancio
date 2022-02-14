@@ -23,8 +23,8 @@ public eliminaContratto(id_contratto:number,onSuccess:any,onFailure:any){
   return this.doGet("/deleteContratto?id_contratto="+id_contratto,onSuccess,onFailure);
 }
 
-public elencoContratti(queryString : string){
-  return this.http.get<Array<Contratto>>(this.backendURL + queryString);
+public elencoContratti(onSuccess:any,onFailure:any){
+  return this.doGet("/allContratti",onSuccess,onFailure);
  }
 
  public byTipologiaX(tipologia:string,callback:any){

@@ -48,10 +48,8 @@ export class AllContrattiComponent implements OnInit {
     this.elencoContratti();
   }
   elencoContratti(){
-    this.service.elencoContratti(this.queryString).subscribe(response => {
-      this.listaContratti = response;
-   
-    })
+    this.service.elencoContratti(this.onSuccess.bind(this),this.onFailure.bind(this))
+
   }
 
   byTipologiaX(tipologia : string) {
@@ -81,8 +79,8 @@ responseTipologia(risposta:any){
   }
 }
 
-  onSuccess(response:String) {
-
+  onSuccess(response:any) {
+    this.listaContratti = response.data
 	
   }
 

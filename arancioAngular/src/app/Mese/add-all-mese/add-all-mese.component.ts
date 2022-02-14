@@ -19,6 +19,8 @@ export class AddMeseComponent implements OnInit {
   enableEditIndex: any = null;
  monthControl = document.querySelector('input[type="mesi"]');
  mesi : string;
+ anni : string;
+ giorni : string = "01";
   constructor(private servizio: MeseService, private router : Router, private location: Location) { 
     
   }
@@ -57,9 +59,22 @@ export class AddMeseComponent implements OnInit {
     this.enableEditIndex = i;
   }
 
+  selectYear(anni : any){
+
+    this.daySelected(this.anni, "")
+  }
+
   selectMonth(mesi : any){
-    
-    console.log(this.mesi)
+
+    this.daySelected(this.anni, this.mesi)
+  }
+
+  daySelected(anni : string, mesi : string){
+    var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
+    console.log(daySelected);
+    if(this.anni!= undefined && this.mesi!=undefined){
+      
+    }
   }
 
   save(mese : Mese) {

@@ -6,17 +6,18 @@ import javax.ejb.Remote;
 
 import it.exolab.model.Dipendente;
 import it.exolab.responces.RispostaDipendente;
+import it.exolab.responces.RispostaDipendenti;
 
 @Remote
 public interface DipendenteEJBRemote {
 	
 	public RispostaDipendente add(Dipendente dipendente);
 	public RispostaDipendente edit(Dipendente dipendente);
-	public RispostaDipendente delete(Integer id_dipendente);
+	public RispostaDipendente delete(Dipendente dipendente);
 	
 	public RispostaDipendente updatePassword(Dipendente dipendente);
 	public RispostaDipendente login(Dipendente dipendente);
-	public RispostaDipendente selectByRuolo(String ruolo);
+	public RispostaDipendenti selectByRuolo(String ruolo);
 	
 	public List<Dipendente> allDipendenti();
 	public List<Dipendente> allJoinDipendentiEContratti();
