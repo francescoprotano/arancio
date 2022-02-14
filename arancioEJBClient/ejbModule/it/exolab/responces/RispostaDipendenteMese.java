@@ -1,7 +1,5 @@
 package it.exolab.responces;
 
-import java.util.List;
-
 import it.exolab.model.DipendenteMese;
 
 public class RispostaDipendenteMese extends Risposta<DipendenteMese> {
