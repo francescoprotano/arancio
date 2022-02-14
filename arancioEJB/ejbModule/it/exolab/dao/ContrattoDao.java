@@ -40,11 +40,11 @@ public class ContrattoDao extends BaseDAO<ContrattoMapper> {
 		sqlSession.commit();
 	}
 
-	public void delete(Integer id_contratto) throws CampoRichiesto, ErroreGenerico {
-		validaID(id_contratto);
+	public void delete(Contratto contratto) throws CampoRichiesto, ErroreGenerico {
+		validaID(contratto.getId_contratto());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
-		mapper.delete(id_contratto);
+		mapper.delete(contratto.getId_contratto());
 		sqlSession.commit();
 	}
 
@@ -62,7 +62,7 @@ public class ContrattoDao extends BaseDAO<ContrattoMapper> {
 		return mapper.selectByTipologia(tipologia);
 	}
 
-	public List<Contratto> selectAll() {
+	public List<Contratto> selectAll() throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		return mapper.selectAll();
