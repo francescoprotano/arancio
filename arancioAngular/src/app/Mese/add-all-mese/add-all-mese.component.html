@@ -26,7 +26,40 @@
         </tbody>
     </table>
     <br><br><br>
-    <div class="container">
+    <select name="anni" class="datefield month"  [(ngModel)]="anni" (click)="selectYear(anni)">
+        <option disabled value="">Seleziona Anno</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+        
+    </select>
+    <select name="mesi" class="datefield month"  [(ngModel)]="mesi" (click)="selectMonth(mesi)">
+        <option disabled value="">Seleziona Mese</option>
+        <option value="01">Gennaio</option>
+        <option value="02">Febbraio</option>
+        <option value="03">Marzo</option>
+        <option value="04">Aprile</option>
+        <option value="05">Maggio</option>
+        <option value="06">Giugno</option>
+        <option value="07">Luglio</option>
+        <option value="08">Agosto</option>
+        <option value="09">Settembre</option>
+        <option value="10">Ottobre</option>
+        <option value="11">Novembre</option>
+        <option value="12">Dicembre</option>
+    </select>
+  
+
+        <ng-container *ngIf="listaMesi != null"> 
+
         <legend style="color: brown;">Lista Mesi</legend>
         <table class="table">
             <thead>
@@ -40,40 +73,11 @@
                 
 
             </thead>
-            <select name="anni" class="datefield month"  [(ngModel)]="anni" (click)="selectYear(anni)">
-                <option disabled value="">Seleziona Anno</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-                
-            </select>
-            <select name="mesi" class="datefield month"  [(ngModel)]="mesi" (click)="selectMonth(mesi)">
-                <option disabled value="">Seleziona Mese</option>
-                <option value="01">Gennaio</option>
-                <option value="02">Febbraio</option>
-                <option value="03">Marzo</option>
-                <option value="04">Aprile</option>
-                <option value="05">Maggio</option>
-                <option value="06">Giugno</option>
-                <option value="07">Luglio</option>
-                <option value="08">Agosto</option>
-                <option value="09">Settembre</option>
-                <option value="10">Ottobre</option>
-                <option value="11">Novembre</option>
-                <option value="12">Dicembre</option>
-            </select>
+            
 
         
 
-            <tbody>
+            <tbody >
                 <ng-container *ngFor="let m of listaMesi; index as i;">
 
                     <tr>
@@ -93,12 +97,14 @@
 
                         </ng-container>
 
-
-                        
+                       
+                        <div *ngIf="listaMesi != null">
                         <td *ngIf="enableEditIndex != i">
                             <button type="button" class="btn btn-warning" (click)="switchEditMode(i)">Modifica</button>
                             <button type="button" class="btn btn-danger" (click)="onRemove(m.id_mese)">Cancella</button>
                         </td>
+                    </div>
+               
                         <ng-container *ngIf="enableEditIndex == i">
 
                             <tr *ngIf="enableEditIndex == i">
@@ -116,7 +122,7 @@
                 </ng-container>
             </tbody>
         </table>
-    </div>
+    </ng-container>
     <hr />
     <td><button (click)="back()">Indietro</button></td>
     <br>

@@ -17,6 +17,7 @@ export class AddMeseComponent implements OnInit {
   listaMesi : Array<Mese> = new Array<Mese>(); 
   isEditing: boolean = false;
   enableEditIndex: any = null;
+  singleMese : Mese;
  monthControl = document.querySelector('input[type="mesi"]');
  mesi : string;
  anni : string;
@@ -70,7 +71,7 @@ export class AddMeseComponent implements OnInit {
     var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
     console.log(daySelected);
     if(this.anni!= undefined && this.mesi!=undefined){
-      this.servizio.elencoByMese(daySelected,this.onSuccess.bind(this), this.onFailure.bind(this));
+      this.servizio.elencoByMese(daySelected,this.onSuccessSingle.bind(this), this.onFailure.bind(this));
     }
   }
 
@@ -95,6 +96,17 @@ export class AddMeseComponent implements OnInit {
   onSuccess(response : any) {
     this.listaMesi = response
   }
+
+  onSuccessSingle(response : any) {
+    if(response==null){
+      this.listaMesi = null;
+    }
+    else{
+      this.listaMesi=[]
+    this.singleMese = response
+    this.listaMesi.push(this.singleMese);}
+  }
+
   onFailure(err: String) {
     alert("Operazione non andata a buon fine. Codice errore: "+err);
   }
