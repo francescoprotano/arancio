@@ -26,7 +26,6 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   mesi: string;
   anni: string;
   giorni : string = "01";
-
   user: any = sessionStorage.getItem("utente") || '{}';
   utente: Dipendente = new Dipendente();
 
@@ -86,6 +85,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   selectYear(anni : any){
 
     this.daySelected(this.anni, "")
+
   }
 
   selectMonth(mesi : any){
@@ -97,7 +97,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
     console.log(daySelected);
     if(this.anni!= undefined && this.mesi!=undefined){
-      
+      this.service.elencoByMese(daySelected,this.onSuccess.bind(this), this.onFailure.bind(this));
     }
   }
 

@@ -6,27 +6,6 @@
 <mapper namespace="it.exolab.mapper.PresenzaMapper">
 
 
-	<resultMap id="presenzeJoinmesi"
-		type="it.exolab.model.Presenza">
-		<id column="id_presenza" property="id_presenza" />
-		<result property="id_dipendente_fk" column="id_dipendente_fk" />
-		<result property="data" column="data" />
-		<result property="ore_lavorate" column="ore_lavorate" />
-		<result property="ore_assenza" column="ore_assenza" />
-		<result property="motivazione_assenza_fk"
-			column="motivazione_assenza_fk" />
-		<result property="id_mese_fk" column="id_mese_fk" />
-		<association property="mese"
-			javaType="it.exolab.model.Mese">
-			<id property="id_mese" column="id_mese" />
-			<id property="mese" column="mese" />
-			<id property="chiuso" column="chiuso" />
-		</association>
-	</resultMap>
-
-
-
-
 	<insert id="insert" parameterType="it.exolab.model.Presenza"
 		useGeneratedKeys="true" keyProperty="id_presenza"
 		keyColumn="id_presenza">
@@ -101,8 +80,8 @@
 	</select>
 	
 	<select id="presenzeJoinmesi"
-		resultMap="presenzeJoinmesi">
-		SELECT *
+		resultType="it.exolab.model.Presenza">
+		SELECT p.*
 		FROM mesi m inner join presenze p ON
 		p.id_mese_fk = m.id_mese
 		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data});
