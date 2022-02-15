@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionMeseEJB;
+import it.exolab.model.Dipendente;
 import it.exolab.model.Mese;
 import it.exolab.responces.RispostaMese;
 import it.exolab.responces.RispostaMesi;
@@ -22,8 +23,8 @@ public class MeseServiceRest {
 	
 	@POST
 	@Path("/add")
-	public RispostaMese add(Mese mese) {
-		return ConnectionMeseEJB.getConnection().add(mese);
+	public RispostaMese add(Dipendente dipendente) {
+		return ConnectionMeseEJB.getConnection().add(dipendente);
 	}
 	
 	@POST

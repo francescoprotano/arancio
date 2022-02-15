@@ -1,6 +1,7 @@
 package it.exolab.ejb;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 import it.exolab.dao.MeseDAO;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
+import it.exolab.model.Dipendente;
 import it.exolab.model.Mese;
 import it.exolab.responces.RispostaMese;
 import it.exolab.responces.RispostaMesi;
@@ -20,9 +22,15 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public RispostaMese add(Mese mese) {
+	public RispostaMese add(Dipendente dipendente) {
 		RispostaMese res = new RispostaMese();
 		try {
+			// fase di test
+			Mese mese = new Mese();
+			String sdata="2022-08-01";
+			Date data = Date.valueOf(sdata);
+			mese.setMese(data);
+			//
 			MeseDAO.getIstanza().insert(mese);
 			res.setData(mese);
 		} catch (CampoRichiesto e) {

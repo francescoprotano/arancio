@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.ejb.Remote;
 
+import it.exolab.model.Dipendente;
 import it.exolab.model.Mese;
 import it.exolab.responces.RispostaMese;
 import it.exolab.responces.RispostaMesi;
@@ -11,7 +12,7 @@ import it.exolab.responces.RispostaMesi;
 @Remote
 public interface MeseEJBRemote {
 	
-	public RispostaMese add(Mese mese);
+	public RispostaMese add(Dipendente dipendente);
 	public RispostaMese edit(Mese mese);
 	public RispostaMese delete(Mese mese);
 	public RispostaMesi allMesi();
