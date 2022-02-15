@@ -24,6 +24,11 @@
 	INSERT INTO dipendenti_mesi(id_dipendente_fk,id_mese_fk)
 	VALUES(#{id_dipendente_fk},#{id_mese_fk});
 	</insert>
+	<insert id="inserisciDipendenti_Mesi" parameterType="it.exolab.model.DipendenteMese" useGeneratedKeys="true" keyProperty="id_presenza" 
+		keyColumn="id_presenza">
+	INSERT INTO presenze(id_presenza,id_dipendente_fk,data,ore_lavorate,ore_assenza,motivazione_assenza_fk,id_mese_fk)
+	VALUES(#{id_presenza},#{id_dipendente_fk},#{data},8,0,'presente',#{id_mese_fk});
+	</insert>
 	
 	<update id="update" parameterType="it.exolab.model.Mese">
 	UPDATE mesi
