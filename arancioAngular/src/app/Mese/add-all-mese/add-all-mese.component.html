@@ -2,32 +2,14 @@
 
 
     <legend style="color: brown;">Inserisci Mese</legend>
-    <table class="table">
-        <thead>
-            <tr>
-
-
-                <th scope="col">MESE</th>
-                <th scope="col">Chiuso?</th>
-                <th scope="col">-AZIONI-</th>
-            </tr>
-        </thead>
-        <tbody>
-
-
-            <td><input type="date" [(ngModel)]="model.mese" name="mese" /></td>
-            <td><select [(ngModel)]="model.chiuso" name="chiuso">
-                    <option value="true">SI</option>
-                    <option value="false">NO</option>
-                </select></td>
-            <input type="button" class="btn btn-success" name="buttonSalva" (click)="salva()" value="Salva" /><br />
-        </tbody>
-    </table>
+    
+            <input type="button" class="btn btn-success" name="buttonSalva" (click)="salva()" value="Inserisci mese" /><br />
+       
     <br><br><br>
     <h5 style="color: tomato;">Seleziona l'anno e il mese che vuoi visualizzare:</h5>
     <br>
     <select name="anni" class="datefield month" [(ngModel)]="anni" (click)="selectYear(anni)">
-        <option disabled value="">Seleziona Anno</option>
+        <option disabled value="0">Seleziona Anno</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>
@@ -41,8 +23,8 @@
         <option value="2030">2030</option>
 
     </select>
-    <select  name="mesi" class="datefield month" [(ngModel)]="mesi" (click)="selectMonth(mesi)">
-        <option disabled value="">Seleziona Mese</option>
+    <select  name="mesi" id="months" class="datefield month" [(ngModel)]="mesi" (click)="selectMonth(mesi)">
+        <option disabled value="0">Seleziona Mese</option>
         <option value="01">Gennaio</option>
         <option value="02">Febbraio</option>
         <option value="03">Marzo</option>
@@ -57,9 +39,11 @@
         <option value="12">Dicembre</option>
     </select>
     <ng-container *ngIf="allMonths == false">
-        <button type="button" class="btn btn-warning" (click)="elencoMesi()">Mostra tutto</button>
+        <button type="button" class="btn btn-warning" (click)="elencoMesi()" >Mostra tutto</button>
     </ng-container>
     <br><br>
+
+
 
     <ng-container *ngIf="listaMesi != null">
 

@@ -4,6 +4,7 @@ import { CampoRichiesto } from 'src/app/exceptions/campo-richiesto';
 import { Mese } from 'src/app/models/mese';
 import { MeseService } from 'src/app/services/mese.service';
 import { Location } from '@angular/common'
+import { Dipendente } from 'src/app/models/dipendente';
 
 @Component({
   selector: 'app-add-mese',
@@ -19,7 +20,8 @@ export class AddMeseComponent implements OnInit {
   allMonths: boolean = true;
   enableEditIndex: any = null;
   singleMese : Mese;
- monthControl = document.querySelector('input[type="mesi"]');
+  user : any = sessionStorage.getItem("utente")|| '{}';
+  admin : Dipendente = new Dipendente();
  mesi : string;
  anni : string;
  giorni : string = "01";
@@ -34,13 +36,12 @@ export class AddMeseComponent implements OnInit {
 
   elencoMesi(){
     this.servizio.elencoMesi(this.onSuccess.bind(this), this.onFailure.bind(this));
-    this.showAll();
+    this.showAll()
   }
 
   salva() {
     try {
-      this.validateForward();
-      this.servizio.aggiungiMese(this.model, this.onSuccess.bind(this), this.onFailure.bind(this));
+      this.servizio.aggiungiMese(this.admin, this.onSuccess.bind(this), this.onFailure.bind(this));
       
       this.router.navigate(['/adminLoggedIn'])
     } catch (e) {
@@ -118,13 +119,7 @@ export class AddMeseComponent implements OnInit {
     alert("Operazione non andata a buon fine. Codice errore: "+err);
   }
 
-  validateForward() {
-
-    if (this.model.mese == null) {
-      throw new CampoRichiesto('mese');
-    }
-
-  }
+ 
 
   back(): void {
     this.location.back()

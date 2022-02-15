@@ -69,12 +69,13 @@ public class MeseDAO extends BaseDAO<MeseMapper> {
 		Integer res = cal.getActualMaximum(Calendar.DATE);
 		for (Dipendente id_dipendente : id_dipendenti) {
 			presMes.setId_dipendente_fk(id_dipendente.getId_dipendente());
-			for (Integer i = localDate.getDayOfMonth(); i <= res; i++) {
+			for (Integer i = 0; i <= res; i++) {
 				presMes.setData(Date.valueOf(localDate));
 				mapper.inserisciPresenzeMese(presMes);
 				sqlSession.commit();
 				localDate = localDate.plusDays(1);
 			}
+			sqlSession.commit();
 		}
 	}
 

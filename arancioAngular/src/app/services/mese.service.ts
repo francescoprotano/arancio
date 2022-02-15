@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Dipendente } from '../models/dipendente';
 import { Mese } from '../models/mese';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class MeseService {
 
   //***MESE***
 
-public aggiungiMese(model: Mese,onSuccess:any,onFailure:any) : void {
+public aggiungiMese(model: Dipendente,onSuccess:any,onFailure:any) : void {
   this.doPost("/add",model,onSuccess,onFailure);
 }
 

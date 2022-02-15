@@ -44,6 +44,7 @@
           <th scope="col">Ore lavorate</th>
           <th scope="col">Ore assenza</th>
           <th scope="col">Motivazione assenza</th>
+          <th scope="col">STATO</th>
 
           <th scope="col">-AZIONI-</th>
         </tr>
@@ -80,7 +81,9 @@
           <option value="11">Novembre</option>
           <option value="12">Dicembre</option>
       </select>
-
+      <ng-container *ngIf="allMonths == false">
+        <button type="button" class="btn btn-warning" (click)="elencoTuttePresenze()" >Mostra tutto</button>
+    </ng-container>
         <ng-container *ngFor="let p of listaPresenze; index as i;">
 
           <tr>
@@ -90,8 +93,11 @@
               <td>{{p.ore_lavorate}}</td>
               <td>{{p.ore_assenza}}</td>
               <td>{{p.motivazione_assenza_fk}}</td>
-
+              
+              
             </ng-container>
+
+
             <td *ngIf="enableEditIndex != i">
               <button type="button" (click)="switchEditMode(i)">Modifica</button>
             </td>
@@ -110,6 +116,34 @@
               <td><button (click)="save(p)">Conferma</button></td>
               <td><button (click)="cancel()">Annulla</button></td>
             </ng-container>
+        
+        
+        </ng-container>
+
+
+
+
+
+        <ng-container *ngFor="let dm of listaDipendenteMese; index as i;">
+
+          <tr>
+           
+            <ng-container *ngIf="enableEditIndex != i">
+              <td>{{dm.stato}}</td>
+            
+            </ng-container>
+
+            <td *ngIf="enableEditIndex != i">
+              <button type="button" (click)="switchEditMode(i)">Modifica</button>
+            </td>
+            <ng-container *ngIf="enableEditIndex == i">
+
+              <td><input [(ngModel)]="dm.stato" type="number" /></td>   
+              <td><button (click)="saveStatus(dm)">Conferma</button></td>
+              <td><button (click)="cancel()">Annulla</button></td>
+            </ng-container>
+        
+        
         </ng-container>
       </tbody>
     </table>

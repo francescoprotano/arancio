@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DipendenteMese } from '../models/dipendenteMese';
 import { Presenza } from '../models/presenza';
 
 @Injectable({
@@ -15,6 +16,12 @@ export class PresenzaService {
   public aggiornaPresenza(model: Presenza, onSuccess: any, onFailure: any) {
     return this.doPost("/update", model, onSuccess, onFailure);
   }
+
+  public aggiornaStato(model: DipendenteMese, onSuccess: any, onFailure: any) {
+    return this.doPost("/update", model, onSuccess, onFailure);
+  }
+
+
   public elencoPresenze(onSuccess: any, onFailure: any) {
     this.doGet("/all", onSuccess, onFailure);
   }

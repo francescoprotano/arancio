@@ -7,8 +7,8 @@
 	<insert id="insert" parameterType="it.exolab.model.Mese"
 		useGeneratedKeys="true" keyProperty="id_mese" 
 		keyColumn="id_mese">
-		INSERT INTO mesi(id_mese,mese,chiuso)
-		VALUES(#{id_mese},#{mese},#{chiuso});
+		INSERT INTO mesi(mese,chiuso)
+		VALUES(#{mese},0);
 	</insert>
 	<select id="selectLastID" resultType="int">
 	SELECT id_mese
@@ -26,8 +26,8 @@
 	</insert>
 	<insert id="inserisciPresenzeMese" parameterType="it.exolab.model.Presenza" useGeneratedKeys="true" keyProperty="id_presenza" 
 		keyColumn="id_presenza">
-	INSERT INTO presenze(id_presenza,id_dipendente_fk,data,ore_lavorate,ore_assenza,motivazione_assenza_fk,id_mese_fk)
-	VALUES(#{id_presenza},#{id_dipendente_fk},#{data},8,0,'presente',#{id_mese_fk});
+	INSERT INTO presenze(id_dipendente_fk,data,ore_lavorate,ore_assenza,motivazione_assenza_fk,id_mese_fk)
+	VALUES(#{id_dipendente_fk},#{data},8,0,'presente',#{id_mese_fk});
 	</insert>
 	
 	<update id="update" parameterType="it.exolab.model.Mese">
