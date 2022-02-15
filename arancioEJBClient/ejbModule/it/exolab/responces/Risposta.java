@@ -14,6 +14,12 @@ public class Risposta<T> implements Serializable {
 		successo=true;
 	}
 
+	@Override
+	public String toString() {
+		return "Risposta [successo=" + successo + ", errore=" + errore + ", codice_errore=" + codice_errore + ", data="
+				+ data + "]";
+	}
+
 	public Risposta(Boolean successo, String errore, String codice_errore, T data) {
 		super();
 		this.successo = successo;

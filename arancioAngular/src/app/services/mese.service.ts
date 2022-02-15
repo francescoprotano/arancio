@@ -20,12 +20,16 @@ public eliminaMese(id_mese:number,onSuccess:any,onFailure:any){
   return this.doGet("/delete?id_mese="+id_mese,onSuccess,onFailure);
 }
 
-public elencoMesi(queryString : string){
-  return this.http.get<Array<Mese>>(this.backendURL + queryString);
+public elencoMesi(onSuccess:any,onFailure:any){
+  return this.doGet("/all",onSuccess,onFailure);;
  }
 
  public aggiornaMese(model: Mese,onSuccess:any,onFailure:any)  {
   return this.doPost("/update",model, onSuccess,onFailure);
+}
+
+public elencoByMese(day : string, onSuccess: any, onFailure: any ){
+  this.doGet("/selectByMese?mese="+ day, onSuccess, onFailure)
 }
 
 private doGet(querystring:String,onSuccess:any,onFailure:any){

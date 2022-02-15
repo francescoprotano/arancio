@@ -119,6 +119,7 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 															// setCodice_errore
 			e.printStackTrace();
 		}
+		System.out.println(res.toString());
 		return res;
 	}
 
