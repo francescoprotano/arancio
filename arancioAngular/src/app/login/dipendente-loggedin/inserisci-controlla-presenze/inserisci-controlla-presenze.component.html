@@ -121,30 +121,6 @@
         </ng-container>
 
 
-
-
-
-        <ng-container *ngFor="let dm of listaDipendenteMese; index as i;">
-
-          <tr>
-           
-            <ng-container *ngIf="enableEditIndex != i">
-              <td>{{dm.stato}}</td>
-            
-            </ng-container>
-
-            <td *ngIf="enableEditIndex != i">
-              <button type="button" (click)="switchEditMode(i)">Modifica</button>
-            </td>
-            <ng-container *ngIf="enableEditIndex == i">
-
-              <td><input [(ngModel)]="dm.stato" type="number" /></td>   
-              <td><button (click)="saveStatus(dm)">Conferma</button></td>
-              <td><button (click)="cancel()">Annulla</button></td>
-            </ng-container>
-        
-        
-        </ng-container>
       </tbody>
     </table>
   </div>

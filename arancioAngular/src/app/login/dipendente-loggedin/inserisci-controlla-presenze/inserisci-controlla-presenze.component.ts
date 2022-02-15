@@ -32,6 +32,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   user: any = sessionStorage.getItem("utente") || '{}';
   utente: Dipendente = new Dipendente();
   allMonths: boolean = true;
+  singlePresenza : Presenza;
 
 
 
@@ -106,7 +107,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   }
 
   selectMonth(mesi : any){
-
+    
     this.daySelected(this.anni, this.mesi)
   }
 
@@ -114,6 +115,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
     console.log(daySelected);
     if(this.anni!= undefined && this.mesi!=undefined){
+      this.listaPresenze=[]
       this.allMonths = false;
       this.service.elencoByMese(daySelected,this.onSuccess.bind(this), this.onFailure.bind(this));
     }
@@ -143,7 +145,14 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   }
 
   onSuccess(response: any) {
-    this.listaPresenze = response;
+    if(response==null){
+      this.listaPresenze = null;
+    }
+    else{
+      this.listaPresenze=[]
+      this.listaPresenze = response
+    
+  }
   }
 
   onDipMesServiceSuccess(response: any){

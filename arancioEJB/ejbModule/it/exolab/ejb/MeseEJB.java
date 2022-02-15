@@ -27,7 +27,7 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 		try {
 			// fase di test
 			Mese mese = new Mese();
-			String sdata="2022-10-01";
+			String sdata="2022-11-01";
 			Date data = Date.valueOf(sdata);
 			mese.setMese(data);
 			//
