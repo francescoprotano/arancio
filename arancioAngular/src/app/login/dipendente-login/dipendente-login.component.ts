@@ -97,7 +97,7 @@ export class DipendenteLoginComponent implements OnInit {
 
   }
   onLoginFailure(err: string, err_code: string) {
-    alert(err + " : " + err_code);
+    alert("Credenziali non valide: "+err);
   }
 
 

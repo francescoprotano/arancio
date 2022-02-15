@@ -16,6 +16,7 @@ export class AddMeseComponent implements OnInit {
   today = new Date()
   listaMesi : Array<Mese> = new Array<Mese>(); 
   isEditing: boolean = false;
+  allMonths: boolean = true;
   enableEditIndex: any = null;
   singleMese : Mese;
  monthControl = document.querySelector('input[type="mesi"]');
@@ -33,6 +34,7 @@ export class AddMeseComponent implements OnInit {
 
   elencoMesi(){
     this.servizio.elencoMesi(this.onSuccess.bind(this), this.onFailure.bind(this));
+    this.showAll();
   }
 
   salva() {
@@ -50,6 +52,10 @@ export class AddMeseComponent implements OnInit {
     }
 
     return true;
+  }
+
+  showAll(){
+    this.allMonths = true;
   }
 
   switchEditMode(i: any) {
@@ -71,6 +77,7 @@ export class AddMeseComponent implements OnInit {
     var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
     console.log(daySelected);
     if(this.anni!= undefined && this.mesi!=undefined){
+      this.allMonths = false;
       this.servizio.elencoByMese(daySelected,this.onSuccessSingle.bind(this), this.onFailure.bind(this));
     }
   }

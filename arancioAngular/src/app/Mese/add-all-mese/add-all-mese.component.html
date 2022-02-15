@@ -1,5 +1,3 @@
-
-
 <body>
 
 
@@ -8,7 +6,7 @@
         <thead>
             <tr>
 
-               
+
                 <th scope="col">MESE</th>
                 <th scope="col">Chiuso?</th>
                 <th scope="col">-AZIONI-</th>
@@ -16,7 +14,7 @@
         </thead>
         <tbody>
 
-            
+
             <td><input type="date" [(ngModel)]="model.mese" name="mese" /></td>
             <td><select [(ngModel)]="model.chiuso" name="chiuso">
                     <option value="true">SI</option>
@@ -26,7 +24,9 @@
         </tbody>
     </table>
     <br><br><br>
-    <select name="anni" class="datefield month"  [(ngModel)]="anni" (click)="selectYear(anni)">
+    <h5 style="color: tomato;">Seleziona l'anno e il mese che vuoi visualizzare:</h5>
+    <br>
+    <select name="anni" class="datefield month" [(ngModel)]="anni" (click)="selectYear(anni)">
         <option disabled value="">Seleziona Anno</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
@@ -39,9 +39,9 @@
         <option value="2028">2028</option>
         <option value="2029">2029</option>
         <option value="2030">2030</option>
-        
+
     </select>
-    <select name="mesi" class="datefield month"  [(ngModel)]="mesi" (click)="selectMonth(mesi)">
+    <select  name="mesi" class="datefield month" [(ngModel)]="mesi" (click)="selectMonth(mesi)">
         <option disabled value="">Seleziona Mese</option>
         <option value="01">Gennaio</option>
         <option value="02">Febbraio</option>
@@ -56,9 +56,12 @@
         <option value="11">Novembre</option>
         <option value="12">Dicembre</option>
     </select>
-  
+    <ng-container *ngIf="allMonths == false">
+        <button type="button" class="btn btn-warning" (click)="elencoMesi()">Mostra tutto</button>
+    </ng-container>
+    <br><br>
 
-        <ng-container *ngIf="listaMesi != null"> 
+    <ng-container *ngIf="listaMesi != null">
 
         <legend style="color: brown;">Lista Mesi</legend>
         <table class="table">
@@ -70,14 +73,14 @@
                     <th scope="col">Chiuso?</th>
                     <th scope="col">-AZIONI-</th>
                 </tr>
-                
+
 
             </thead>
-            
 
-        
 
-            <tbody >
+
+
+            <tbody>
                 <ng-container *ngFor="let m of listaMesi; index as i;">
 
                     <tr>
@@ -93,35 +96,37 @@
 
                             <td>{{m.mese | date: 'dd-MM-yyyy'}}</td>
                             <td>{{m.chiuso}}</td>
-                           
+
 
                         </ng-container>
 
-                       
+
                         <div *ngIf="listaMesi != null">
-                        <td *ngIf="enableEditIndex != i">
-                            <button type="button" class="btn btn-warning" (click)="switchEditMode(i)">Modifica</button>
-                            <button type="button" class="btn btn-danger" (click)="onRemove(m.id_mese)">Cancella</button>
-                        </td>
-                    </div>
-               
+                            <td *ngIf="enableEditIndex != i">
+                                <button type="button" class="btn btn-warning"
+                                    (click)="switchEditMode(i)">Modifica</button>
+                                <button type="button" class="btn btn-danger"
+                                    (click)="onRemove(m.id_mese)">Cancella</button>
+                            </td>
+                        </div>
+
                         <ng-container *ngIf="enableEditIndex == i">
 
-                            <tr *ngIf="enableEditIndex == i">
+                    <tr *ngIf="enableEditIndex == i">
 
-                                <th scope="col">Chiuso?</th>
+                        <th scope="col">Chiuso?</th>
 
-                            <td><select [(ngModel)]="m.chiuso" name="chiuso">
-                                    <option value="true">SI</option>
-                                    <option value="false">NO</option>
-                                </select></td>
-                            </tr>
-                            <td><button class="btn btn-success" (click)="save(m)">Conferma</button></td>
-                            <td><button class="btn btn-primary" (click)="cancel()">Annulla</button></td>
-                        </ng-container>
+                        <td><select [(ngModel)]="m.chiuso" name="chiuso">
+                                <option value="true">SI</option>
+                                <option value="false">NO</option>
+                            </select></td>
+                    </tr>
+                    <td><button class="btn btn-success" (click)="save(m)">Conferma</button></td>
+                    <td><button class="btn btn-primary" (click)="cancel()">Annulla</button></td>
                 </ng-container>
-            </tbody>
-        </table>
+    </ng-container>
+    </tbody>
+    </table>
     </ng-container>
     <hr />
     <td><button (click)="back()">Indietro</button></td>

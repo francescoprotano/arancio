@@ -44,8 +44,7 @@ export class LoginService {
      if(httpResponse.successo == true){
        onSuccess(httpResponse.data);
      } else {
-       onFailure(httpResponse.codice_errore);
-       alert("Operazione non andata a buon fine. Codice errore: "+httpResponse.codice_errore);
+       onFailure(httpResponse.errore);
        
      }       
                  

@@ -99,6 +99,9 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper> {
 	// ------------------------VALIDAZIONI----------------------------------//
 
 	private void validaCredenziali(Dipendente dipendente, Dipendente dipendenteLog) throws CredenzialiErrate {
+		if (dipendenteLog == null) {
+			dipendenteLog = new Dipendente();
+		}
 		if (!dipendente.getEmail().equals(dipendenteLog.getEmail())) {
 			throw new CredenzialiErrate("mail errata");
 		} else if (!dipendente.getPassword().equals(dipendenteLog.getPassword())) {
