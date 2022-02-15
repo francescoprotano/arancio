@@ -84,9 +84,8 @@ export class DipendenteLoginComponent implements OnInit {
 
   }
   elencoUtenti() {
-    this.apiservice.elenco2(this.queryString).subscribe(response => {
-      this.listaLavoratori = response;
-    })
+    this.apiservice.elenco(this.onLoginSuccess.bind(this),this.onLoginFailure.bind(this))
+
   }
 
 

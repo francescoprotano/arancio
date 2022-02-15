@@ -45,14 +45,12 @@ export class AllDipendentiComponent implements OnInit {
   }
 
   elenco2(){
-    this.service.elenco2(this.queryString).subscribe(response => {
-      this.listaDipendenti = response;
-   
-    })
+    this.service.elenco(this.onSuccess.bind(this),this.onFailure.bind(this))
   }
 
-  onSuccess(err:String,err_code:String) {
-		
+  onSuccess(response:any) {
+    this.listaDipendenti = response.data
+
   }
 
   onFailure(err: String) {

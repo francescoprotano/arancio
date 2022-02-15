@@ -35,7 +35,7 @@ export class PresenzaService {
                 console.log(httpResponse);
       if(httpResponse.successo == true){
         
-        onSuccess(httpResponse.presenze);
+        onSuccess(httpResponse.data);
       } else {
         onFailure(httpResponse.codice_errore);
         

@@ -21,8 +21,8 @@ export class DipendenteService {
   }
 
 
-  public elenco2(queryString : string){
-    return this.http.get<Array<Dipendente>>(this.backendURL + queryString);
+  public elenco(onSuccess:any,onFailure:any){
+    return this.doGet("/all",onSuccess,onFailure);
    }
 
    public selectByEmail(email: string,onSuccess:any,onFailure:any){

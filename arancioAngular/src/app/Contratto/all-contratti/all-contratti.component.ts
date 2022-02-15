@@ -52,35 +52,20 @@ export class AllContrattiComponent implements OnInit {
 
   }
 
-  byTipologiaX(tipologia : string) {
-    console.log(tipologia)
-    this.service.byTipologiaX(tipologia, this.responseTipologia.bind(this))  
-}
 
 byTipologia(tipologia : string) {
-  this.service.byTipologia(this.queryStringTipologia+tipologia).subscribe(response => {
-    console.log(response)
-    if(response == null){
-      alert("C'e' stato un errore interno. Riprova piu' tardi. CODICE ERRORE: response = null ")
-    }else if(response.length==0){
-      alert("Nessun dipendente con questo tipo di contratto.")
-    }
-    this.listaByTipologia = response
- 
-  })
+  this.service.byTipologia(tipologia,this.onSuccessTipologia.bind(this),this.onSuccessTipologia.bind(this))
+
 }
 
-responseTipologia(risposta:any){
-  if(risposta.successo){
-    alert('rispsota della lista' + risposta.data)
-    this.listaByTipologia=risposta.data
-  } else {
-    alert(risposta.errore)
-  }
-}
 
   onSuccess(response:any) {
     this.listaContratti = response.data
+
+  }
+
+  onSuccessTipologia(response:any) {
+    this.listaByTipologia = response.data
 	
   }
 

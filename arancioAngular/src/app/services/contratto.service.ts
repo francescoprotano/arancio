@@ -27,12 +27,8 @@ public elencoContratti(onSuccess:any,onFailure:any){
   return this.doGet("/allContratti",onSuccess,onFailure);
  }
 
- public byTipologiaX(tipologia:string,callback:any){
-  return this.doGetC("/allByTipologia?tipologia="+tipologia,callback);
- }
-
- public byTipologia(queryString:string){
-  return this.http.get<Array<Contratto>>(this.backendURL + queryString);
+ public byTipologia(tipologia:string,onSuccess:any,onFailure:any){
+  return this.doGet("/allByTipologia?tipologia="+tipologia,onSuccess,onFailure);
  }
 
  public aggiornaContratto(model: Contratto,onSuccess:any,onFailure:any)  {
@@ -58,9 +54,9 @@ private doGet(querystring:String,onSuccess:any,onFailure:any){
     if(httpResponse.successo == true){
       console.log(httpResponse.data);
       
-      onSuccess(Risposta);
+      onSuccess(httpResponse);
     } else {
-      onFailure(Risposta);
+      onFailure(httpResponse);
       
     }
     

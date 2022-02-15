@@ -28,6 +28,10 @@ export class AdminLoggedinComponent implements OnInit {
     this.router.navigate(["/allDipContracts"])
   }
 
+  revisionaPresenze(){
+    this.router.navigate(["/insCheckPresenze"])
+  }
+
   ngOnInit(): void {
     if(!this.authService.isLoggedIn$){
       this.router.navigate(["/dipLogin"])

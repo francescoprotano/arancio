@@ -5,13 +5,36 @@
 
 <mapper namespace="it.exolab.mapper.PresenzaMapper">
 
+
+	<resultMap id="presenzeJoinmesi"
+		type="it.exolab.model.Presenza">
+		<id column="id_presenza" property="id_presenza" />
+		<result property="id_dipendente_fk" column="id_dipendente_fk" />
+		<result property="data" column="data" />
+		<result property="ore_lavorate" column="ore_lavorate" />
+		<result property="ore_assenza" column="ore_assenza" />
+		<result property="motivazione_assenza_fk"
+			column="motivazione_assenza_fk" />
+		<result property="id_mese_fk" column="id_mese_fk" />
+		<association property="mese"
+			javaType="it.exolab.model.Mese">
+			<id property="id_mese" column="id_mese" />
+			<id property="mese" column="mese" />
+			<id property="chiuso" column="chiuso" />
+		</association>
+	</resultMap>
+
+
+
+
 	<insert id="insert" parameterType="it.exolab.model.Presenza"
 		useGeneratedKeys="true" keyProperty="id_presenza"
 		keyColumn="id_presenza">
 		INSERT into
-		presenze (id_dipendente_fk,data, ore_lavorate, ore_assenza,
+		presenze (id_dipendente_fk,data, ore_lavorate,
+		ore_assenza,
 		motivazione_assenza_fk,
-		 id_mese_fk)
+		id_mese_fk)
 		VALUES
 		(#{id_dipendente_fk},
 		#{data}, #{ore_lavorate}, #{ore_assenza},
@@ -39,27 +62,31 @@
 	<select id="selectByData" resultType="it.exolab.model.Presenza">
 		SELECT *
 		FROM presenze
-		WHERE data=#{data}
+		WHERE
+		data=#{data}
 	</select>
 
 	<select id="selectByMese" resultType="it.exolab.model.Presenza">
 		SELECT *
 		FROM presenze
-		WHERE id_mese_fk=#{id_mese_fk}
+		WHERE
+		id_mese_fk=#{id_mese_fk}
 	</select>
 
 	<select id="selectByDipendente"
 		resultType="it.exolab.model.Presenza">
 		SELECT *
 		FROM presenze
-		WHERE id_dipendente_fk=#{id_dipendente_fk}
+		WHERE
+		id_dipendente_fk=#{id_dipendente_fk}
 	</select>
 
 	<select id="selectByAssenza"
 		resultType="it.exolab.model.Presenza">
 		SELECT *
 		FROM presenze
-		WHERE motivazione_assenza_fk=#{motivazione_assenza_fk}
+		WHERE
+		motivazione_assenza_fk=#{motivazione_assenza_fk}
 	</select>
 
 	<select id="selectAll" resultType="it.exolab.model.Presenza">
@@ -68,9 +95,17 @@
 	</select>
 
 	<select id="ricercaIdDelMese" resultType="int">
-	SELECT id_mese
-	FROM mesi
-	WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data});
+		SELECT id_mese
+		FROM mesi
+		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data});
+	</select>
+	
+	<select id="presenzeJoinmesi"
+		resultMap="presenzeJoinmesi">
+		SELECT *
+		FROM mesi m inner join presenze p ON
+		p.id_mese_fk = m.id_mese
+		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data});
 	</select>
 
 </mapper>

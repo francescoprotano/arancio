@@ -19,5 +19,6 @@ public interface PresenzaEJBRemote {
 	public RispostaPresenze selectByDipendente(Integer id_dipendente_fk);
 	public RispostaPresenze selectByAssenza(String motivazione_assenza_fk);
 	public RispostaPresenze selectAll();
+	public RispostaPresenze presenzeJoinmesi(Date data);
 	
 }

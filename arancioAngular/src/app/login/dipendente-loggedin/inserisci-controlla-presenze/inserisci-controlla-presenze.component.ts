@@ -23,6 +23,9 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   listaDipendenti: Array<Dipendente> = new Array<Dipendente>();
   listaPresenze: Array<Presenza> = new Array<Presenza>();
   presenza: Presenza = new Presenza();
+  mesi: string;
+  anni: string;
+  giorni : string = "01";
 
   user: any = sessionStorage.getItem("utente") || '{}';
   utente: Dipendente = new Dipendente();
@@ -45,7 +48,9 @@ export class InserisciControllaPresenzeComponent implements OnInit {
       this.router.navigate(["/dipLogin"])
     }
     this.getStorage()
-    this.elencoPresenze(this.utente.id_dipendente)
+    if (this.utente.ruolo_fk == 'dipendente') {
+      this.elencoPresenze(this.utente.id_dipendente)
+    }
     if (this.utente.ruolo_fk == 'responsabile') {
       this.elencoTuttePresenze();
     }
@@ -78,7 +83,23 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     this.service.elencoPresenze(this.onSuccess.bind(this), this.onFailure.bind(this))
   }
 
+  selectYear(anni : any){
 
+    this.daySelected(this.anni, "")
+  }
+
+  selectMonth(mesi : any){
+
+    this.daySelected(this.anni, this.mesi)
+  }
+
+  daySelected(anni : string, mesi : string){
+    var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
+    console.log(daySelected);
+    if(this.anni!= undefined && this.mesi!=undefined){
+      
+    }
+  }
 
   salva() {
     try {

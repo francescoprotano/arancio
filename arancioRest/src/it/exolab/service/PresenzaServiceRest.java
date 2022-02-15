@@ -67,5 +67,9 @@ public class PresenzaServiceRest {
 	public RispostaPresenze selectAll(){
 		return ConnectionPresenzaEJB.getConnection().selectAll();
 	}
-
+	@GET
+	@Path("/presenzeJoinMese")
+	public RispostaPresenze presenzeJoinMese(@QueryParam("data") Date data) {
+		return ConnectionPresenzaEJB.getConnection().presenzeJoinmesi(data);
+	}
 }

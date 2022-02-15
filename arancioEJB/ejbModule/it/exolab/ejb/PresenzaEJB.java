@@ -214,5 +214,28 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 		}
 		return res;
 	}
+	
+	@Override
+	public RispostaPresenze presenzeJoinmesi(Date data) {
+		RispostaPresenze res = new RispostaPresenze();
+		try {
+			res.setData(PresenzaDao.getIstanza().presenzeJoinmesi(data));
+		} catch (CampoRichiesto e) {
+			res.setErrore(e.getCampo() + " è richiesto");
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il// setCodice_errore
+			e.printStackTrace();
+		} catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il// setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 }
