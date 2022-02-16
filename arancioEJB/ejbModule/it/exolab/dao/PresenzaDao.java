@@ -124,6 +124,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 	}
 
 	private void validaIdDipendente(Integer id_dipendente_fk) throws CampoRichiesto {
+		System.out.println(id_dipendente_fk);
 		if (id_dipendente_fk == null || id_dipendente_fk.equals("")) {
 			throw new CampoRichiesto("dipendente");
 		}

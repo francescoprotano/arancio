@@ -41,7 +41,7 @@ public class DipendenteMeseServiceRest {
 		return ConnectionDipendenteMese.getConnection().selectAll();
 	}
 
-	@GET
+	@POST
 	@Path("/selectByDipendente")
 	public RispostaDipendentiMesi selectByDipendente(DipendenteMese dipendenteMese) {
 		return ConnectionDipendenteMese.getConnection().selectByDipendente(dipendenteMese);
