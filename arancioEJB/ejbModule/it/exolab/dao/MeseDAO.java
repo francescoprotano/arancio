@@ -31,7 +31,7 @@ public class MeseDAO extends BaseDAO<MeseMapper> {
 		return istanza;
 	}
 
-	public void insert(Mese mese) throws CampoRichiesto, ErroreGenerico {
+	public void insert(Mese mese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaMese(mese);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
@@ -64,22 +64,27 @@ public class MeseDAO extends BaseDAO<MeseMapper> {
 		SimpleDateFormat giorno = new SimpleDateFormat("dd");
 		SimpleDateFormat mese = new SimpleDateFormat("MM");
 		SimpleDateFormat anno = new SimpleDateFormat("yyyy");
+		Integer a = Integer.parseInt(anno.format(data));
+		Integer m = Integer.parseInt(mese.format(data));
+		Integer g = Integer.parseInt(giorno.format(data));
 		Calendar cal = Calendar.getInstance();
+		cal.set(a, m - 1, g);
 		Integer res = cal.getActualMaximum(Calendar.DATE);
 		for (Dipendente id_dipendente : id_dipendenti) {
 			presMes.setId_dipendente_fk(id_dipendente.getId_dipendente());
-			LocalDate localDate = LocalDate.of(Integer.parseInt(anno.format(data)), Integer.parseInt(mese.format(data)), Integer.parseInt(giorno.format(data)));
-			for (Integer i = 0; i <= res; i++) {
+			LocalDate localDate = LocalDate.of(a, m, g);
+			for (Integer i = 1; i <= res; i++) {
+
 				presMes.setData(Date.valueOf(localDate));
 				mapper.inserisciPresenzeMese(presMes);
-				localDate = localDate.plusDays(1);
 				sqlSession.commit();
+
+				localDate = localDate.plusDays(1);
 			}
-			
 		}
 	}
 
-	public void update(Mese mese) throws CampoRichiesto, ErroreGenerico {
+	public void update(Mese mese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaMese(mese);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
@@ -87,7 +92,7 @@ public class MeseDAO extends BaseDAO<MeseMapper> {
 		sqlSession.commit();
 	}
 
-	public void delete(Mese mese) throws CampoRichiesto, ErroreGenerico {
+	public void delete(Mese mese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaID(mese.getId_mese());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
@@ -95,14 +100,14 @@ public class MeseDAO extends BaseDAO<MeseMapper> {
 		sqlSession.commit();
 	}
 
-	public Mese selectByMese(Date mese) throws CampoRichiesto, ErroreGenerico {
+	public Mese selectByMese(Date mese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaData(mese);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
 		return mapper.selectByMese(mese);
 	}
 
-	public List<Mese> selectAll() throws ErroreGenerico {
+	public List<Mese> selectAll(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
 		return mapper.selectAll();

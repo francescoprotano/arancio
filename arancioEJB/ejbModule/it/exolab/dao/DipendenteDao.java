@@ -70,27 +70,27 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper> {
 		return dipendenteLog;
 	}
 
-	public List<Dipendente> selectByRuolo(String ruolo) throws CampoRichiesto, ErroreGenerico {
+	public List<Dipendente> selectByRuolo(String ruolo,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaRuolo(ruolo);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectByRuolo(ruolo);
 	}
 
-	public List<Dipendente> selectAll() throws ErroreGenerico {
+	public List<Dipendente> selectAll(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.selectAll();
 
 	}
 
-	public List<Dipendente> allJoinDipendentiEContratti() throws ErroreGenerico {
+	public List<Dipendente> allJoinDipendentiEContratti(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEContratti();
 	}
 
-	public List<Dipendente> allJoinDipendentiEPresenze() throws ErroreGenerico {
+	public List<Dipendente> allJoinDipendentiEPresenze(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		return mapper.allJoinDipendentiEPresenze();

@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionContrattoEJB;
 import it.exolab.model.Contratto;
+import it.exolab.model.Dipendente;
 import it.exolab.responces.RispostaContratti;
 import it.exolab.responces.RispostaContratto;
 
@@ -21,38 +22,38 @@ public class ContrattoServiceRest {
 	
 		@GET
 		@Path("/allContratti")
-		public RispostaContratti allContratti() {
-			return ConnectionContrattoEJB.getConnection().allContratti();
+		public RispostaContratti allContratti(Dipendente dipendente) {
+			return ConnectionContrattoEJB.getConnection().allContratti(dipendente);
 		}
 		
 		@POST
 		@Path("/addContratto")
-		public RispostaContratto add(Contratto contratto) {
-			return ConnectionContrattoEJB.getConnection().add(contratto);
+		public RispostaContratto add(Contratto contratto,Dipendente dipendente) {
+			return ConnectionContrattoEJB.getConnection().add(contratto,dipendente);
 		}
 		
 		@POST
 		@Path("/updateContratto")
-		public RispostaContratto update(Contratto contratto) {
-			return ConnectionContrattoEJB.getConnection().edit(contratto);
+		public RispostaContratto update(Contratto contratto,Dipendente dipendente) {
+			return ConnectionContrattoEJB.getConnection().edit(contratto,dipendente);
 		}
 		
 		@GET
 		@Path("/deleteContratto")
-		public RispostaContratto deleteContratto(Contratto contratto) {
-			return ConnectionContrattoEJB.getConnection().delete(contratto);
+		public RispostaContratto deleteContratto(Contratto contratto,Dipendente dipendente) {
+			return ConnectionContrattoEJB.getConnection().delete(contratto,dipendente);
 		}
 		
 		@GET
 		@Path("/allById")
-		public RispostaContratto allContrattiById(@QueryParam("id_contratto") Integer id_contratto) {
-			return ConnectionContrattoEJB.getConnection().selectByID(id_contratto);
+		public RispostaContratto allContrattiById(@QueryParam("id_contratto") Integer id_contratto,Dipendente dipendente) {
+			return ConnectionContrattoEJB.getConnection().selectByID(id_contratto,dipendente);
 		}
 		
 		@GET
 		@Path("/allByTipologia")
-		public RispostaContratti allContrattiByTipologia(@QueryParam("tipologia") String tipologia) {
-			return ConnectionContrattoEJB.getConnection().selectByTipologia(tipologia);
+		public RispostaContratti allContrattiByTipologia(@QueryParam("tipologia") String tipologia,Dipendente dipendente) {
+			return ConnectionContrattoEJB.getConnection().selectByTipologia(tipologia,dipendente);
 		}
 
 }

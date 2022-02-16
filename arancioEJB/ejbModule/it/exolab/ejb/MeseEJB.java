@@ -1,7 +1,6 @@
 package it.exolab.ejb;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -31,7 +30,7 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 			Date data = Date.valueOf(sdata);
 			mese.setMese(data);
 			//
-			MeseDAO.getIstanza().insert(mese);
+			MeseDAO.getIstanza().insert(mese,dipendente);
 			res.setData(mese);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -54,10 +53,10 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public RispostaMese edit(Mese mese) {
+	public RispostaMese edit(Mese mese,Dipendente dipendente) {
 		RispostaMese res = new RispostaMese();
 		try {
-			MeseDAO.getIstanza().update(mese);
+			MeseDAO.getIstanza().update(mese,dipendente);
 			res.setData(mese);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -80,10 +79,10 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public RispostaMese delete(Mese mese) {
+	public RispostaMese delete(Mese mese,Dipendente dipendente) {
 		RispostaMese res = new RispostaMese();
 		try {
-			MeseDAO.getIstanza().delete(mese);
+			MeseDAO.getIstanza().delete(mese,dipendente);
 			res.setData(mese);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -106,10 +105,10 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public RispostaMese selectByMese(Date mese) {
+	public RispostaMese selectByMese(Date mese,Dipendente dipendente) {
 		RispostaMese res = new RispostaMese();
 		try {
-			res.setData(MeseDAO.getIstanza().selectByMese(mese));
+			res.setData(MeseDAO.getIstanza().selectByMese(mese,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -132,10 +131,10 @@ public class MeseEJB extends BaseEJB implements MeseEJBRemote {
 	}
 
 	@Override
-	public RispostaMesi allMesi() {
+	public RispostaMesi allMesi(Dipendente dipendente) {
 		RispostaMesi res = new RispostaMesi();
 		try {
-			res.setData(MeseDAO.getIstanza().selectAll());
+			res.setData(MeseDAO.getIstanza().selectAll(dipendente));
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il

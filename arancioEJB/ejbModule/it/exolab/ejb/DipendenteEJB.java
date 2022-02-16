@@ -153,10 +153,10 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenti selectByRuolo(String ruolo) {
+	public RispostaDipendenti selectByRuolo(String ruolo,Dipendente dipendente) {
 		RispostaDipendenti res = new RispostaDipendenti();
 		try {
-			res.setData(DipendenteDao.getIstanza().selectByRuolo(ruolo));
+			res.setData(DipendenteDao.getIstanza().selectByRuolo(ruolo,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -178,10 +178,10 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenti allDipendenti() {
+	public RispostaDipendenti allDipendenti(Dipendente dipendente) {
 		RispostaDipendenti res = new RispostaDipendenti();
 		try {
-			res.setData(DipendenteDao.getIstanza().selectAll());
+			res.setData(DipendenteDao.getIstanza().selectAll(dipendente));
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
@@ -198,10 +198,10 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenti allJoinDipendentiEContratti() {
+	public RispostaDipendenti allJoinDipendentiEContratti(Dipendente dipendente) {
 		RispostaDipendenti res = new RispostaDipendenti();
 		try {
-			res.setData(DipendenteDao.getIstanza().allJoinDipendentiEContratti());
+			res.setData(DipendenteDao.getIstanza().allJoinDipendentiEContratti(dipendente));
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
@@ -218,10 +218,10 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendenti allJoinDipendentiEPresenze() {
+	public RispostaDipendenti allJoinDipendentiEPresenze(Dipendente dipendente) {
 		RispostaDipendenti res = new RispostaDipendenti();
 		try {
-			res.setData(DipendenteDao.getIstanza().allJoinDipendentiEPresenze());
+			res.setData(DipendenteDao.getIstanza().allJoinDipendentiEPresenze(dipendente));
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il

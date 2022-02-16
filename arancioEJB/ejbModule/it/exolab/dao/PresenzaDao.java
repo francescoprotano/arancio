@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.PresenzaMapper;
+import it.exolab.model.Dipendente;
 import it.exolab.model.Presenza;
 import it.exolab.util.MyBatisUtils;
 
@@ -25,7 +26,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 		return istanza;
 	}
 
-	public void insert(Presenza presenza) throws CampoRichiesto, ErroreGenerico {
+	public void insert(Presenza presenza, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		presenza.setId_mese_fk(ricercaIdDelMese(presenza.getData()));;
 		validaPresenza(presenza);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
@@ -40,7 +41,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 		return mapper.ricercaIdDelMese(data);
 	}
 
-	public void update(Presenza presenza) throws CampoRichiesto, ErroreGenerico {
+	public void update(Presenza presenza, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaPresenza(presenza);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
@@ -49,7 +50,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public void delete(Presenza presenza) throws CampoRichiesto, ErroreGenerico {
+	public void delete(Presenza presenza, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaID(presenza.getId_presenza());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
@@ -58,14 +59,14 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public List<Presenza> selectByData(Date data) throws CampoRichiesto, ErroreGenerico {
+	public List<Presenza> selectByData(Date data, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaData(data);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		return mapper.selectByData(data);
 	}
 
-	public List<Presenza> selectByMese(Integer id_mese_fk) throws CampoRichiesto, ErroreGenerico {
+	public List<Presenza> selectByMese(Integer id_mese_fk, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaIdMese(id_mese_fk);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
@@ -73,7 +74,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public List<Presenza> selectByDipendente(Integer id_dipendente_fk) throws CampoRichiesto, ErroreGenerico {
+	public List<Presenza> selectByDipendente(Integer id_dipendente_fk, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaIdDipendente(id_dipendente_fk);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
@@ -81,7 +82,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public List<Presenza> selectByAssenza(String motivazione_assenza_fk) throws CampoRichiesto, ErroreGenerico {
+	public List<Presenza> selectByAssenza(String motivazione_assenza_fk, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaMotivazioneAssenza(motivazione_assenza_fk);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
@@ -89,14 +90,14 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	}
 
-	public List<Presenza> selectAll() throws ErroreGenerico {
+	public List<Presenza> selectAll(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
 		return mapper.selectAll();
 
 	}
 
-	public List<Presenza> presenzeJoinmesi(Date data) throws CampoRichiesto, ErroreGenerico {
+	public List<Presenza> presenzeJoinmesi(Date data, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaData(data);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);

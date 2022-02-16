@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionDipendenteMese;
+import it.exolab.model.Dipendente;
 import it.exolab.model.DipendenteMese;
 import it.exolab.responces.RispostaDipendenteMese;
 import it.exolab.responces.RispostaDipendentiMesi;
@@ -19,44 +20,44 @@ public class DipendenteMeseServiceRest {
 
 	@POST
 	@Path("/update")
-	public RispostaDipendenteMese update(DipendenteMese dipendenteMese) {
-		return ConnectionDipendenteMese.getConnection().update(dipendenteMese);
+	public RispostaDipendenteMese update(DipendenteMese dipendenteMese,Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().update(dipendenteMese,dipendente);
 	}
 
 	@GET
 	@Path("/delete")
-	public RispostaDipendenteMese delete(DipendenteMese dipendenteMese) {
-		return ConnectionDipendenteMese.getConnection().delete(dipendenteMese);
+	public RispostaDipendenteMese delete(DipendenteMese dipendenteMese,Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().delete(dipendenteMese,dipendente);
 	}
 
 	@GET
 	@Path("/selectOne")
-	public RispostaDipendenteMese selectOne(DipendenteMese dipendenteMese) {
-		return ConnectionDipendenteMese.getConnection().selectOne(dipendenteMese);
+	public RispostaDipendenteMese selectOne(DipendenteMese dipendenteMese,Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().selectOne(dipendenteMese,dipendente);
 	}
 
 	@GET
 	@Path("/selectAll")
-	public RispostaDipendentiMesi selectAll() {
-		return ConnectionDipendenteMese.getConnection().selectAll();
+	public RispostaDipendentiMesi selectAll(Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().selectAll(dipendente);
 	}
 
 	@GET
 	@Path("/selectByDipendente")
-	public RispostaDipendentiMesi selectByDipendente(DipendenteMese dipendenteMese) {
-		return ConnectionDipendenteMese.getConnection().selectByDipendente(dipendenteMese);
+	public RispostaDipendentiMesi selectByDipendente(DipendenteMese dipendenteMese,Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().selectByDipendente(dipendenteMese,dipendente);
 	}
 
 	@GET
 	@Path("/selectByMese")
-	public RispostaDipendentiMesi selectByMese(DipendenteMese dipendenteMese) {
-		return ConnectionDipendenteMese.getConnection().selectByMese(dipendenteMese);
+	public RispostaDipendentiMesi selectByMese(DipendenteMese dipendenteMese,Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().selectByMese(dipendenteMese,dipendente);
 	}
 
 	@GET
 	@Path("/selectByStato")
-	public RispostaDipendentiMesi selectByStato(DipendenteMese dipendenteMese) {
-		return ConnectionDipendenteMese.getConnection().selectByStato(dipendenteMese);
+	public RispostaDipendentiMesi selectByStato(DipendenteMese dipendenteMese,Dipendente dipendente) {
+		return ConnectionDipendenteMese.getConnection().selectByStato(dipendenteMese,dipendente);
 	}
 
 }

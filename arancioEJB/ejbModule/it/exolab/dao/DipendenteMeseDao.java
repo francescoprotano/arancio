@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.DipendenteMeseMapper;
+import it.exolab.model.Dipendente;
 import it.exolab.model.DipendenteMese;
 import it.exolab.util.MyBatisUtils;
 
@@ -24,52 +25,52 @@ public class DipendenteMeseDao extends BaseDAO<DipendenteMeseMapper> {
 		return istanza;
 	}
 
-	public void update(Integer id_dipendente_fk, Integer id_mese_fk) throws CampoRichiesto, ErroreGenerico {
-		validaMeseEDip(id_dipendente_fk, id_mese_fk);
+	public void update(DipendenteMese dipendenteMese, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaMeseEDip( dipendenteMese.getId_dipendente_fk() ,dipendenteMese.getId_mese_fk());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		mapper.update(id_dipendente_fk, id_mese_fk);
+		mapper.update(dipendenteMese.getId_dipendente_fk() ,dipendenteMese.getId_mese_fk());
 	}
 
-	public void delete(Integer id_dipendente_fk, Integer id_mese_fk) throws CampoRichiesto, ErroreGenerico {
-		validaMeseEDip(id_dipendente_fk, id_mese_fk);
+	public void delete(DipendenteMese dipendenteMese, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaMeseEDip(dipendenteMese.getId_dipendente_fk() ,dipendenteMese.getId_mese_fk());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		mapper.delete(id_dipendente_fk, id_mese_fk);
+		mapper.delete(dipendenteMese.getId_dipendente_fk() ,dipendenteMese.getId_mese_fk());
 	}
 
-	public DipendenteMese selectOne(Integer id_dipendente_fk, Integer id_mese_fk) throws CampoRichiesto, ErroreGenerico {
-		validaMeseEDip(id_dipendente_fk, id_mese_fk);
+	public DipendenteMese selectOne(DipendenteMese dipendenteMese, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaMeseEDip(dipendenteMese.getId_dipendente_fk() ,dipendenteMese.getId_mese_fk());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		return mapper.selectOne(id_dipendente_fk, id_mese_fk);
+		return mapper.selectOne(dipendenteMese.getId_dipendente_fk() ,dipendenteMese.getId_mese_fk());
 	}
 
-	public List<DipendenteMese> selectAll() throws ErroreGenerico {
+	public List<DipendenteMese> selectAll(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
 		return mapper.selectAll();
 	}
 
-	public List<DipendenteMese> selectByDipendente(Integer id_dipendente_fk) throws CampoRichiesto, ErroreGenerico {
-		validaIdDipendente(id_dipendente_fk);
+	public List<DipendenteMese> selectByDipendente(DipendenteMese dipendenteMese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaIdDipendente(dipendenteMese.getId_dipendente_fk());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		return mapper.selectByDipendente(id_dipendente_fk);
+		return mapper.selectByDipendente(dipendenteMese.getId_dipendente_fk());
 	}
 
-	public List<DipendenteMese> selectByMese(Integer id_mese_fk) throws CampoRichiesto, ErroreGenerico {
-		validaIdMese(id_mese_fk);
+	public List<DipendenteMese> selectByMese(DipendenteMese dipendenteMese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaIdMese(dipendenteMese.getId_mese_fk());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		return mapper.selectByMese(id_mese_fk);
+		return mapper.selectByMese(dipendenteMese.getId_mese_fk());
 	}
 
-	public List<DipendenteMese> selectByStato(Integer stato) throws CampoRichiesto, ErroreGenerico {
-		validaStato(stato);
+	public List<DipendenteMese> selectByStato(DipendenteMese dipendenteMese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaStato(dipendenteMese.getStato());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		return mapper.selectByStato(stato);
+		return mapper.selectByStato(dipendenteMese.getStato());
 	}
 
 	// ------------------------VALIDAZIONI----------------------------------//

@@ -8,6 +8,7 @@ import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.ContrattoMapper;
 import it.exolab.model.Contratto;
+import it.exolab.model.Dipendente;
 import it.exolab.util.MyBatisUtils;
 
 public class ContrattoDao extends BaseDAO<ContrattoMapper> {
@@ -24,7 +25,7 @@ public class ContrattoDao extends BaseDAO<ContrattoMapper> {
 		return istanza;
 	}
 
-	public void insert(Contratto contratto) throws CampoRichiesto, ErroreGenerico {
+	public void insert(Contratto contratto,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaContratto(contratto);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
@@ -32,7 +33,7 @@ public class ContrattoDao extends BaseDAO<ContrattoMapper> {
 		sqlSession.commit();
 	}
 
-	public void update(Contratto contratto) throws CampoRichiesto, ErroreGenerico {
+	public void update(Contratto contratto,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaContratto(contratto);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
@@ -40,7 +41,7 @@ public class ContrattoDao extends BaseDAO<ContrattoMapper> {
 		sqlSession.commit();
 	}
 
-	public void delete(Contratto contratto) throws CampoRichiesto, ErroreGenerico {
+	public void delete(Contratto contratto,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaID(contratto.getId_contratto());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
@@ -48,21 +49,21 @@ public class ContrattoDao extends BaseDAO<ContrattoMapper> {
 		sqlSession.commit();
 	}
 
-	public Contratto selectByID(Integer id_contratto) throws CampoRichiesto, ErroreGenerico {
+	public Contratto selectByID(Integer id_contratto,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaID(id_contratto);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		return mapper.selectByID(id_contratto);
 	}
 
-	public List<Contratto> selectByTipologia(String tipologia) throws CampoRichiesto, ErroreGenerico {
+	public List<Contratto> selectByTipologia(String tipologia,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaTipologia(tipologia);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		return mapper.selectByTipologia(tipologia);
 	}
 
-	public List<Contratto> selectAll() throws ErroreGenerico {
+	public List<Contratto> selectAll(Dipendente dipendente) throws ErroreGenerico {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		return mapper.selectAll();

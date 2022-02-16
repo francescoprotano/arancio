@@ -13,9 +13,9 @@ import it.exolab.responces.RispostaMesi;
 public interface MeseEJBRemote {
 	
 	public RispostaMese add(Dipendente dipendente);
-	public RispostaMese edit(Mese mese);
-	public RispostaMese delete(Mese mese);
-	public RispostaMesi allMesi();
-	public RispostaMese selectByMese(Date mese);
+	public RispostaMese edit(Mese mese,Dipendente dipendente);
+	public RispostaMese delete(Mese mese,Dipendente dipendente);
+	public RispostaMesi allMesi(Dipendente dipendente);
+	public RispostaMese selectByMese(Date mese,Dipendente dipendente);
 
 }

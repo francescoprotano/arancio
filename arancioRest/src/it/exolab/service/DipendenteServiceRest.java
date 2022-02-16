@@ -52,28 +52,28 @@ public class DipendenteServiceRest {
 
 	@GET
 	@Path("/allByRuolo")
-	public RispostaDipendenti allByRuolo(@QueryParam("ruolo_fk") String ruolo_fk) {
-		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo_fk);
+	public RispostaDipendenti allByRuolo(@QueryParam("ruolo_fk") String ruolo_fk,Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo_fk,dipendente);
 	}
 
 	@GET
 	@Path("/all")
-	public RispostaDipendenti allDipendenti() {
-		return ConnectionDipendenteEJB.getConnection().allDipendenti();
+	public RispostaDipendenti allDipendenti(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().allDipendenti(dipendente);
 	}
 
 	// *** JOIN ***
 
 	@GET
 	@Path("/allJoinDipendentiEContratti")
-	public RispostaDipendenti allJoinDipendentiEContratti() {
-		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEContratti();
+	public RispostaDipendenti allJoinDipendentiEContratti(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEContratti(dipendente);
 	}
 
 	@GET
 	@Path("/allJoinDipendentiEPresenze")
-	public RispostaDipendenti allJoinDipendentiEPresenze() {
-		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEPresenze();
+	public RispostaDipendenti allJoinDipendentiEPresenze(Dipendente dipendente) {
+		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEPresenze(dipendente);
 	}
 
 }

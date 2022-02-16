@@ -15,10 +15,10 @@ public interface DipendenteEJBRemote {
 	
 	public RispostaDipendente updatePassword(Dipendente dipendente);
 	public RispostaDipendente login(Dipendente dipendente);
-	public RispostaDipendenti selectByRuolo(String ruolo);
+	public RispostaDipendenti selectByRuolo(String ruolo,Dipendente dipendente);
 	
-	public RispostaDipendenti allDipendenti();
-	public RispostaDipendenti allJoinDipendentiEContratti();
-	public RispostaDipendenti allJoinDipendentiEPresenze();
+	public RispostaDipendenti allDipendenti(Dipendente dipendente);
+	public RispostaDipendenti allJoinDipendentiEContratti(Dipendente dipendente);
+	public RispostaDipendenti allJoinDipendentiEPresenze(Dipendente dipendente);
 	
 }

@@ -29,27 +29,27 @@ public class MeseServiceRest {
 	
 	@POST
 	@Path("/update")
-	public RispostaMese update(Mese mese) {
-		return ConnectionMeseEJB.getConnection().edit(mese);
+	public RispostaMese update(Mese mese,Dipendente dipendente) {
+		return ConnectionMeseEJB.getConnection().edit(mese,dipendente);
 	}
 	
 	@GET
 	@Path("/delete")
-	public RispostaMese delete(Mese mese) {
-		return ConnectionMeseEJB.getConnection().delete(mese);
+	public RispostaMese delete(Mese mese,Dipendente dipendente) {
+		return ConnectionMeseEJB.getConnection().delete(mese,dipendente);
 	}
 	
 	@GET
 	@Path("/selectByMese")
-	public RispostaMese selectByMese(@QueryParam("mese") Date mese) {
+	public RispostaMese selectByMese(@QueryParam("mese") Date mese,Dipendente dipendente) {
 		System.out.println(mese);
-		return ConnectionMeseEJB.getConnection().selectByMese(mese);
+		return ConnectionMeseEJB.getConnection().selectByMese(mese,dipendente);
 	}
 	
 	@GET
 	@Path("/all")
-	public RispostaMesi selectAll(){
-		return ConnectionMeseEJB.getConnection().allMesi();
+	public RispostaMesi selectAll(Dipendente dipendente){
+		return ConnectionMeseEJB.getConnection().allMesi(dipendente);
 	}
 
 }

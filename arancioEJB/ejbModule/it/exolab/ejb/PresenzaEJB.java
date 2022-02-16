@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import it.exolab.dao.PresenzaDao;
 import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
+import it.exolab.model.Dipendente;
 import it.exolab.model.Presenza;
 import it.exolab.responces.RispostaPresenza;
 import it.exolab.responces.RispostaPresenze;
@@ -20,10 +21,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenza add(Presenza presenza) {
+	public RispostaPresenza add(Presenza presenza,Dipendente dipendente) {
 		RispostaPresenza res = new RispostaPresenza();
 		try {
-			PresenzaDao.getIstanza().insert(presenza);
+			PresenzaDao.getIstanza().insert(presenza,dipendente);
 			res.setData(presenza);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -46,10 +47,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenza edit(Presenza presenza) {
+	public RispostaPresenza edit(Presenza presenza,Dipendente dipendente) {
 		RispostaPresenza res = new RispostaPresenza();
 		try {
-			PresenzaDao.getIstanza().update(presenza);
+			PresenzaDao.getIstanza().update(presenza,dipendente);
 			res.setData(presenza);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -72,10 +73,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenza delete(Presenza presenza) {
+	public RispostaPresenza delete(Presenza presenza,Dipendente dipendente) {
 		RispostaPresenza res = new RispostaPresenza();
 		try {
-			PresenzaDao.getIstanza().delete(presenza);
+			PresenzaDao.getIstanza().delete(presenza,dipendente);
 			res.setData(presenza);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
@@ -98,10 +99,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenze selectByData(Date data) {
+	public RispostaPresenze selectByData(Date data,Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().selectByData(data));
+			res.setData(PresenzaDao.getIstanza().selectByData(data,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il// setCodice_errore
@@ -121,10 +122,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenze selectByMese(Integer id_mese_fk) {
+	public RispostaPresenze selectByMese(Integer id_mese_fk,Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().selectByMese(id_mese_fk));
+			res.setData(PresenzaDao.getIstanza().selectByMese(id_mese_fk,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -146,10 +147,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenze selectByDipendente(Integer id_dipendente_fk) {
+	public RispostaPresenze selectByDipendente(Integer id_dipendente_fk,Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().selectByDipendente(id_dipendente_fk));
+			res.setData(PresenzaDao.getIstanza().selectByDipendente(id_dipendente_fk,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -171,10 +172,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenze selectByAssenza(String motivazione_assenza_fk) {
+	public RispostaPresenze selectByAssenza(String motivazione_assenza_fk,Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().selectByAssenza(motivazione_assenza_fk));
+			res.setData(PresenzaDao.getIstanza().selectByAssenza(motivazione_assenza_fk,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
@@ -196,10 +197,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenze selectAll() {
+	public RispostaPresenze selectAll(Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().selectAll());
+			res.setData(PresenzaDao.getIstanza().selectAll(dipendente));
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
@@ -216,10 +217,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 	
 	@Override
-	public RispostaPresenze presenzeJoinmesi(Date data) {
+	public RispostaPresenze presenzeJoinmesi(Date data,Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().presenzeJoinmesi(data));
+			res.setData(PresenzaDao.getIstanza().presenzeJoinmesi(data, dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il// setCodice_errore
