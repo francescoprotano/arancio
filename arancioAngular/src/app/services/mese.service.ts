@@ -25,7 +25,7 @@ public eliminaMese(id_mese:number,onSuccess:any,onFailure:any){
 }
 
 public elencoMesi(onSuccess:any,onFailure:any){
-  return this.doGet("/all", this.utenteLoggato, onSuccess,onFailure);;
+  return this.doGet("/selectByDipendente", this.utenteLoggato, onSuccess,onFailure);;
  }
 
  public aggiornaMese(model: Mese,onSuccess:any,onFailure:any)  {

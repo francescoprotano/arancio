@@ -66,7 +66,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     if (this.utente.ruolo_fk == 'responsabile') {
       this.elencoTuttePresenze();
     }
-    this.meseService.elencoMesi(this.onSuccessMese.bind(this), this.onFailure.bind(this));
+    this.dipMesService.findStatus(this.dipendenteMese,this.onSuccessMese.bind(this), this.onFailure.bind(this));
   }
 
   switchEditMode(i: any) {
