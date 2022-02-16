@@ -11,40 +11,35 @@ export class ContrattoService {
   private backendURL :String = "http://localhost:8080/arancioRest/gestione_presenze/contratto";
   private lavoratoreSelezionato: Dipendente = new Dipendente;
   risp : Array<Risposta> = new Array<Risposta>()
-  constructor(private http: HttpClient) { }
+  utenteLoggato : Dipendente = new Dipendente();
+  constructor(private http: HttpClient) { 
+  this.utenteLoggato = JSON.parse(sessionStorage.getItem("utente") || '{}');
+  }
 
 //***CONTRATTO***
 
 public aggiungiContratto(model: Contratto,onSuccess:any,onFailure:any) : void {
-  this.doPost("/addContratto",model,onSuccess,onFailure);
+  this.doPost("/addContratto",model,this.utenteLoggato,onSuccess,onFailure);
 }
 
 public eliminaContratto(id_contratto:number,onSuccess:any,onFailure:any){
-  return this.doGet("/deleteContratto?id_contratto="+id_contratto,onSuccess,onFailure);
+  return this.doGet("/deleteContratto?id_contratto="+id_contratto, this.utenteLoggato, onSuccess,onFailure);
 }
 
 public elencoContratti(onSuccess:any,onFailure:any){
-  return this.doGet("/allContratti",onSuccess,onFailure);
+  return this.doGet("/allContratti", this.utenteLoggato,onSuccess,onFailure);
  }
 
  public byTipologia(tipologia:string,onSuccess:any,onFailure:any){
-  return this.doGet("/allByTipologia?tipologia="+tipologia,onSuccess,onFailure);
+  return this.doGet("/allByTipologia?tipologia="+tipologia, this.utenteLoggato,onSuccess,onFailure);
  }
 
  public aggiornaContratto(model: Contratto,onSuccess:any,onFailure:any)  {
-  return this.doPost("/updateContratto",model, onSuccess,onFailure);
+  return this.doPost("/updateContratto",model, this.utenteLoggato, onSuccess,onFailure);
 }
 
-private doGetC(querystring:String,callback: any){
-  var url = this.backendURL + "" +querystring;
-    return this.http.get(url).subscribe((httpResponse:any) => {
-              console.log("dogetc"+JSON.stringify(httpResponse));
-              
-    callback(httpResponse)         
-    });
-}
 
-private doGet(querystring:String,onSuccess:any,onFailure:any){
+private doGet(querystring:String, utenteLoggato : Dipendente, onSuccess:any,onFailure:any){
     
   var url = this.backendURL + "" +querystring;
 
@@ -64,7 +59,7 @@ private doGet(querystring:String,onSuccess:any,onFailure:any){
     });
 }
 
-private doPost(querystring:any, data:any, onSuccess:any,onFailure:any){
+private doPost(querystring:any, data:any, utenteLoggato : Dipendente, onSuccess:any,onFailure:any){
   
   var url = this.backendURL + "" + querystring;
 

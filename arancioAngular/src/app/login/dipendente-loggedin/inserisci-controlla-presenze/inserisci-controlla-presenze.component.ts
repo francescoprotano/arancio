@@ -7,8 +7,10 @@ import { Presenza } from 'src/app/models/presenza';
 import { LoginService } from 'src/app/services/login.service';
 import { PresenzaService } from 'src/app/services/presenza.service';
 import { Location } from '@angular/common'
-import {DipendenteMese} from 'src/app/models/dipendenteMese';
+import { DipendenteMese } from 'src/app/models/dipendenteMese';
 import { DipendenteMeseService } from 'src/app/services/dipendente-mese.service';
+import { Mese } from 'src/app/models/mese';
+import { MeseService } from 'src/app/services/mese.service';
 
 @Component({
   selector: 'app-inserisci-controlla-presenze',
@@ -24,21 +26,27 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   enableEditIndex: any = null;
   listaDipendenti: Array<Dipendente> = new Array<Dipendente>();
   listaPresenze: Array<Presenza> = new Array<Presenza>();
-  listaDipendenteMese: Array<DipendenteMese> = new Array<DipendenteMese>();
+  listaMesi: Array<Mese> = new Array<Mese>();
   presenza: Presenza = new Presenza();
+  dipendenteMese: DipendenteMese = new DipendenteMese();
+  mese: Mese = new Mese();
   mesi: string;
   anni: string;
-  giorni : string = "01";
+  giorni: string = "01";
   user: any = sessionStorage.getItem("utente") || '{}';
   utente: Dipendente = new Dipendente();
   allMonths: boolean = true;
-  singlePresenza : Presenza;
+  singlePresenza: Presenza;
 
 
 
 
-  constructor(private router: Router, private authService: LoginService, private service: PresenzaService, private dipMesService : DipendenteMeseService, private location: Location) {
+  constructor(private router: Router, private authService: LoginService, private service: PresenzaService,
+    private dipMesService: DipendenteMeseService, private meseService : MeseService, private location: Location) {
 
+    this.utente = JSON.parse(sessionStorage.getItem("utente") || '{}');
+    this.dipendenteMese.id_dipendente_fk = this.utente.id_dipendente;
+    this.mese.id_mese = this.dipendenteMese.id_mese_fk;
 
   }
 
@@ -54,12 +62,11 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     this.getStorage()
     if (this.utente.ruolo_fk == 'dipendente') {
       this.elencoPresenze(this.utente.id_dipendente)
-      this.elencoStati()
     }
     if (this.utente.ruolo_fk == 'responsabile') {
       this.elencoTuttePresenze();
     }
- 
+    this.meseService.elencoMesi(this.onSuccessMese.bind(this), this.onFailure.bind(this));
   }
 
   switchEditMode(i: any) {
@@ -84,6 +91,9 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     this.service.aggiornaStato(dm, this.onSuccess, this.onFailure)
   }
 
+  selectStatus() {
+    this.dipMesService.findStatus(this.dipendenteMese, this.onSuccess.bind(this), this.onFailure.bind(this))
+  }
 
   elencoPresenze(user_id: any) {
     user_id = this.utente.id_dipendente
@@ -91,36 +101,34 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     this.showAll()
   }
 
-  elencoStati(){
-    this.dipMesService.elencoDipendentiMesi(this.onDipMesServiceSuccess.bind(this), this.onFailure.bind(this))
-  }
 
   elencoTuttePresenze() {
     this.service.elencoPresenze(this.onSuccess.bind(this), this.onFailure.bind(this))
     this.showAll()
+
   }
 
-  selectYear(anni : any){
+  selectYear(anni: any) {
 
     this.daySelected(this.anni, "")
 
   }
 
-  selectMonth(mesi : any){
-    
+  selectMonth(mesi: any) {
+
     this.daySelected(this.anni, this.mesi)
   }
 
-  daySelected(anni : string, mesi : string){
+  daySelected(anni: string, mesi: string) {
     var daySelected = this.anni + "-" + this.mesi + "-" + this.giorni;
     console.log(daySelected);
-    if(this.anni!= undefined && this.mesi!=undefined){
-      this.listaPresenze=[]
+    if (this.anni != undefined && this.mesi != undefined) {
+      this.listaPresenze = []
       this.allMonths = false;
-      this.service.elencoByMese(daySelected,this.onSuccess.bind(this), this.onFailure.bind(this));
+      this.service.elencoByMese(daySelected, this.onSuccess.bind(this), this.onFailure.bind(this));
     }
   }
-  showAll(){
+  showAll() {
     this.allMonths = true;
   }
   salva() {
@@ -145,19 +153,31 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   }
 
   onSuccess(response: any) {
-    if(response==null){
+    if (response == null) {
       this.listaPresenze = null;
     }
-    else{
-      this.listaPresenze=[]
+    else {
+      this.listaPresenze = []
       this.listaPresenze = response
-    
-  }
+
+    }
   }
 
-  onDipMesServiceSuccess(response: any){
-    this.listaDipendenteMese =response;
+  onSuccessMese(response: any) {
+    if (response == null) {
+      this.listaMesi = null;
+    }
+    else {
+      console.log(response)
+      this.listaMesi = response
+      this.listaMesi.forEach(element => {
+        this.dipendenteMese.id_mese_fk = element.id_mese
+      });
+      
+
+    }
   }
+
 
   onFailure(err: String) {
     alert("Operazione non andata a buon fine. Codice errore: " + err);
