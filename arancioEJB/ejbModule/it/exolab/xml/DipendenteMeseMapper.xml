@@ -5,40 +5,78 @@
 
 <mapper namespace="it.exolab.mapper.DipendenteMeseMapper">
 
-	<update id="update" parameterType="it.exolab.model.DipendenteMeseMapper">
+	<resultMap
+		id="allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze"
+		type="it.exolab.model.Presenza">
+		<result property="data" column="data" />
+		<result property="ore_lavorate" column="ore_lavorate" />
+		<result property="ore_assenza" column="ore_assenza" />
+		<result property="motivazione_assenza_fk"
+			column="motivazione_assenza_fk" />
+		<association property="dipendenteMese"
+			javaType="it.exolab.model.DipendenteMese">
+			<id property="stato" column="stato" />
+		</association>
+	</resultMap>
+
+	<update id="update"
+		parameterType="it.exolab.model.DipendenteMese">
 		UPDATE dipendenti_mesi
 		SET stato=#{stato}
-		WHERE id_dipendente_fk=#{id_dipendente_fk} AND  id_mese_fk=#{id_mese_fk}
+		WHERE
+		id_dipendente_fk=#{id_dipendente_fk} AND id_mese_fk=#{id_mese_fk}
 	</update>
-	
-	<delete id="delete" parameterType="it.exolab.model.DipendenteMeseMapper">
+
+	<delete id="delete"
+		parameterType="it.exolab.model.DipendenteMese">
 		DELETE FROM dipendenti_mesi
-		WHERE id_dipendente_fk=#{id_dipendente_fk} AND  id_mese_fk=#{id_mese_fk}
+		WHERE
+		id_dipendente_fk=#{id_dipendente_fk} AND id_mese_fk=#{id_mese_fk}
 	</delete>
-	
-	<select id="selectOne">
-	SELECT *
-	FROM dipendenti_mesi
-	WHERE id_dipendente_fk=#{id_dipendente_fk} AND  id_mese_fk=#{id_mese_fk}
+
+	<select id="selectOne"
+		resultType="it.exolab.model.DipendenteMese">
+		SELECT *
+		FROM dipendenti_mesi
+		WHERE id_dipendente_fk=#{id_dipendente_fk} AND id_mese_fk=#{id_mese_fk}
 	</select>
-	<select id="selectAll">
-	SELECT *
-	FROM dipendenti_mesi
+	<select id="selectAll"
+		resultType="it.exolab.model.DipendenteMese">
+		SELECT *
+		FROM dipendenti_mesi
 	</select>
-	<select id="selectByDipendente">
-	SELECT *
-	FROM dipendenti_mesi
-	WHERE id_dipendente_fk=#{id_dipendente_fk}
+	<select id="selectByDipendente"
+		resultType="it.exolab.model.DipendenteMese">
+		SELECT *
+		FROM dipendenti_mesi
+		WHERE id_dipendente_fk=#{id_dipendente_fk}
 	</select>
-	<select id="selectByMese">
-	SELECT *
-	FROM dipendenti_mesi
-	WHERE id_mese_fk=#{id_mese_fk}
+	<select id="selectByMese"
+		resultType="it.exolab.model.DipendenteMese">
+		SELECT *
+		FROM dipendenti_mesi
+		WHERE id_mese_fk=#{id_mese_fk}
 	</select>
-	<select id="selectByStato">
-	SELECT *
-	FROM dipendenti_mesi
-	WHERE stato=#{stato}
+	<select id="selectByStato"
+		resultType="it.exolab.model.DipendenteMese">
+		SELECT *
+		FROM dipendenti_mesi
+		WHERE stato=#{stato}
 	</select>
-	
+
+	<select id="allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze"
+		resultMap="allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze">
+		SELECT P.data, P.ore_lavorate, P.ore_assenza,
+		P.motivazione_assenza_fk,
+		DM.stato
+		FROM dipendenti D
+		JOIN dipendenti_mesi DM ON D.id_dipendente =
+		DM.id_dipendente_fk
+		JOIN mesi M ON M.id_mese = DM.id_mese_fk
+		JOIN
+		presenze P ON P.id_mese_fk = M.id_mese AND D.id_dipendente =
+		P.id_dipendente_fk
+		WHERE D.id_dipendente = #{id_dipendente};
+	</select>
+
 </mapper>

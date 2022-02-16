@@ -13,5 +13,6 @@ public interface DipendenteMeseMapper {
 	List<DipendenteMese> selectByDipendente(Integer id_dipendente_fk);
 	List<DipendenteMese> selectByMese(Integer id_mese_fk);
 	List<DipendenteMese> selectByStato(Integer stato);
+	List<DipendenteMese> allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze(Integer id_dipendente_fk);
 
 }

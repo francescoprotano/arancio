@@ -1,5 +1,5 @@
 export class dipendenteLoggato{
+    id_dipendente!: number;
     email!: string;
-    password!: string;
     ruolo_fk!: string;
 }

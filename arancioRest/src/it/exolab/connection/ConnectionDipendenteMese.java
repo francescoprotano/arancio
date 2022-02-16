@@ -32,7 +32,8 @@ public class ConnectionDipendenteMese {
 					"org.wildfly.naming.client.WildFlyInitialContextFactory");
 
 			initialContext = new InitialContext(properties);
-			String mystring = "java:global/arancioEJBEAR/arancioEJB/DipendenteEJB!it.exolab.ejb.DipendenteMeseEJBRemote";
+			String mystring = "java:global/arancioEJBEAR/arancioEJB/DipendenteMeseEJB!it.exolab.ejb.DipendenteMeseEJBRemote";
+			
 			ejb = (DipendenteMeseEJBRemote) initialContext.lookup(mystring);
 
 		} catch (NamingException namingException) {

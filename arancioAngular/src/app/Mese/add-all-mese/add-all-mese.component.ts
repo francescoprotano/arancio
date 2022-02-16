@@ -22,15 +22,18 @@ export class AddMeseComponent implements OnInit {
   singleMese : Mese;
   user : any = sessionStorage.getItem("utente")|| '{}';
   admin : Dipendente = new Dipendente();
+  utenteLoggato : Dipendente = new Dipendente();
  mesi : string;
  anni : string;
  giorni : string = "01";
+ 
   constructor(private servizio: MeseService, private router : Router, private location: Location) { 
     
   }
 
 
   ngOnInit(): void {
+    this.utenteLoggato = JSON.parse(sessionStorage.getItem("utente") || '{}');
     this.elencoMesi()
   }
 
