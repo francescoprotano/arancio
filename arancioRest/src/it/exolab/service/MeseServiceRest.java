@@ -3,7 +3,6 @@ package it.exolab.service;
 import java.sql.Date;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -39,14 +38,14 @@ public class MeseServiceRest {
 		return ConnectionMeseEJB.getConnection().delete(cont.getMese(),cont.getDip());
 	}
 	
-	@GET
+	@POST
 	@Path("/selectByMese")
 	public RispostaMese selectByMese(@QueryParam("mese") Date mese,Dipendente dipendente) {
 		System.out.println(mese);
 		return ConnectionMeseEJB.getConnection().selectByMese(mese,dipendente);
 	}
 	
-	@GET
+	@POST
 	@Path("/all")
 	public RispostaMesi selectAll(Dipendente dipendente){
 		return ConnectionMeseEJB.getConnection().allMesi(dipendente);

@@ -3,7 +3,6 @@ package it.exolab.service;
 import java.sql.Date;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -38,33 +37,33 @@ public class PresenzaServiceRest {
 		return ConnectionPresenzaEJB.getConnection().delete(cont.getPres(), cont.getDip());
 	}
 
-	@GET
+	@POST
 	@Path("/selectByData")
 	public RispostaPresenze selectByData(@QueryParam("data") Date data, Dipendente dipendente) {
 		return ConnectionPresenzaEJB.getConnection().selectByData(data, dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/selectByMese")
 	public RispostaPresenze selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk, Dipendente dipendente) {
 		return ConnectionPresenzaEJB.getConnection().selectByMese(id_mese_fk, dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/selectByDipendente")
 	public RispostaPresenze selectByDipendente(@QueryParam("id_dipendente_fk") Integer id_dipendente_fk,
 			Dipendente dipendente) {
 		return ConnectionPresenzaEJB.getConnection().selectByDipendente(id_dipendente_fk, dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/selectByAssenza")
 	public RispostaPresenze selectByAssenza(@QueryParam("motivazione_assenza_fk") String motivazione_assenza_fk,
 			Dipendente dipendente) {
 		return ConnectionPresenzaEJB.getConnection().selectByAssenza(motivazione_assenza_fk, dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/all")
 	public RispostaPresenze selectAll(Dipendente dipendente) {
 		return ConnectionPresenzaEJB.getConnection().selectAll(dipendente);
