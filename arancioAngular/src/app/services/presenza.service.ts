@@ -33,10 +33,6 @@ export class PresenzaService {
     return this.doPost("/update", model, this.utenteLoggato, onSuccess, onFailure);
   }
 
-
-  public elencoPresenze(onSuccess: any, onFailure: any) {
-    this.doGet("/all", this.utenteLoggato, onSuccess, onFailure);
-  }
   public elencoPresenzeIndividual(id_dipendente_fk: number, onSuccess: any, onFailure: any): void {
     this.doGet("/selectByDipendente?id_dipendente_fk=" + id_dipendente_fk, this.utenteLoggato, onSuccess, onFailure);
   }
@@ -103,10 +99,7 @@ export class PresenzaService {
 
 
     return this.http.post(url, cont).subscribe((httpResponse: any) => {
-      console.log(httpResponse);
-      console.log(cont.dip);
-      console.log(cont.pres);
-
+     
       if (httpResponse.successo == true) {
         onSuccess(httpResponse.data);
       } else {

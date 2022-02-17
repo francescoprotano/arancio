@@ -44,7 +44,7 @@ export class AddMeseComponent implements OnInit {
 
   salva() {
     try {
-      this.servizio.aggiungiMese(this.admin, this.onSuccess.bind(this), this.onFailure.bind(this));
+      this.servizio.aggiungiMese(this.utenteLoggato, this.onSuccess.bind(this), this.onFailure.bind(this));
       
       this.router.navigate(['/adminLoggedIn'])
     } catch (e) {
@@ -94,8 +94,8 @@ export class AddMeseComponent implements OnInit {
     this.servizio.aggiornaMese(mese,this.onSuccess,this.onFailure)
   }
 
-  onRemove(codice:number) {
-		this.servizio.eliminaMese(codice,this.onSuccess.bind(this),this.onFailure.bind(this));
+  onRemove(mese : Mese) {
+		this.servizio.eliminaMese(mese,this.onSuccess.bind(this),this.onFailure.bind(this));
     this.elencoMesi();
   }
 

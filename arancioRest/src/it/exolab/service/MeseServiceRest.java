@@ -41,7 +41,7 @@ public class MeseServiceRest {
 	@POST
 	@Path("/selectByMese")
 	public RispostaMese selectByMese(@QueryParam("mese") Date mese,Dipendente dipendente) {
-		System.out.println(mese);
+
 		return ConnectionMeseEJB.getConnection().selectByMese(mese,dipendente);
 	}
 	

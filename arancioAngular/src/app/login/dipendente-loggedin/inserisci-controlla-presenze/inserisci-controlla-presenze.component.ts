@@ -36,13 +36,13 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   utente: Dipendente = new Dipendente();
   allMonths: boolean = true;
   singlePresenza: Presenza;
-  id_presenza : number;
-  dataSelected : Date;
-
+  id_presenza: number;
+  dataSelected: Date;
+  meseInviato: Boolean = false;
 
 
   constructor(private router: Router, private authService: LoginService, private service: PresenzaService,
-    private dipMesService: DipendenteMeseService, private meseService : MeseService, private location: Location) {
+    private dipMesService: DipendenteMeseService, private meseService: MeseService, private location: Location) {
 
     this.utente = JSON.parse(sessionStorage.getItem("utente") || '{}');
     this.dipendenteMese.id_dipendente_fk = this.utente.id_dipendente;
@@ -66,7 +66,7 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     if (this.utente.ruolo_fk == 'responsabile') {
       this.elencoTuttePresenze();
     }
-    this.dipMesService.findStatus(this.dipendenteMese,this.onSuccess.bind(this), this.onFailure.bind(this));
+   
   }
 
   switchEditMode(i: any) {
@@ -79,22 +79,22 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     this.enableEditIndex = null;
   }
 
-  save(singlePresenza : Presenza) {
+  save(singlePresenza: Presenza) {
     this.isEditing = false;
     this.enableEditIndex = null;
-    this.singlePresenza =singlePresenza 
+    this.singlePresenza = singlePresenza
     console.log(this.singlePresenza)
     this.service.aggiornaPresenza(singlePresenza, this.onSuccessModifica.bind(this), this.onFailure.bind(this))
   }
 
-  inviaMese(p : Presenza){
+  inviaMese(p: Presenza) {
     this.dipendenteMese.id_dipendente_fk = p.id_dipendente_fk
     this.dipendenteMese.id_mese_fk = p.id_mese_fk
-    this.dipMesService.sendMonth(this.dipendenteMese, this.onSuccess, this.onFailure)
+    this.dipMesService.sendMonth(this.dipendenteMese, this.onSuccessSendMese.bind(this), this.onFailure.bind(this))
   }
 
   selectStatus() {
-    this.dipMesService.findStatus(this.dipendenteMese, this.onSuccess.bind(this), this.onFailure.bind(this))
+    this.dipMesService.selectAll(this.dipendenteMese, this.onSuccess.bind(this), this.onFailure.bind(this))
   }
 
   elencoPresenze(user_id: any) {
@@ -105,14 +105,14 @@ export class InserisciControllaPresenzeComponent implements OnInit {
 
 
   elencoTuttePresenze() {
-    this.service.elencoPresenze(this.onSuccess.bind(this), this.onFailure.bind(this))
+    this.dipMesService.selectAll(this.dipendenteMese, this.onSuccess.bind(this), this.onFailure.bind(this))
     this.showAll()
 
   }
 
   selectYear(anni: any) {
 
-    this.daySelected(this.anni , null)
+    this.daySelected(this.anni, null)
 
   }
 
@@ -122,14 +122,11 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   }
 
   daySelected(anni: number, mesi: number) {
-   // this.dataSelected = this.anni + "-" + this.mesi + "-" + this.giorni;
-
-   this.dataSelected=new Date(anni,mesi,1)
-    console.log(this.daySelected);
+    this.dataSelected = new Date(anni, mesi, 1)
     if (this.anni != undefined && this.mesi != null) {
       this.listaPresenze = []
       this.allMonths = false;
-      this.service.elencoByMese(this.dataSelected, this.onSuccess.bind(this), this.onFailure.bind(this));
+      this.service.elencoByMese(this.dataSelected, this.onSuccessFiltraMese.bind(this), this.onFailure.bind(this));
     }
   }
   showAll() {
@@ -140,7 +137,6 @@ export class InserisciControllaPresenzeComponent implements OnInit {
       this.presenza.id_dipendente_fk = this.utente.id_dipendente;
       this.validateForward();
       this.service.aggiungiPresenza(this.presenza, this.onSuccess.bind(this), this.onFailure.bind(this));
-      console.log(this.presenza)
       this.router.navigate(['/dipendenteLoggedIn'])
     } catch (e) {
       if (e instanceof CampoRichiesto) {
@@ -163,12 +159,34 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     else {
       this.listaPresenze = []
       this.listaPresenze = response
-      console.log(this.listaPresenze)
+      this.listaPresenze.forEach(element => {
+        if (element.dipendenteMese.stato == 0) {
+          this.meseInviato == false
+        } else {
+          this.meseInviato == true
+        }
+      });
 
     }
   }
 
-  onSuccessModifica(response:any){
+  onSuccessFiltraMese(response: any) {
+    if (response == null) {
+      this.listaPresenze = null;
+    }
+    else {
+      this.listaPresenze = []
+      this.listaPresenze = response
+
+    }
+  }
+
+  onSuccessSendMese(response: any) {
+    this.listaPresenze = response
+    this.meseInviato = true;
+  }
+
+  onSuccessModifica(response: any) {
     alert("Modifica avvenuta con successo.")
   }
 

@@ -12,7 +12,7 @@
     <table class="table">
       <thead>
         <tr>
-          
+
           <th scope="col">Data</th>
           <th scope="col">Ore lavorate</th>
           <th scope="col">Ore assenza</th>
@@ -24,7 +24,7 @@
       </thead>
       <tbody>
 
-        <select name="anni" class="datefield month"  [(ngModel)]="anni" (click)="selectYear(anni)">
+        <select name="anni" class="datefield month" [(ngModel)]="anni" (click)="selectYear(anni)">
           <option disabled value="">Seleziona Anno</option>
           <option value="2020">2020</option>
           <option value="2021">2021</option>
@@ -37,9 +37,9 @@
           <option value="2028">2028</option>
           <option value="2029">2029</option>
           <option value="2030">2030</option>
-          
-      </select>
-      <select name="mesi" class="datefield month"  [(ngModel)]="mesi" (click)="selectMonth(mesi)">
+
+        </select>
+        <select name="mesi" class="datefield month" [(ngModel)]="mesi" (click)="selectMonth(mesi)">
           <option disabled value="">Seleziona Mese</option>
           <option value="00">Gennaio</option>
           <option value="01">Febbraio</option>
@@ -53,22 +53,22 @@
           <option value="09">Ottobre</option>
           <option value="10">Novembre</option>
           <option value="11">Dicembre</option>
-      </select>
-      <ng-container *ngIf="allMonths == false">
-        <button type="button" class="btn btn-warning" (click)="elencoTuttePresenze()" >Mostra tutto</button>
-    </ng-container>
+        </select>
+        <ng-container *ngIf="allMonths == false">
+          <button type="button" class="btn btn-warning" (click)="elencoTuttePresenze()">Mostra tutto</button>
+        </ng-container>
         <ng-container *ngFor="let p of listaPresenze; index as i;">
 
           <tr>
-           
+
             <ng-container *ngIf="enableEditIndex != i">
               <td>{{p.data | date: 'dd-MM-yyyy' }}</td>
               <td>{{p.ore_lavorate}}</td>
               <td>{{p.ore_assenza}}</td>
               <td>{{p.motivazione_assenza_fk}}</td>
 
-              
-              
+
+
             </ng-container>
 
 
@@ -85,13 +85,13 @@
                   <option value="permesso">permesso</option>
                   <option value="presente">presente</option>
                 </select></td>
-      
+
               <td><button (click)="save(p)">Conferma</button></td>
               <td><button (click)="cancel()">Annulla</button></td>
             </ng-container>
-        
-            
-        
+
+
+
         </ng-container>
 
 
@@ -99,9 +99,15 @@
     </table>
     <ng-container *ngFor="let p of listaPresenze; index as i;">
       <ng-container *ngIf="i==1">
-    <button type="button" class="btn btn-info" (click)="inviaMese(p)" >Invia mese</button>
-  </ng-container>
-  </ng-container>
+        <ng-container *ngIf="meseInviato == false">
+          <button type="button" class="btn btn-info" (click)="inviaMese(p)">Invia mese</button>
+        </ng-container>
+        <ng-container *ngIf="meseInviato == true">
+          <button type="button" disabled class="btn btn-info" (click)="inviaMese(p)">Invia mese</button>
+        </ng-container>
+
+      </ng-container>
+    </ng-container>
   </div>
   <hr />
 

@@ -19,7 +19,7 @@ export class DipendenteMeseService {
     this.doGet("/selectAll", this.utenteLoggato, onSuccess, onFailure);
   }
 
-  public findStatus(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any): void {
+  public selectAll(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any): void {
     this.doPost("/selectByDipendente" , dipendenteMese, onSuccess, onFailure);
   }
 
@@ -54,8 +54,7 @@ export class DipendenteMeseService {
 
 
     return this.http.post(url, data).subscribe((httpResponse: any) => {
-      console.log(httpResponse);
-      console.log(data);
+
 
       if (httpResponse.successo == true) {
         onSuccess(httpResponse.data);
