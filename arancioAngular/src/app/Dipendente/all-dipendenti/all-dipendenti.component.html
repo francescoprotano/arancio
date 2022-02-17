@@ -4,53 +4,59 @@
 
 	<div class="container">
 		<table class="table table-hover">
-		  <thead>
-			<tr>
-			  <th scope="col">Nome</th>
-			  <th scope="col">Cognome</th>
-			  <th scope="col">Data di Nascita</th>
-			  <th scope="col">Email</th>
-			  <th scope="col">Password</th>
-			  <th scope="col">Ruolo</th>
-			  <th scope="col">Contratto corrente</th>
-			  <th scope="col">-AZIONI-</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<ng-container *ngFor="let d of listaDipendenti; index as i;">
-			  <tr>
+			<thead>
+				<tr>
+					<th scope="col">Nome</th>
+					<th scope="col">Cognome</th>
+					<th scope="col">Data di Nascita</th>
+					<th scope="col">Email</th>
+					<th scope="col">Password</th>
+					<th scope="col">Ruolo</th>
+					<th scope="col">Contratto corrente</th>
+					<th scope="col">-AZIONI-</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ng-container *ngFor="let d of listaDipendenti; index as i;">
+					<tr>
 
-				<ng-container *ngIf="enableEditIndex != i">
-				  <td>{{d.nome}}</td>
-				  <td>{{d.email}}</td>
-				  <td>{{d.data_nascita | date: 'yyyy-MM-dd'}}</td>
-				  <td>{{d.email}}</td>
-				  <td>{{d.password}}</td>
-				  <td>{{d.ruolo_fk}}</td>
-				  <td>{{d.contratto_corrente_fk}}</td>
-				  <td *ngIf="enableEditIndex != i">
-					<button  *ngIf="utente.ruolo_fk == 'admin'" type="button" class="btn btn-info" (click)="switchEditMode(i)">Modifica</button>
-					<input *ngIf="utente.ruolo_fk == 'admin'" type="button" class="btn btn-danger" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
-				  </td>
+						<ng-container *ngIf="enableEditIndex != i">
+							<td>{{d.nome}}</td>
+							<td>{{d.email}}</td>
+							<td>{{d.data_nascita | date: 'yyyy-MM-dd'}}</td>
+							<td>{{d.email}}</td>
+							<td>{{d.password}}</td>
+							<td>{{d.ruolo_fk}}</td>
+							<td>{{d.contratto_corrente_fk}}</td>
+							<td *ngIf="enableEditIndex != i">
+								<button *ngIf="utente.ruolo_fk == 'admin'" type="button" class="btn btn-info"
+									(click)="switchEditMode(i)">Modifica</button>
+								<input *ngIf="utente.ruolo_fk == 'admin'" type="button" class="btn btn-danger"
+									value="Cancella" (click)="onRemove(d.id_dipendente)" />
+							</td>
+						</ng-container>
+						<ng-container *ngIf="enableEditIndex == i">
+							<td><input [(ngModel)]="d.nome" /></td>
+							<td><input [(ngModel)]="d.cognome" /></td>
+							<td><input [(ngModel)]="d.data_nascita" type="date" /></td>
+							<td><input [(ngModel)]="d.email" /></td>
+							<td><input [(ngModel)]="d.password" /></td>
+							<td><input [(ngModel)]="d.ruolo_fk" /></td>
+
+							<select>
+								<option *ngFor="let c of listaContratti" value="{{c.id_contratto}}"> {{c.id_contratto}}
+								</option>
+							</select>
+							<td><button class="btn btn-success" (click)="save(d)">Conferma</button></td>
+							<td><button class="btn btn-warning" (click)="cancel()">Annulla</button></td>
+						</ng-container>
+					</tr>
 				</ng-container>
-				<ng-container *ngIf="enableEditIndex == i">
-				  <td><input [(ngModel)]="d.nome" /></td>
-				  <td><input [(ngModel)]="d.cognome" /></td>
-				  <td><input [(ngModel)]="d.data_nascita" type="date" /></td>
-				  <td><input [(ngModel)]="d.email" /></td>
-				  <td><input [(ngModel)]="d.password" /></td>
-				  <td><input [(ngModel)]="d.ruolo_fk" /></td>
-				  <td><input [(ngModel)]="d.contratto_corrente_fk" /></td>
-				  <td><button class="btn btn-success" (click)="save(d)">Conferma</button></td>
-				  <td><button class="btn btn-warning" (click)="cancel()">Annulla</button></td>
-				</ng-container>
-			  </tr>
-			</ng-container>
-		  </tbody>
+			</tbody>
 		</table>
-	  </div>
-	  <hr/>
+	</div>
+	<hr />
 
-	  <input type="button" class="btn btn-primary" value="Indietro" (click)="back()">
-	
-   </body>
+	<input type="button" class="btn btn-primary" value="Indietro" (click)="back()">
+
+</body>

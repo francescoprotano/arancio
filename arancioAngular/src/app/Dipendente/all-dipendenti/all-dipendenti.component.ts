@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Dipendente } from 'src/app/models/dipendente';
 import { DipendenteService } from 'src/app/services/dipendente.service';
 import { Location } from '@angular/common'
+import { Contratto } from 'src/app/models/contratto';
+import { ContrattoService } from 'src/app/services/contratto.service';
 
 
 @Component({
@@ -15,13 +17,15 @@ export class AllDipendentiComponent implements OnInit {
   isEditing: boolean = false;
   enableEditIndex: any = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
+  listaContratti : Array<Contratto> = new Array<Contratto>();
   user: any = sessionStorage.getItem("utente") || '{}';
   utente: Dipendente = new Dipendente();
-  constructor(private service:DipendenteService,private router: Router, private location: Location) { }
+  constructor(private service:DipendenteService,private router: Router, private contrattoService : ContrattoService, private location: Location) { }
 
   ngOnInit(): void {
     this.getStorage();
     this.elenco2();
+    this.elencoContratti();
   }
 
   getStorage() {
@@ -37,7 +41,10 @@ export class AllDipendentiComponent implements OnInit {
   setStatus(stato:number){
     
   }
+  elencoContratti(){
+    this.contrattoService.elencoContratti(this.onSuccessContratti.bind(this),this.onFailure.bind(this))
 
+  }
 
   redirectTo(uri: string) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
@@ -50,6 +57,16 @@ export class AllDipendentiComponent implements OnInit {
 
   onSuccess(response:any) {
     this.listaDipendenti = response
+
+  }
+
+  onSuccessContratti(response : any){
+    this.listaContratti = response
+  }
+
+  onUpdateSuccess(response:any) {
+    alert("Utente modificato!")
+    this.elenco2();
 
   }
 
@@ -70,7 +87,7 @@ export class AllDipendentiComponent implements OnInit {
   save(d : Dipendente) {
     this.isEditing = false;
     this.enableEditIndex = null;
-    this.service.aggiorna(d,this.onSuccess,this.onFailure)
+    this.service.aggiorna(d,this.onUpdateSuccess.bind(this),this.onFailure.bind(this))
   }
 
   cancel() {

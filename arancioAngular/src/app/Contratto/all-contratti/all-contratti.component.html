@@ -2,7 +2,19 @@
 
 <body>
 
-	
+	<h3>Cerca per Tipologia:</h3>
+	  
+		<td><select [(ngModel)]="tipologia" name="tipologia" (click)="byTipologia(tipologia)">
+		  <option value="a progetto">a progetto</option>
+		  <option value="determinato">determinato</option>
+		  <option value="indeterminato">indeterminato</option>
+		  <option value="stagionale">stagionale</option>
+		 
+	  </select></td>
+	  <ng-container *ngIf="showButton">
+	  <button class="btn btn-info" type="button" (click)="elencoContratti()">Mostra tutti</button>
+	</ng-container>
+		<br>
 	
 	<div class="container">
 		<table class="table">
@@ -25,8 +37,8 @@
 				  <td>{{c.tipologia}}</td>
 				  <td>{{c.id_dipendente_fk}}</td>
 				  <td *ngIf="enableEditIndex != i">
-					<button type="button" (click)="switchEditMode(i)">Modifica</button>
-					<input type="button" value="Cancella" (click)="onRemove(c.id_contratto)"/>
+					<button class="btn btn-info" type="button" (click)="switchEditMode(i)">Modifica</button>
+
 				  </td>
 				</ng-container>
 				<ng-container *ngIf="enableEditIndex == i">
@@ -44,7 +56,8 @@
 				
 
 				  <td><input [(ngModel)]="c.id_dipendente_fk" type="number" /></td>
-				  <td><button (click)="save(c)">Conferma</button></td>
+				  <td><button class="btn btn-success" (click)="save(c)">Conferma</button></td>
+				  <td><button class="btn btn-warning" type="button" (click)="cancel()">Annulla</button></td>
 
 				  
 				</ng-container>
@@ -57,50 +70,6 @@
 	  </div>
 	  <hr/>
 	 
-	  <h3>Cerca per Tipologia:</h3>
-	  
-		<td><select [(ngModel)]="tipologia" name="tipologia">
-		  <option value="a progetto">a progetto</option>
-		  <option value="determinato">determinato</option>
-		  <option value="indeterminato">indeterminato</option>
-		  <option value="stagionale">stagionale</option>
-		 
-	  </select></td>
-	
-  
-		<td><button (click)="byTipologia(tipologia)">Conferma</button></td>
-		<br>
-		<table class="table">
-			<ng-container>
-		<thead>
-		  <tr>
-			<th scope="col">Data assunzione</th>
-			<th scope="col">Data scadenza</th>
-			<th scope="col">Tipologia</th>
-			<th scope="col">Id Dipendente</th>
-			<th scope="col">-AZIONI-</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <ng-container *ngFor="let c of listaByTipologia; index as i;">
-			  
-			<tr>
-			  <ng-container *ngIf="enableEditIndex != i">
-				<td>{{c.data_assunzione | date: 'yyyy-MM-dd'}}</td>
-				<td>{{c.data_scadenza | date: 'yyyy-MM-dd'}}</td>
-				<td>{{c.tipologia}}</td>
-				<td>{{c.id_dipendente_fk}}</td>
-				<td *ngIf="enableEditIndex != i">
-				  <button type="button" (click)="switchEditMode(i)">Modifica</button>
-				  <input type="button" value="Cancella" (click)="onRemove(c.id_contratto)"/>
-				</td>
-			  </ng-container>
-			  </tr>
-		  </ng-container>
-  
+	  <input type="button" class="btn btn-primary" value="Indietro" (click)="back()">
 		
-	  </ng-container>
-	  <br><br>
-	  <input type="button" class="btn btn-danger" (click)="back()" value="Annulla" >
-	</table>
    </body>

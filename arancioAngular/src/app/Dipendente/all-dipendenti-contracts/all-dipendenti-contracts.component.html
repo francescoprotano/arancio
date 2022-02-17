@@ -33,7 +33,6 @@
                 </ng-container>
 				  <td *ngIf="enableEditIndex != i">
 					<button type="button" (click)="switchEditMode(i)">Modifica</button>
-					<input type="button" value="Cancella" (click)="onRemove(d.id_dipendente)"/>
 				  </td>
 				
             
@@ -46,6 +45,7 @@
 				  <td><input [(ngModel)]="d.contratto.data_scadenza" type="date" /></td>
 				  <td><input [(ngModel)]="d.contratto.tipologia" /></td>
 				  <td><button (click)="save(d)">Conferma</button></td>
+				  <td><button (click)="cancel()">Annulla</button></td>
 				</ng-container>
 			</ng-container>
 		  </tbody>

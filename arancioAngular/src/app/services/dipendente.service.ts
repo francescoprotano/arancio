@@ -24,11 +24,11 @@ export class DipendenteService {
 
 
   public elenco(onSuccess: any, onFailure: any) {
-    return this.doPostElenco("/all", this.utenteLoggato,  onSuccess, onFailure);
+    return this.doPostElenco("/all", this.utenteLoggato, onSuccess, onFailure);
   }
 
-  public elencoByContratto(onSuccess: any, onFailure: any){
-    return this.doPostElenco("/allJoinDipendentiEContratti", this.utenteLoggato,  onSuccess, onFailure);
+  public elencoByContratto(onSuccess: any, onFailure: any) {
+    return this.doPostElenco("/allJoinDipendentiEContratti", this.utenteLoggato, onSuccess, onFailure);
   }
 
   public selectByEmail(email: string, onSuccess: any, onFailure: any) {
@@ -40,7 +40,7 @@ export class DipendenteService {
   }
 
   public aggiorna(model: Dipendente, onSuccess: any, onFailure: any) {
-    return this.doPost("/update", model, this.utenteLoggato, onSuccess, onFailure);
+    return this.doPostAddUpdate("/update", model,  onSuccess, onFailure);
   }
 
 
@@ -74,17 +74,17 @@ export class DipendenteService {
     });
   }
 
-  private doPost(querystring: any, data: any, utenteLoggato: any,  onSuccess: any, onFailure: any) {
+  private doPost(querystring: any, data: any, utenteLoggato: any, onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
 
 
 
     return this.http.post(url, data, utenteLoggato).subscribe((httpResponse: any) => {
-      console.log(httpResponse);
-      console.log(data);
+
 
       if (httpResponse.successo == true) {
+        console.log(httpResponse.data)
         onSuccess(httpResponse.data);
       } else {
         onFailure(httpResponse.codice_errore);
@@ -94,7 +94,7 @@ export class DipendenteService {
 
     });
   }
-  private doPostElenco(querystring: any,  utenteLoggato: any,  onSuccess: any, onFailure: any) {
+  private doPostElenco(querystring: any, utenteLoggato: any, onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
 
@@ -114,4 +114,26 @@ export class DipendenteService {
 
     });
   }
+
+  private doPostAddUpdate(querystring: any, model: any, onSuccess: any, onFailure: any) {
+
+    var url = this.backendURL + "" + querystring;
+
+
+
+    return this.http.post(url, model).subscribe((httpResponse: any) => {
+      console.log(httpResponse);
+
+
+      if (httpResponse.successo == true) {
+        onSuccess(httpResponse.data);
+      } else {
+        onFailure(httpResponse.codice_errore);
+        alert("Operazione non andata a buon fine. Codice errore: " + httpResponse.codice_errore);
+
+      }
+
+    });
+  }
+
 }

@@ -18,6 +18,7 @@ export class AllContrattiComponent implements OnInit {
   enableEditIndex: any = null;
   contratto : Contratto = new Contratto()
   tipologia : string;
+  showButton : Boolean = false;
   constructor(private service:ContrattoService,private router: Router, private location: Location) { }
 
   ngOnInit(): void {
@@ -49,19 +50,26 @@ export class AllContrattiComponent implements OnInit {
   }
   elencoContratti(){
     this.service.elencoContratti(this.onSuccess.bind(this),this.onFailure.bind(this))
-
+    this.showButton = false;
   }
 
 
 byTipologia(tipologia : string) {
-  this.service.byTipologia(tipologia,this.onSuccessTipologia.bind(this),this.onSuccessTipologia.bind(this))
+  this.service.byTipologia(tipologia,this.onSuccess.bind(this),this.onFailure.bind(this))
+  this.showButton = true;
 
 }
 
 
   onSuccess(response:any) {
+    this.listaContratti = []
     this.listaContratti = response
 
+  }
+
+  cancel() {
+    this.isEditing = false;
+    this.enableEditIndex = null;
   }
 
   onSuccessTipologia(response:any) {
