@@ -24,12 +24,15 @@ export class DipendenteService {
 
 
   public elenco(onSuccess: any, onFailure: any) {
-    return this.doGet("/all", this.utenteLoggato, onSuccess, onFailure);
+    return this.doPostElenco("/all", this.utenteLoggato,  onSuccess, onFailure);
+  }
+
+  public elencoByContratto(onSuccess: any, onFailure: any){
+    return this.doPostElenco("/allJoinDipendentiEContratti", this.utenteLoggato,  onSuccess, onFailure);
   }
 
   public selectByEmail(email: string, onSuccess: any, onFailure: any) {
     return this.doGet("/allByEmail?email=" + email, this.utenteLoggato, onSuccess, onFailure);
-
   }
 
   public elimina(codice: number, onSuccess: any, onFailure: any) {
@@ -71,13 +74,13 @@ export class DipendenteService {
     });
   }
 
-  private doPost(querystring: any, data: any, utenteLoggato: Dipendente, onSuccess: any, onFailure: any) {
+  private doPost(querystring: any, data: any, utenteLoggato: any,  onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
 
 
 
-    return this.http.post(url, data).subscribe((httpResponse: any) => {
+    return this.http.post(url, data, utenteLoggato).subscribe((httpResponse: any) => {
       console.log(httpResponse);
       console.log(data);
 
@@ -91,5 +94,24 @@ export class DipendenteService {
 
     });
   }
+  private doPostElenco(querystring: any,  utenteLoggato: any,  onSuccess: any, onFailure: any) {
 
+    var url = this.backendURL + "" + querystring;
+
+
+
+    return this.http.post(url, utenteLoggato).subscribe((httpResponse: any) => {
+      console.log(httpResponse);
+
+
+      if (httpResponse.successo == true) {
+        onSuccess(httpResponse.data);
+      } else {
+        onFailure(httpResponse.codice_errore);
+        alert("Operazione non andata a buon fine. Codice errore: " + httpResponse.codice_errore);
+
+      }
+
+    });
+  }
 }

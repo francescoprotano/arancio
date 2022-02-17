@@ -60,12 +60,12 @@ byTipologia(tipologia : string) {
 
 
   onSuccess(response:any) {
-    this.listaContratti = response.data
+    this.listaContratti = response
 
   }
 
   onSuccessTipologia(response:any) {
-    this.listaByTipologia = response.data
+    this.listaByTipologia = response
 	
   }
 

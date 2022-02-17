@@ -33,12 +33,12 @@ export class AllDipendentiContractsComponent implements OnInit {
   }
 
   elencoDipendenti(){
-    this.service.elenco(this.onSuccess.bind(this),this.onFailure.bind(this))
+    this.service.elencoByContratto(this.onSuccess.bind(this),this.onFailure.bind(this))
 
   }
 
   onSuccess(response:any) {
-    this.listaDipendenti = response.data
+    this.listaDipendenti = response
 
   }
 

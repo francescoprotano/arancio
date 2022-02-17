@@ -1,7 +1,6 @@
 package it.exolab.service;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -20,7 +19,7 @@ import it.exolab.responces.RispostaContratto;
 public class ContrattoServiceRest {
 	// *** CONTRATTI ***
 	
-		@GET
+	@POST
 		@Path("/allContratti")
 		public RispostaContratti allContratti(Dipendente dipendente) {
 			return ConnectionContrattoEJB.getConnection().allContratti(dipendente);
@@ -44,13 +43,13 @@ public class ContrattoServiceRest {
 			return ConnectionContrattoEJB.getConnection().delete(cont.getCon(),cont.getDip());
 		}
 		
-		@GET
+		@POST
 		@Path("/allById")
 		public RispostaContratto allContrattiById(@QueryParam("id_contratto") Integer id_contratto,Dipendente dipendente) {
 			return ConnectionContrattoEJB.getConnection().selectByID(id_contratto,dipendente);
 		}
 		
-		@GET
+		@POST
 		@Path("/allByTipologia")
 		public RispostaContratti allContrattiByTipologia(@QueryParam("tipologia") String tipologia,Dipendente dipendente) {
 			return ConnectionContrattoEJB.getConnection().selectByTipologia(tipologia,dipendente);

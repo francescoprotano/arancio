@@ -49,7 +49,7 @@ export class AllDipendentiComponent implements OnInit {
   }
 
   onSuccess(response:any) {
-    this.listaDipendenti = response.data
+    this.listaDipendenti = response
 
   }
 

@@ -1,7 +1,6 @@
 package it.exolab.service;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -32,7 +31,7 @@ public class DipendenteServiceRest {
 		return ConnectionDipendenteEJB.getConnection().edit(dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/delete")
 	public RispostaDipendente delete(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().delete(dipendente);
@@ -50,13 +49,13 @@ public class DipendenteServiceRest {
 		return ConnectionDipendenteEJB.getConnection().login(dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/allByRuolo")
 	public RispostaDipendenti allByRuolo(@QueryParam("ruolo_fk") String ruolo_fk,Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().selectByRuolo(ruolo_fk,dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/all")
 	public RispostaDipendenti allDipendenti(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().allDipendenti(dipendente);
@@ -64,13 +63,13 @@ public class DipendenteServiceRest {
 
 	// *** JOIN ***
 
-	@GET
+	@POST
 	@Path("/allJoinDipendentiEContratti")
 	public RispostaDipendenti allJoinDipendentiEContratti(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEContratti(dipendente);
 	}
 
-	@GET
+	@POST
 	@Path("/allJoinDipendentiEPresenze")
 	public RispostaDipendenti allJoinDipendentiEPresenze(Dipendente dipendente) {
 		return ConnectionDipendenteEJB.getConnection().allJoinDipendentiEPresenze(dipendente);

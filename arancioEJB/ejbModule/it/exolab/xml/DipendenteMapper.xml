@@ -100,7 +100,7 @@
 		resultMap="dipendenteJoincontratti">
 		SELECT *
 		FROM dipendenti d inner join contratti c ON
-		c.id_dipendente_fk = d.id_dipendente;
+		c.id_contratto=d.contratto_corrente_fk
 	</select>
 	<select id="allJoinDipendentiEPresenze"
 		resultMap="dipendenteJoinpresenze">
