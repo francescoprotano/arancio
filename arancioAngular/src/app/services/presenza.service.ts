@@ -1,5 +1,7 @@
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Container } from '../models/container';
 import { Dipendente } from '../models/dipendente';
 import { DipendenteMese } from '../models/dipendenteMese';
 import { Presenza } from '../models/presenza';
@@ -13,13 +15,18 @@ export class PresenzaService {
   user: any = sessionStorage.getItem("utente") || '{}';
   utenteLoggato: Dipendente = new Dipendente();
   dipendenteMese: DipendenteMese = new DipendenteMese();
+  cont : Container = new Container();
+  
   constructor(private http: HttpClient) {
     this.utenteLoggato = JSON.parse(sessionStorage.getItem("utente") || '{}');
+    this.cont.pres.data = new Date();
   }
 
 
   public aggiornaPresenza(model: Presenza, onSuccess: any, onFailure: any) {
-    return this.doPost("/update", model, this.utenteLoggato, onSuccess, onFailure);
+    this.cont.pres = model
+    this.cont.dip = this.utenteLoggato
+    return this.doPostX("/update", this.cont, onSuccess, onFailure);
   }
 
   public aggiornaStato(model: DipendenteMese, onSuccess: any, onFailure: any) {
@@ -40,8 +47,10 @@ export class PresenzaService {
     this.doPost("/add", model, this.utenteLoggato, onSuccess, onFailure);
   }
 
-  public elencoByMese(day: string, onSuccess: any, onFailure: any) {
-    this.doGet("/presenzeJoinMese?data=" + day, this.utenteLoggato, onSuccess, onFailure)
+  public elencoByMese(data: any, onSuccess: any, onFailure: any) {
+    this.cont.pres.data = data
+    this.cont.dip = this.utenteLoggato
+    this.doPostX("/presenzeJoinMese", this.cont, onSuccess, onFailure)
   }
 
   private doGet(querystring: String, utenteLoggato: Dipendente, onSuccess: any, onFailure: any) {
@@ -65,15 +74,38 @@ export class PresenzaService {
 
   
 
-  private doPost(querystring: any, data: any, utenteLoggato: Dipendente, onSuccess: any, onFailure: any) {
+  private doPost(querystring: any, data: any, utenteLoggato: any, onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
 
 
 
-    return this.http.post(url, data).subscribe((httpResponse: any) => {
+    return this.http.post(url, data, utenteLoggato).subscribe((httpResponse: any) => {
       console.log(httpResponse);
       console.log(data);
+
+      if (httpResponse.successo == true) {
+        onSuccess(httpResponse.data);
+      } else {
+        onFailure(httpResponse.codice_errore);
+        alert("Operazione non andata a buon fine. Codice errore: " + httpResponse.codice_errore);
+
+      }
+
+    });
+
+  }
+
+  private doPostX(querystring: any, cont : Container, onSuccess: any, onFailure: any) {
+
+    var url = this.backendURL + "" + querystring;
+
+
+
+    return this.http.post(url, cont).subscribe((httpResponse: any) => {
+      console.log(httpResponse);
+      console.log(cont.dip);
+      console.log(cont.pres);
 
       if (httpResponse.successo == true) {
         onSuccess(httpResponse.data);

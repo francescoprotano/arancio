@@ -8,6 +8,9 @@
 	<resultMap
 		id="allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze"
 		type="it.exolab.model.Presenza">
+		<result property="id_presenza" column="id_presenza" />
+		<result property="id_dipendente_fk" column="id_dipendente_fk" />
+		<result property="id_mese_fk" column="id_mese_fk" />
 		<result property="data" column="data" />
 		<result property="ore_lavorate" column="ore_lavorate" />
 		<result property="ore_assenza" column="ore_assenza" />
@@ -66,7 +69,7 @@
 
 	<select id="allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze"
 		resultMap="allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze">
-		SELECT P.data, P.ore_lavorate, P.ore_assenza,
+		SELECT P.id_presenza, P.id_dipendente_fk, P.id_mese_fk, P.data, P.ore_lavorate, P.ore_assenza,
 		P.motivazione_assenza_fk,
 		DM.stato
 		FROM dipendenti D

@@ -1,3 +1,5 @@
+import { DipendenteMese } from "./dipendenteMese";
+
 export class Presenza {
     id_presenza!: number;
     id_dipendente_fk!: number;
@@ -6,5 +8,5 @@ export class Presenza {
     ore_assenza!: number;
     motivazione_assenza_fk!: string;
     id_mese_fk!: number;
-    stato!: number;
+    dipendenteMese!: DipendenteMese;
 }

@@ -17,7 +17,7 @@
           <th scope="col">Ore lavorate</th>
           <th scope="col">Ore assenza</th>
           <th scope="col">Motivazione assenza</th>
-          <th scope="col">STATO</th>
+
 
           <th scope="col">-AZIONI-</th>
         </tr>
@@ -41,18 +41,18 @@
       </select>
       <select name="mesi" class="datefield month"  [(ngModel)]="mesi" (click)="selectMonth(mesi)">
           <option disabled value="">Seleziona Mese</option>
-          <option value="01">Gennaio</option>
-          <option value="02">Febbraio</option>
-          <option value="03">Marzo</option>
-          <option value="04">Aprile</option>
-          <option value="05">Maggio</option>
-          <option value="06">Giugno</option>
-          <option value="07">Luglio</option>
-          <option value="08">Agosto</option>
-          <option value="09">Settembre</option>
-          <option value="10">Ottobre</option>
-          <option value="11">Novembre</option>
-          <option value="12">Dicembre</option>
+          <option value="00">Gennaio</option>
+          <option value="01">Febbraio</option>
+          <option value="02">Marzo</option>
+          <option value="03">Aprile</option>
+          <option value="04">Maggio</option>
+          <option value="05">Giugno</option>
+          <option value="06">Luglio</option>
+          <option value="07">Agosto</option>
+          <option value="08">Settembre</option>
+          <option value="09">Ottobre</option>
+          <option value="10">Novembre</option>
+          <option value="11">Dicembre</option>
       </select>
       <ng-container *ngIf="allMonths == false">
         <button type="button" class="btn btn-warning" (click)="elencoTuttePresenze()" >Mostra tutto</button>
@@ -66,7 +66,7 @@
               <td>{{p.ore_lavorate}}</td>
               <td>{{p.ore_assenza}}</td>
               <td>{{p.motivazione_assenza_fk}}</td>
-              <td>{{p.stato}}</td>
+
               
               
             </ng-container>
@@ -85,20 +85,23 @@
                   <option value="permesso">permesso</option>
                   <option value="presente">presente</option>
                 </select></td>
-                <td><select [(ngModel)]="p.stato">
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                </select></td>
+      
               <td><button (click)="save(p)">Conferma</button></td>
               <td><button (click)="cancel()">Annulla</button></td>
             </ng-container>
         
+            
         
         </ng-container>
 
 
       </tbody>
     </table>
+    <ng-container *ngFor="let p of listaPresenze; index as i;">
+      <ng-container *ngIf="i==1">
+    <button type="button" class="btn btn-info" (click)="inviaMese(p)" >Invia mese</button>
+  </ng-container>
+  </ng-container>
   </div>
   <hr />
 

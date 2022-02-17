@@ -56,7 +56,7 @@ public class DipendenteMeseDao extends BaseDAO<DipendenteMeseMapper> {
 		validaIdDipendente(dipendenteMese.getId_dipendente_fk());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMeseMapper mapper = sqlSession.getMapper(DipendenteMeseMapper.class);
-		return mapper.selectByDipendente(dipendenteMese.getId_dipendente_fk());
+		return mapper.allDipendentiJoinDipendentiMesiJoinMesiJoinPresenze(dipendenteMese.getId_dipendente_fk());
 	}
 
 	public List<DipendenteMese> selectByMese(DipendenteMese dipendenteMese,Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {

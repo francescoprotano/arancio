@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionPresenzaEJB;
+import it.exolab.model.Container;
 import it.exolab.model.Dipendente;
 import it.exolab.model.Presenza;
 import it.exolab.responces.RispostaPresenza;
@@ -21,56 +22,59 @@ import it.exolab.responces.RispostaPresenze;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PresenzaServiceRest {
-	
+
 	@POST
 	@Path("/add")
-	public RispostaPresenza add(Presenza presenza,Dipendente dipendente) {
-	return ConnectionPresenzaEJB.getConnection().add(presenza,dipendente);	
+	public RispostaPresenza add(Container cont) {
+		return ConnectionPresenzaEJB.getConnection().add(cont.getPres(),cont.getDip());
 	}
-	
+
 	@POST
 	@Path("/update")
-	public RispostaPresenza update(Presenza presenza,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().edit(presenza,dipendente);
+	public RispostaPresenza update(Container cont) {
+		return ConnectionPresenzaEJB.getConnection().edit(cont.getPres(),cont.getDip());
 	}
-	
+
 	@DELETE
-	public RispostaPresenza delete(Presenza presenza,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().delete(presenza,dipendente);
+	public RispostaPresenza delete(Presenza presenza, Dipendente dipendente) {
+		return ConnectionPresenzaEJB.getConnection().delete(presenza, dipendente);
 	}
-	
+
 	@GET
 	@Path("/selectByData")
-	public RispostaPresenze selectByData(@QueryParam("data") Date data,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().selectByData(data,dipendente);
+	public RispostaPresenze selectByData(@QueryParam("data") Date data, Dipendente dipendente) {
+		return ConnectionPresenzaEJB.getConnection().selectByData(data, dipendente);
 	}
-	
+
 	@GET
 	@Path("/selectByMese")
-	public RispostaPresenze selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().selectByMese(id_mese_fk,dipendente);
+	public RispostaPresenze selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk, Dipendente dipendente) {
+		return ConnectionPresenzaEJB.getConnection().selectByMese(id_mese_fk, dipendente);
 	}
-	
+
 	@GET
 	@Path("/selectByDipendente")
-	public RispostaPresenze selectByDipendente(@QueryParam("id_dipendente_fk") Integer id_dipendente_fk,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().selectByDipendente(id_dipendente_fk,dipendente);
+	public RispostaPresenze selectByDipendente(@QueryParam("id_dipendente_fk") Integer id_dipendente_fk,
+			Dipendente dipendente) {
+		return ConnectionPresenzaEJB.getConnection().selectByDipendente(id_dipendente_fk, dipendente);
 	}
-	
+
 	@GET
 	@Path("/selectByAssenza")
-	public RispostaPresenze selectByAssenza(@QueryParam("motivazione_assenza_fk") String motivazione_assenza_fk,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().selectByAssenza(motivazione_assenza_fk,dipendente);
+	public RispostaPresenze selectByAssenza(@QueryParam("motivazione_assenza_fk") String motivazione_assenza_fk,
+			Dipendente dipendente) {
+		return ConnectionPresenzaEJB.getConnection().selectByAssenza(motivazione_assenza_fk, dipendente);
 	}
-	
+
 	@GET
 	@Path("/all")
-	public RispostaPresenze selectAll(Dipendente dipendente){
+	public RispostaPresenze selectAll(Dipendente dipendente) {
 		return ConnectionPresenzaEJB.getConnection().selectAll(dipendente);
 	}
-	@GET
+
+	@POST
 	@Path("/presenzeJoinMese")
-	public RispostaPresenze presenzeJoinMese(@QueryParam("data") Date data,Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().presenzeJoinmesi(data,dipendente);
+	public RispostaPresenze presenzeJoinMese(Container cont) {
+		return ConnectionPresenzaEJB.getConnection().presenzeJoinmesi(cont.getPres().getData(),cont.getDip());
 	}
 }

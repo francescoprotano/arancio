@@ -23,6 +23,10 @@ export class DipendenteMeseService {
     this.doPost("/selectByDipendente" , dipendenteMese, onSuccess, onFailure);
   }
 
+  public sendMonth(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any){
+    this.doPost("/updateMese" , dipendenteMese, onSuccess, onFailure);
+  }
+
   private doGet(querystring: String, utenteLoggato : Dipendente, onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
@@ -42,24 +46,6 @@ export class DipendenteMeseService {
     });
   }
 
-  private doGetDipStato(querystring: String, dipMese: DipendenteMese, onSuccess: any, onFailure: any) {
-    console.log(dipMese)
-    var url = this.backendURL + "" + querystring;
-
-    return this.http.get(url).subscribe((httpResponse: any) => {
-
-      console.log(httpResponse);
-      if (httpResponse.successo == true) {
-
-        onSuccess(httpResponse.data);
-      } else {
-        onFailure(httpResponse.codice_errore);
-
-      }
-
-
-    });
-  }
 
   private doPost(querystring: any, data: any, onSuccess: any, onFailure: any) {
 
