@@ -11,8 +11,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionMeseEJB;
+import it.exolab.model.Container;
 import it.exolab.model.Dipendente;
-import it.exolab.model.Mese;
 import it.exolab.responces.RispostaMese;
 import it.exolab.responces.RispostaMesi;
 
@@ -29,14 +29,14 @@ public class MeseServiceRest {
 	
 	@POST
 	@Path("/update")
-	public RispostaMese update(Mese mese,Dipendente dipendente) {
-		return ConnectionMeseEJB.getConnection().edit(mese,dipendente);
+	public RispostaMese update(Container cont) {
+		return ConnectionMeseEJB.getConnection().edit(cont.getMese(),cont.getDip());
 	}
 	
-	@GET
+	@POST
 	@Path("/delete")
-	public RispostaMese delete(Mese mese,Dipendente dipendente) {
-		return ConnectionMeseEJB.getConnection().delete(mese,dipendente);
+	public RispostaMese delete(Container cont) {
+		return ConnectionMeseEJB.getConnection().delete(cont.getMese(),cont.getDip());
 	}
 	
 	@GET

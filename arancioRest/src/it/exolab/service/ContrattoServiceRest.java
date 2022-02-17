@@ -9,7 +9,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionContrattoEJB;
-import it.exolab.model.Contratto;
+import it.exolab.model.Container;
 import it.exolab.model.Dipendente;
 import it.exolab.responces.RispostaContratti;
 import it.exolab.responces.RispostaContratto;
@@ -28,20 +28,20 @@ public class ContrattoServiceRest {
 		
 		@POST
 		@Path("/addContratto")
-		public RispostaContratto add(Contratto contratto,Dipendente dipendente) {
-			return ConnectionContrattoEJB.getConnection().add(contratto,dipendente);
+		public RispostaContratto add(Container cont) {
+			return ConnectionContrattoEJB.getConnection().add(cont.getCon(),cont.getDip());
 		}
 		
 		@POST
 		@Path("/updateContratto")
-		public RispostaContratto update(Contratto contratto,Dipendente dipendente) {
-			return ConnectionContrattoEJB.getConnection().edit(contratto,dipendente);
+		public RispostaContratto update(Container cont) {
+			return ConnectionContrattoEJB.getConnection().edit(cont.getCon(),cont.getDip());
 		}
 		
-		@GET
+		@POST
 		@Path("/deleteContratto")
-		public RispostaContratto deleteContratto(Contratto contratto,Dipendente dipendente) {
-			return ConnectionContrattoEJB.getConnection().delete(contratto,dipendente);
+		public RispostaContratto deleteContratto(Container cont) {
+			return ConnectionContrattoEJB.getConnection().delete(cont.getCon(),cont.getDip());
 		}
 		
 		@GET

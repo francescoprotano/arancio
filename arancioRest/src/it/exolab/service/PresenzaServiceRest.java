@@ -3,7 +3,6 @@ package it.exolab.service;
 import java.sql.Date;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import it.exolab.connection.ConnectionPresenzaEJB;
 import it.exolab.model.Container;
 import it.exolab.model.Dipendente;
-import it.exolab.model.Presenza;
 import it.exolab.responces.RispostaPresenza;
 import it.exolab.responces.RispostaPresenze;
 
@@ -26,18 +24,18 @@ public class PresenzaServiceRest {
 	@POST
 	@Path("/add")
 	public RispostaPresenza add(Container cont) {
-		return ConnectionPresenzaEJB.getConnection().add(cont.getPres(),cont.getDip());
+		return ConnectionPresenzaEJB.getConnection().add(cont.getPres(), cont.getDip());
 	}
 
 	@POST
 	@Path("/update")
 	public RispostaPresenza update(Container cont) {
-		return ConnectionPresenzaEJB.getConnection().edit(cont.getPres(),cont.getDip());
+		return ConnectionPresenzaEJB.getConnection().edit(cont.getPres(), cont.getDip());
 	}
 
-	@DELETE
-	public RispostaPresenza delete(Presenza presenza, Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().delete(presenza, dipendente);
+	@POST
+	public RispostaPresenza delete(Container cont) {
+		return ConnectionPresenzaEJB.getConnection().delete(cont.getPres(), cont.getDip());
 	}
 
 	@GET
@@ -75,6 +73,6 @@ public class PresenzaServiceRest {
 	@POST
 	@Path("/presenzeJoinMese")
 	public RispostaPresenze presenzeJoinMese(Container cont) {
-		return ConnectionPresenzaEJB.getConnection().presenzeJoinmesi(cont.getPres().getData(),cont.getDip());
+		return ConnectionPresenzaEJB.getConnection().presenzeJoinmesi(cont.getPres().getData(), cont.getDip());
 	}
 }
