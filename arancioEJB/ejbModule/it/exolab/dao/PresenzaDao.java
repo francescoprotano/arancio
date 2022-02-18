@@ -101,7 +101,7 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 		validaData(data);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
-		return mapper.presenzeJoinmesi(data);
+		return mapper.presenzeJoinmesi(data, dipendente);
 	}
 	
 	// ------------------------VALIDAZIONI----------------------------------//

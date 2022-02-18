@@ -84,7 +84,7 @@
 		SELECT p.*
 		FROM mesi m inner join presenze p ON
 		p.id_mese_fk = m.id_mese
-		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data});
+		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data}) AND p.id_dipendente_fk=#{id_dipendente};
 	</select>
 
 </mapper>
