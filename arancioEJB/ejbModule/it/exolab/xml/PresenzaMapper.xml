@@ -10,17 +10,16 @@
 		<id column="id_dipendente" property="id_dipendente" />
 		<result property="nome" column="nome" />
 		<result property="cognome" column="cognome" />
-		<association property="dipendenteMese" javaType="it.exolab.model.DipendenteMese">
-			<id property="stato" column="stato" />
-		</association>
-		<collection property="presenze" javaType="java.util.ArrayList">
+		
+		<collection property="presenze" javaType="it.exolab.model.Presenza">
 			<id property="id_presenza" column="id_presenza" />
-			<id property="id_dipendente_fk" column="id_dipendente_fk" />
-			<id property="id_mese_fk" column="id_mese_fk" />
-			<id property="data" column="data" />
-			<id property="ore_lavorate" column="ore_lavorate" />
-			<id property="ore_assenza" column="ore_assenza" />
-			<id property="motivazione_assenza_fk" column="motivazione_assenza_fk" />
+			<result property="id_dipendente_fk" column="id_dipendente_fk" />
+			<result property="id_mese_fk" column="id_mese_fk" />
+			<result property="data" column="data" />
+			<result property="ore_lavorate" column="ore_lavorate" />
+			<result property="ore_assenza" column="ore_assenza" />
+			<result property="motivazione_assenza_fk" column="motivazione_assenza_fk" />
+			
 		</collection>
 	</resultMap>
 
@@ -108,13 +107,13 @@
 	</select>
 
 	<select id="presenzeDelDipendenteDelMese"
-		resultMap="dipendentiJOINdipendentiMesiJOINmesiJOINpresenze">
+		resultMap="dipendentiJOINdipendentiMesiJOINmesiJOINpresenze" parameterType="it.exolab.model.Presenza">
 		SELECT P.id_presenza, P.id_dipendente_fk, P.id_mese_fk,P.data, P.ore_lavorate, P.ore_assenza,P.motivazione_assenza_fk,
-		DM.stato , d.nome, d.cognome
+		DM.stato , D.nome, D.cognome, D.id_dipendente
 		FROM dipendenti D JOIN dipendenti_mesi DM ON D.id_dipendente = DM.id_dipendente_fk
 		JOIN mesi M ON M.id_mese = DM.id_mese_fk
 		JOIN presenze P ON P.id_mese_fk = M.id_mese AND D.id_dipendente = P.id_dipendente_fk
-		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data}) AND D.id_dipendente = #{id_dipendente};
+		WHERE YEAR(mese)=YEAR(#{data}) AND MONTH(mese)=MONTH(#{data}) AND D.id_dipendente = #{id_dipendente_fk};
 	</select>
 
 </mapper>

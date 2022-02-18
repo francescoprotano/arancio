@@ -8,7 +8,8 @@
 
   <br><br><br>
   <div class="container">
-    <legend style="color: brown;">Le mie Presenze</legend>
+    
+    <legend style="color: brown;">Presenze</legend>
     <table class="table">
       <thead>
         <tr>
@@ -54,6 +55,34 @@
           <option value="10">Novembre</option>
           <option value="11">Dicembre</option>
         </select>
+        <select name="idSelezionato" [(ngModel)]="idSelezionato" (click)="selectByDipendenteAndMese(anni,mesi,idSelezionato)">
+          <option *ngFor="let c of listaDipendenti" value="{{c.id_dipendente}}"> {{c.id_dipendente}}
+          </option>
+        </select>
+        <ng-container *ngFor="let p of listaPresenze; index as i;">
+          <ng-container *ngIf="i==1">
+            <ng-container *ngIf="utente.ruolo_fk != 'responsabile'">
+              <ng-container *ngIf="meseInviato == false">
+                <button type="button" class="btn btn-info" (click)="inviaMese(p)">Invia mese</button>
+              </ng-container>
+              <ng-container *ngIf="meseInviato == true">
+                <button type="button" disabled class="btn btn-info" (click)="inviaMese(p)">Invia mese</button>
+              </ng-container>
+            </ng-container>
+              <ng-container *ngIf="utente.ruolo_fk == 'responsabile'">
+                <ng-container *ngIf="allMonths == false">
+                  <ng-container *ngIf="approvaMese != false">
+                <button type="button" class="btn btn-info" (click)="approvaSingoloMese(p)">Approva Mese (Invia al commercialista)</button>
+              </ng-container>
+              <ng-container *ngIf="approvaMese == false">
+                <button type="button" disabled class="btn btn-info" (click)="approvaSingoloMese(p)">Approva Mese (Invia al commercialista)</button>
+              </ng-container>
+              </ng-container>
+              </ng-container>
+            
+          </ng-container>
+        </ng-container>
+        
         <ng-container *ngIf="allMonths == false">
           <button type="button" class="btn btn-warning" (click)="elencoTuttePresenze()">Mostra tutto</button>
         </ng-container>
@@ -76,6 +105,7 @@
               <button type="button" (click)="switchEditMode(i)">Modifica</button>
             </td>
             <ng-container *ngIf="enableEditIndex == i">
+              
               <td>{{p.data | date: 'dd-MM-yyyy' }}</td>
               <td><input [(ngModel)]="p.ore_lavorate" type="number" /></td>
               <td><input [(ngModel)]="p.ore_assenza" type="number" /></td>
@@ -97,17 +127,7 @@
 
       </tbody>
     </table>
-    <ng-container *ngFor="let p of listaPresenze; index as i;">
-      <ng-container *ngIf="i==1">
-        <ng-container *ngIf="meseInviato == false">
-          <button type="button" class="btn btn-info" (click)="inviaMese(p)">Invia mese</button>
-        </ng-container>
-        <ng-container *ngIf="meseInviato == true">
-          <button type="button" disabled class="btn btn-info" (click)="inviaMese(p)">Invia mese</button>
-        </ng-container>
-
-      </ng-container>
-    </ng-container>
+    
   </div>
   <hr />
 

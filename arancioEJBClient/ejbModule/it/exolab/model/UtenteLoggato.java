@@ -1,7 +1,10 @@
 package it.exolab.model;
 
-public class UtenteLoggato {
+import java.io.Serializable;
 
+public class UtenteLoggato implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Integer id_dipendente;
 	private String email;
 	private String ruolo_fk;

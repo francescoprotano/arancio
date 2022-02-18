@@ -28,25 +28,49 @@ export class PresenzaService {
     this.cont.dip = this.utenteLoggato
     return this.doPostX("/update", this.cont, onSuccess, onFailure);
   }
-
+/*
   public aggiornaStato(model: DipendenteMese, onSuccess: any, onFailure: any) {
     return this.doPost("/update", model, this.utenteLoggato, onSuccess, onFailure);
   }
-
+*/
   public elencoPresenzeIndividual(id_dipendente_fk: number, onSuccess: any, onFailure: any): void {
     this.doGet("/selectByDipendente?id_dipendente_fk=" + id_dipendente_fk, this.utenteLoggato, onSuccess, onFailure);
+  }
+
+  public elencoAllPresenze(dipendente: Dipendente, onSuccess: any, onFailure: any): void {
+    this.doPost("/all" , dipendente, onSuccess, onFailure);
   }
 
  
 
   public aggiungiPresenza(model: Presenza, onSuccess: any, onFailure: any): void {
-    this.doPost("/add", model, this.utenteLoggato, onSuccess, onFailure);
+    this.cont.dip = this.utenteLoggato
+    this.cont.pres = model
+    this.doPost("/add", this.cont, onSuccess, onFailure);
   }
 
   public elencoByMese(data: any, onSuccess: any, onFailure: any) {
     this.cont.pres.data = data
     this.cont.dip = this.utenteLoggato
     this.doPostX("/presenzeJoinMese", this.cont, onSuccess, onFailure)
+  }
+
+  public elencoAllByMese(data: any, onSuccess: any, onFailure: any) {
+    this.cont.pres.data = data
+    this.cont.dip = this.utenteLoggato
+    this.doPostX("/presenzeJoinMese", this.cont, onSuccess, onFailure)
+  }
+
+  public presenzeDipMese(data : Date, id_dipendente: number, onSuccess : any, onFailure : any){
+    console.log(data)
+    console.log(id_dipendente)
+    this.cont.pres.data = data
+    this.cont.pres.id_dipendente_fk = id_dipendente
+    this.cont.dip = this.utenteLoggato
+    console.log("cont.pres.data = "+this.cont.pres.data);
+    console.log("cont.pres.id = "+this.cont.pres.id_dipendente_fk);
+
+    this.doPostX("/presenzeDelDipendenteDelMese", this.cont, onSuccess,onFailure)
   }
 
   private doGet(querystring: String, utenteLoggato: Dipendente, onSuccess: any, onFailure: any) {
@@ -70,13 +94,13 @@ export class PresenzaService {
 
   
 
-  private doPost(querystring: any, data: any, utenteLoggato: any, onSuccess: any, onFailure: any) {
+  private doPost(querystring: any, data: any, onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
 
 
 
-    return this.http.post(url, data, utenteLoggato).subscribe((httpResponse: any) => {
+    return this.http.post(url, data).subscribe((httpResponse: any) => {
       console.log(httpResponse);
       console.log(data);
 

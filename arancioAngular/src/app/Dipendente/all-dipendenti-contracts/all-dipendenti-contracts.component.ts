@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Contratto } from 'src/app/models/contratto';
 import { Dipendente } from 'src/app/models/dipendente';
 import { DipendenteService } from 'src/app/services/dipendente.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-all-dipendenti-contracts',
@@ -15,7 +16,7 @@ export class AllDipendentiContractsComponent implements OnInit {
   enableEditIndex: any = null;
   listaDipendenti : Array<Dipendente> = new Array<Dipendente>(); 
   listaContratti : Array<Contratto> = new Array<Contratto>(); 
-  constructor(private service:DipendenteService,private router: Router) { }
+  constructor(private service:DipendenteService,private router: Router, private location : Location) { }
 
   ngOnInit(): void {
     this.elencoDipendenti();
@@ -46,7 +47,9 @@ export class AllDipendentiContractsComponent implements OnInit {
     alert("Operazione non andata a buon fine. Codice errore: "+err);
   }
   
-  
+  back(): void {
+    this.location.back()
+  }
 
   onLoad() {
 		this.elencoDipendenti();

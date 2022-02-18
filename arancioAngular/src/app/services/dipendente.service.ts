@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Container } from '../models/container';
 import { Contratto } from '../models/contratto';
 import { Dipendente } from '../models/dipendente';
 import { Presenza } from '../models/presenza';
+import { UtenteLoggato } from '../models/utenteLoggato';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ import { Presenza } from '../models/presenza';
 export class DipendenteService {
   private lavoratoreSelezionato: Dipendente = new Dipendente;
   private backendURL: String = "http://localhost:8080/arancioRest/gestione_presenze/dipendente";
-  utenteLoggato: Dipendente = new Dipendente();
+  utenteLoggato: UtenteLoggato = new UtenteLoggato();
+  cont: Container = new Container();
   constructor(private http: HttpClient) {
     this.utenteLoggato = JSON.parse(sessionStorage.getItem("utente") || '{}');
   }
@@ -19,7 +22,9 @@ export class DipendenteService {
   //***DIPENDENTE***
 
   public aggiungi(model: Dipendente, onSuccess: any, onFailure: any): void {
-    this.doPost("/add", model, this.utenteLoggato, onSuccess, onFailure);
+    this.cont.dip = model
+    this.cont.utLog = this.utenteLoggato
+    this.doPostAddUpdate("/add", this.cont, onSuccess, onFailure);
   }
 
 
@@ -32,11 +37,11 @@ export class DipendenteService {
   }
 
   public selectByEmail(email: string, onSuccess: any, onFailure: any) {
-    return this.doGet("/allByEmail?email=" + email, this.utenteLoggato, onSuccess, onFailure);
+    return this.doPostAddUpdate("/allByEmail?email=" + email, this.utenteLoggato, onSuccess, onFailure);
   }
 
   public elimina(codice: number, onSuccess: any, onFailure: any) {
-    return this.doGet("/delete?codice=" + codice, this.utenteLoggato, onSuccess, onFailure);
+    return this.doPostAddUpdate("/delete?codice=" + codice, this.utenteLoggato, onSuccess, onFailure);
   }
 
   public aggiorna(model: Dipendente, onSuccess: any, onFailure: any) {
@@ -50,7 +55,7 @@ export class DipendenteService {
   }
 
   public cercaPerId(id_dipendente: number, onSuccess: any, onFailure: any) {
-    this.doGet("/findId?id_dipendente=" + id_dipendente, this.utenteLoggato, onSuccess, onFailure);
+    this.doPostAddUpdate("/findId?id_dipendente=" + id_dipendente, this.utenteLoggato, onSuccess, onFailure);
   }
 
 
