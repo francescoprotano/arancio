@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Container } from '../models/container';
 import { Dipendente } from '../models/dipendente';
 import { DipendenteMese } from '../models/dipendenteMese';
 
@@ -10,6 +11,7 @@ export class DipendenteMeseService {
   private backendURL: String = "http://localhost:8080/arancioRest/gestione_presenze/dipendenteMese";
   utenteLoggato: Dipendente = new Dipendente();
   dipendenteMese: DipendenteMese = new DipendenteMese();
+  cont : Container = new Container();
   constructor(private http: HttpClient) {
     this.utenteLoggato = JSON.parse(sessionStorage.getItem("utente") || '{}');
   }
@@ -20,7 +22,9 @@ export class DipendenteMeseService {
   }
 
   public selectAll(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any): void {
-    this.doPost("/selectByDipendente" , dipendenteMese, onSuccess, onFailure);
+    this.cont.dipMes = dipendenteMese;
+    this.cont.dip = this.utenteLoggato;
+    this.doPost("/selectByDipendente" , this.cont, onSuccess, onFailure);
   }
 
   public sendMonth(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any){
