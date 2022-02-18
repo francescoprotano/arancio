@@ -10,6 +10,7 @@ import it.exolab.exception.ErroreGenerico;
 import it.exolab.mapper.DipendenteMapper;
 
 import it.exolab.model.Dipendente;
+import it.exolab.model.UtenteLoggato;
 import it.exolab.util.MyBatisUtils;
 
 public class DipendenteDao extends BaseDAO<DipendenteMapper> {
@@ -26,7 +27,7 @@ public class DipendenteDao extends BaseDAO<DipendenteMapper> {
 		return istanza;
 	}
 
-	public void insert(Dipendente dip) throws CampoRichiesto, ErroreGenerico {
+	public void insert(Dipendente dip, UtenteLoggato utLog) throws CampoRichiesto, ErroreGenerico {
 		validaInsert(dip);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);

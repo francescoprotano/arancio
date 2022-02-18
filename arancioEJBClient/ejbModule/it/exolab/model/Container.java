@@ -10,6 +10,7 @@ public class Container implements Serializable {
 	private DipendenteMese dipMes;
 	private Mese mese;
 	private Presenza pres;
+	private UtenteLoggato utLog;
 
 	public Contratto getCon() {
 		return con;
@@ -49,6 +50,14 @@ public class Container implements Serializable {
 
 	public void setPres(Presenza pres) {
 		this.pres = pres;
+	}
+
+	public UtenteLoggato getUtLog() {
+		return utLog;
+	}
+
+	public void setUtLog(UtenteLoggato utLog) {
+		this.utLog = utLog;
 	}
 
 }

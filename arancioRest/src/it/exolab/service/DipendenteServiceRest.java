@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import it.exolab.connection.ConnectionDipendenteEJB;
+import it.exolab.model.Container;
 import it.exolab.model.Dipendente;
 import it.exolab.responces.RispostaDipendente;
 import it.exolab.responces.RispostaDipendenti;
@@ -21,8 +22,8 @@ public class DipendenteServiceRest {
 
 	@POST
 	@Path("/add")
-	public RispostaDipendente add(Dipendente dipendente) {
-		return ConnectionDipendenteEJB.getConnection().add(dipendente);
+	public RispostaDipendente add(Container cont) {
+		return ConnectionDipendenteEJB.getConnection().add(cont.getDip(),cont.getUtLog());
 	}
 
 	@POST

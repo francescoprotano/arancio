@@ -3,13 +3,14 @@ package it.exolab.ejb;
 import javax.ejb.Remote;
 
 import it.exolab.model.Dipendente;
+import it.exolab.model.UtenteLoggato;
 import it.exolab.responces.RispostaDipendente;
 import it.exolab.responces.RispostaDipendenti;
 
 @Remote
 public interface DipendenteEJBRemote {
 	
-	public RispostaDipendente add(Dipendente dipendente);
+	public RispostaDipendente add(Dipendente dipendente, UtenteLoggato utLog);
 	public RispostaDipendente edit(Dipendente dipendente);
 	public RispostaDipendente delete(Dipendente dipendente);
 	

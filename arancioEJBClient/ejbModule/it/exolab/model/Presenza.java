@@ -2,8 +2,6 @@ package it.exolab.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Presenza implements Serializable {
 

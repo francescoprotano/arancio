@@ -8,6 +8,7 @@ import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.CredenzialiErrate;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.model.Dipendente;
+import it.exolab.model.UtenteLoggato;
 import it.exolab.responces.RispostaDipendente;
 import it.exolab.responces.RispostaDipendenti;
 
@@ -19,10 +20,10 @@ public class DipendenteEJB extends BaseEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public RispostaDipendente add(Dipendente dipendente) {
+	public RispostaDipendente add(Dipendente dipendente, UtenteLoggato utLog) {
 		RispostaDipendente res = new RispostaDipendente();
 		try {
-			DipendenteDao.getIstanza().insert(dipendente);
+			DipendenteDao.getIstanza().insert(dipendente, utLog);
 			res.setData(dipendente);
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
