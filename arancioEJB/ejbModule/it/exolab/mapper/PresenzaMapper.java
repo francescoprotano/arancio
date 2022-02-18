@@ -16,7 +16,7 @@ public interface PresenzaMapper {
 	List<Presenza> selectByDipendente(Integer id_dipendente_fk);
 	List<Presenza> selectByAssenza(String motivazione_assenza_fk);
 	List<Presenza> selectAll();
-	List<Presenza> presenzeJoinmesi(Date data, Dipendente dipendante);
+	List<Presenza> presenzeJoinmesi(Presenza p);
 	Integer ricercaIdDelMese(Date data);
 	
 }

@@ -99,9 +99,12 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 
 	public List<Presenza> presenzeJoinmesi(Date data, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
 		validaData(data);
+		Presenza p = new Presenza();
+		p.setData(data);
+		p.setId_dipendente_fk(dipendente.getId_dipendente());
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
-		return mapper.presenzeJoinmesi(data, dipendente);
+		return mapper.presenzeJoinmesi(p);
 	}
 	
 	// ------------------------VALIDAZIONI----------------------------------//
