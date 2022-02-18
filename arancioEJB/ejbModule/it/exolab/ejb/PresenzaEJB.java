@@ -122,10 +122,10 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 	}
 
 	@Override
-	public RispostaPresenze selectByMese(Integer id_mese_fk,Dipendente dipendente) {
+	public RispostaPresenze selectByMese(Date data,Dipendente dipendente) {
 		RispostaPresenze res = new RispostaPresenze();
 		try {
-			res.setData(PresenzaDao.getIstanza().selectByMese(id_mese_fk,dipendente));
+			res.setData(PresenzaDao.getIstanza().selectByMese(data,dipendente));
 		} catch (CampoRichiesto e) {
 			res.setErrore(e.getCampo() + " è richiesto");
 			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il

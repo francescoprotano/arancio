@@ -49,7 +49,7 @@
 		SELECT *
 		FROM presenze
 		WHERE
-		id_mese_fk=#{id_mese_fk}
+		
 	</select>
 
 	<select id="selectByDipendente"

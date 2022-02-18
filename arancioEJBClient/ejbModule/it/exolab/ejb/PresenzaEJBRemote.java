@@ -16,7 +16,7 @@ public interface PresenzaEJBRemote {
 	public RispostaPresenza edit(Presenza presenza,Dipendente dipendente);
 	public RispostaPresenza delete(Presenza presenza,Dipendente dipendente);
 	public RispostaPresenze selectByData(Date data,Dipendente dipendente);
-	public RispostaPresenze selectByMese(Integer id_mese_fk,Dipendente dipendente);
+	public RispostaPresenze selectByMese(Date data,Dipendente dipendente);
 	public RispostaPresenze selectByDipendente(Integer id_dipendente_fk,Dipendente dipendente);
 	public RispostaPresenze selectByAssenza(String motivazione_assenza_fk,Dipendente dipendente);
 	public RispostaPresenze selectAll(Dipendente dipendente);

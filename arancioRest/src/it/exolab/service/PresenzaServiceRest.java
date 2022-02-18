@@ -33,6 +33,7 @@ public class PresenzaServiceRest {
 	}
 
 	@POST
+	@Path("/delete")
 	public RispostaPresenza delete(Container cont) {
 		return ConnectionPresenzaEJB.getConnection().delete(cont.getPres(), cont.getDip());
 	}
@@ -45,8 +46,8 @@ public class PresenzaServiceRest {
 
 	@POST
 	@Path("/selectByMese")
-	public RispostaPresenze selectByMese(@QueryParam("id_mese_fk") Integer id_mese_fk, Dipendente dipendente) {
-		return ConnectionPresenzaEJB.getConnection().selectByMese(id_mese_fk, dipendente);
+	public RispostaPresenze selectByMese(Container cont) {
+		return ConnectionPresenzaEJB.getConnection().selectByMese(cont.getPres().getData(), cont.getDip());
 	}
 
 	@POST

@@ -12,7 +12,7 @@ public interface PresenzaMapper {
 	void update(Presenza presenza);
 	void delete(Integer id_presenza);
 	List<Presenza> selectByData(Date data);
-	List<Presenza> selectByMese(Integer id_mese_fk);
+	List<Presenza> selectByMese(Date data);
 	List<Presenza> selectByDipendente(Integer id_dipendente_fk);
 	List<Presenza> selectByAssenza(String motivazione_assenza_fk);
 	List<Presenza> selectAll();

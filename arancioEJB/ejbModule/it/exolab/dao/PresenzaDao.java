@@ -66,11 +66,11 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 		return mapper.selectByData(data);
 	}
 
-	public List<Presenza> selectByMese(Integer id_mese_fk, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
-		validaIdMese(id_mese_fk);
+	public List<Presenza> selectByMese(Date data, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaData(data);
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
-		return mapper.selectByMese(id_mese_fk);
+		return mapper.selectByMese(data);
 
 	}
 
