@@ -10,6 +10,7 @@ import it.exolab.exception.CampoRichiesto;
 import it.exolab.exception.ErroreGenerico;
 import it.exolab.model.Dipendente;
 import it.exolab.model.Presenza;
+import it.exolab.responces.RispostaDipendente;
 import it.exolab.responces.RispostaPresenza;
 import it.exolab.responces.RispostaPresenze;
 
@@ -228,6 +229,31 @@ public class PresenzaEJB implements PresenzaEJBRemote {
 		} catch (ErroreGenerico e) {
 			res.setErrore(BaseEJB.ERR_GENERAL);
 			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il// setCodice_errore
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public RispostaDipendente presenzeDelDipendenteDelMese(Presenza presenza, Dipendente dipendente) {
+		RispostaDipendente res = new RispostaDipendente();
+		try {
+			res.setData(PresenzaDao.getIstanza().presenzeDelDipendenteDelMese(presenza, dipendente));
+		} catch (CampoRichiesto e) {
+			res.setErrore(e.getCampo() + " è richiesto");
+			res.setCodice_errore(BaseEJB.ERR_CODE_REQUIRED); // successo viene impostato a false dentro il
+																// setCodice_errore
+			e.printStackTrace();
+		} catch (ErroreGenerico e) {
+			res.setErrore(BaseEJB.ERR_GENERAL);
+			res.setCodice_errore(BaseEJB.ERR_CODE_GENERAL); // successo viene impostato a false dentro il
+															// setCodice_errore
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

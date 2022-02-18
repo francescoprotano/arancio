@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import it.exolab.connection.ConnectionPresenzaEJB;
 import it.exolab.model.Container;
 import it.exolab.model.Dipendente;
+import it.exolab.responces.RispostaDipendente;
 import it.exolab.responces.RispostaPresenza;
 import it.exolab.responces.RispostaPresenze;
 
@@ -75,4 +76,11 @@ public class PresenzaServiceRest {
 	public RispostaPresenze presenzeJoinMese(Container cont) {
 		return ConnectionPresenzaEJB.getConnection().presenzeJoinmesi(cont.getPres().getData(), cont.getDip());
 	}
+	
+	@POST
+	@Path("/presenzeDelDipendenteDelMese")
+	public RispostaDipendente presenzeDelDipendenteDelMese(Container cont) {
+		return ConnectionPresenzaEJB.getConnection().presenzeDelDipendenteDelMese(cont.getPres(), cont.getDip());
+	}
+	
 }

@@ -18,5 +18,6 @@ public interface PresenzaMapper {
 	List<Presenza> selectAll();
 	List<Presenza> presenzeJoinmesi(Presenza p);
 	Integer ricercaIdDelMese(Date data);
+	Dipendente presenzeDelDipendenteDelMese(Presenza presenza);
 	
 }

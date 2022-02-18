@@ -107,6 +107,14 @@ public class PresenzaDao extends BaseDAO<PresenzaMapper>{
 		return mapper.presenzeJoinmesi(p);
 	}
 	
+	public Dipendente presenzeDelDipendenteDelMese(Presenza presenza, Dipendente dipendente) throws CampoRichiesto, ErroreGenerico {
+		validaData(presenza.getData());
+		validaIdDipendente(presenza.getId_dipendente_fk());
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		PresenzaMapper mapper = sqlSession.getMapper(PresenzaMapper.class);
+		return mapper.presenzeDelDipendenteDelMese(presenza);
+	}
+	
 	// ------------------------VALIDAZIONI----------------------------------//
 
 	private void validaID(Integer id_presenza) throws CampoRichiesto {

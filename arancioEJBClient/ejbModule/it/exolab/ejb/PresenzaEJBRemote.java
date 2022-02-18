@@ -6,6 +6,8 @@ import javax.ejb.Remote;
 
 import it.exolab.model.Dipendente;
 import it.exolab.model.Presenza;
+import it.exolab.responces.RispostaDipendente;
+import it.exolab.responces.RispostaDipendenti;
 import it.exolab.responces.RispostaPresenza;
 import it.exolab.responces.RispostaPresenze;
 
@@ -21,5 +23,6 @@ public interface PresenzaEJBRemote {
 	public RispostaPresenze selectByAssenza(String motivazione_assenza_fk,Dipendente dipendente);
 	public RispostaPresenze selectAll(Dipendente dipendente);
 	public RispostaPresenze presenzeJoinmesi(Date data,Dipendente dipendente);
+	public RispostaDipendente presenzeDelDipendenteDelMese(Presenza presenza,Dipendente dipendente);
 	
 }
