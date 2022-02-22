@@ -71,10 +71,10 @@
             </ng-container>
               <ng-container *ngIf="utente.ruolo_fk == 'responsabile'">
                 <ng-container *ngIf="allMonths == false">
-                  <ng-container *ngIf="approvaMese != false">
-                <button type="button" class="btn btn-info" (click)="approvaSingoloMese(p)">Approva Mese (Invia al commercialista)</button>
+                  <ng-container *ngIf="approvaMese != false" >
+                <button type="button" class="btn btn-info" name="nomeSelezionato" (click)="approvaSingoloMese(p)">Approva Mese per {{nomeSelezionato + " "+cognomeSelezionato}} (Invia al commercialista)</button>
               </ng-container>
-              <ng-container *ngIf="approvaMese == false">
+              <ng-container *ngIf="approvaMese == false || statusClosed == true">
                 <button type="button" disabled class="btn btn-info" (click)="approvaSingoloMese(p)">Approva Mese (Invia al commercialista)</button>
               </ng-container>
               </ng-container>

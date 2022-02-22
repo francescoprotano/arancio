@@ -15,8 +15,8 @@ export class PresenzaService {
   user: any = sessionStorage.getItem("utente") || '{}';
   utenteLoggato: Dipendente = new Dipendente();
   dipendenteMese: DipendenteMese = new DipendenteMese();
-  cont : Container = new Container();
-  
+  cont: Container = new Container();
+
   constructor(private http: HttpClient) {
     this.utenteLoggato = JSON.parse(sessionStorage.getItem("utente") || '{}');
     this.cont.pres.data = new Date();
@@ -28,20 +28,20 @@ export class PresenzaService {
     this.cont.dip = this.utenteLoggato
     return this.doPostX("/update", this.cont, onSuccess, onFailure);
   }
-/*
-  public aggiornaStato(model: DipendenteMese, onSuccess: any, onFailure: any) {
-    return this.doPost("/update", model, this.utenteLoggato, onSuccess, onFailure);
-  }
-*/
+  /*
+    public aggiornaStato(model: DipendenteMese, onSuccess: any, onFailure: any) {
+      return this.doPost("/update", model, this.utenteLoggato, onSuccess, onFailure);
+    }
+  */
   public elencoPresenzeIndividual(id_dipendente_fk: number, onSuccess: any, onFailure: any): void {
     this.doGet("/selectByDipendente?id_dipendente_fk=" + id_dipendente_fk, this.utenteLoggato, onSuccess, onFailure);
   }
 
   public elencoAllPresenze(dipendente: Dipendente, onSuccess: any, onFailure: any): void {
-    this.doPost("/all" , dipendente, onSuccess, onFailure);
+    this.doPost("/all", dipendente, onSuccess, onFailure);
   }
 
- 
+
 
   public aggiungiPresenza(model: Presenza, onSuccess: any, onFailure: any): void {
     this.cont.dip = this.utenteLoggato
@@ -61,16 +61,15 @@ export class PresenzaService {
     this.doPostX("/presenzeJoinMese", this.cont, onSuccess, onFailure)
   }
 
-  public presenzeDipMese(data : Date, id_dipendente: number, onSuccess : any, onFailure : any){
+  public presenzeDipMese(data: Date, id_dipendente: number, onSuccess: any, onFailure: any) {
     console.log(data)
     console.log(id_dipendente)
     this.cont.pres.data = data
     this.cont.pres.id_dipendente_fk = id_dipendente
     this.cont.dip = this.utenteLoggato
-    console.log("cont.pres.data = "+this.cont.pres.data);
-    console.log("cont.pres.id = "+this.cont.pres.id_dipendente_fk);
 
-    this.doPostX("/presenzeDelDipendenteDelMese", this.cont, onSuccess,onFailure)
+
+    this.doPostX("/presenzeDelDipendenteDelMese", this.cont, onSuccess, onFailure)
   }
 
   private doGet(querystring: String, utenteLoggato: Dipendente, onSuccess: any, onFailure: any) {
@@ -92,7 +91,7 @@ export class PresenzaService {
     });
   }
 
-  
+
 
   private doPost(querystring: any, data: any, onSuccess: any, onFailure: any) {
 
@@ -116,14 +115,14 @@ export class PresenzaService {
 
   }
 
-  private doPostX(querystring: any, cont : Container, onSuccess: any, onFailure: any) {
+  private doPostX(querystring: any, cont: Container, onSuccess: any, onFailure: any) {
 
     var url = this.backendURL + "" + querystring;
 
 
 
     return this.http.post(url, cont).subscribe((httpResponse: any) => {
-     
+
       if (httpResponse.successo == true) {
         onSuccess(httpResponse.data);
       } else {

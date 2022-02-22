@@ -18,7 +18,7 @@ export class DipendenteMeseService {
 
 
   public elencoDipendentiMesi(onSuccess: any, onFailure: any) {
-    this.doGet("/selectAll", this.utenteLoggato, onSuccess, onFailure);
+    this.doPost("/selectAll", this.utenteLoggato, onSuccess, onFailure);
   }
 
   public selectAll(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any): void {
@@ -28,7 +28,9 @@ export class DipendenteMeseService {
   }
 
   public sendMonth(dipendenteMese: DipendenteMese, onSuccess: any, onFailure: any){
-    this.doPost("/updateMese" , dipendenteMese, onSuccess, onFailure);
+    this.cont.dipMes = dipendenteMese;
+    this.cont.dip = this.utenteLoggato;
+    this.doPost("/update" , this.cont, onSuccess, onFailure);
   }
 
   private doGet(querystring: String, utenteLoggato : Dipendente, onSuccess: any, onFailure: any) {

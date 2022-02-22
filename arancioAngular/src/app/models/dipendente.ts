@@ -1,4 +1,6 @@
 import { Contratto } from "./contratto";
+import { DipendenteMese } from "./dipendenteMese";
+import { Mese } from "./mese";
 
 export class Dipendente{
     id_dipendente!: number;
@@ -10,4 +12,6 @@ export class Dipendente{
     ruolo_fk!: string;
     contratto_corrente_fk!: number;
     contratto!: Contratto;
+    dipendenteMese!: DipendenteMese;
+    mese!: Mese;
 }

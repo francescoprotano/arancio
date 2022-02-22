@@ -29,10 +29,16 @@ public eliminaMese(mese:Mese,onSuccess:any,onFailure:any){
 }
 
 public elencoMesi(onSuccess:any,onFailure:any){
-  return this.doPost("/all", this.utenteLoggato, onSuccess,onFailure);;
+  return this.doPost("/all", this.utenteLoggato, onSuccess,onFailure);
+ }
+
+ public getDipDipMesiMesi(onSuccess:any,onFailure:any){
+   return this.doPost("/dip-dipMesi-mesi", this.utenteLoggato, onSuccess,onFailure)
  }
 
  public aggiornaMese(model: Mese,onSuccess:any,onFailure:any)  {
+   this.cont.mese = model;
+   this.cont.dip = this.utenteLoggato
   return this.doPostContainer("/update", this.cont, onSuccess,onFailure);
 }
 
@@ -91,6 +97,7 @@ private doPost(querystring:any, data:any, onSuccess:any,onFailure:any){
              console.log(data);
          
    if(httpResponse.successo == true){
+     console.log("SERVIZIO: "+httpResponse.data)
      onSuccess(httpResponse.data);
    } else {
      onFailure(httpResponse.codice_errore);

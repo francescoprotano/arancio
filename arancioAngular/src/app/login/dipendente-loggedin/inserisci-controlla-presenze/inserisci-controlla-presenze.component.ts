@@ -44,6 +44,13 @@ export class InserisciControllaPresenzeComponent implements OnInit {
   rendiModificabile : Boolean = false;
   dipendenteSelezionato : Dipendente;
   idSelezionato : number;
+  nomeSelezionato : string ;
+  cognomeSelezionato : string;
+  statoMese : number;
+  listaDipMesi : Array<DipendenteMese> = new Array<DipendenteMese>()
+  id_dip : number;
+  statusClosed : boolean;
+  dipendenteMesePerResp : DipendenteMese = new DipendenteMese()
 
 
   constructor(private router: Router, private authService: LoginService, private service: PresenzaService,
@@ -71,8 +78,13 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     if (this.utente.ruolo_fk == 'responsabile') {
       this.elencoTuttePresenze();
       this.selectAllDipendenti();
+      
     }
    
+  }
+
+  dipDipMesiMesi(dipendenteMesePerResp : DipendenteMese){
+    this.dipMesService.selectAll(dipendenteMesePerResp,this.onSuccessdipdipMesiMesi.bind(this),this.onFailure.bind(this))
   }
 
   switchEditMode(i: any) {
@@ -146,11 +158,22 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     id_dipendente = this.idSelezionato;
     console.log("id dip: "+id_dipendente)
     this.dataSelected = new Date(anni, mesi, 1)
-    if (this.anni != undefined && this.mesi != null && id_dipendente!= null) {
-    
+    if (this.anni != undefined && this.mesi != undefined && id_dipendente != undefined) {
+      this.dipendenteMesePerResp.id_dipendente_fk = id_dipendente
+      this.dipDipMesiMesi(this.dipendenteMesePerResp)
+      this.listaDipMesi.forEach(element => {
+        if(element.id_dipendente_fk == this.idSelezionato ){
+          this.id_dip = element.id_dipendente_fk
+        }
+      });
+      console.log("id dippppppp "+this.id_dip)
+        console.log("statussss "+this.statusClosed)
+
       this.approvaMese = true
       this.listaPresenze = []
       this.service.presenzeDipMese(this.dataSelected, id_dipendente, this.onSuccessFiltraMese.bind(this), this.onFailure.bind(this));
+     
+
     }
   }
 
@@ -222,19 +245,31 @@ export class InserisciControllaPresenzeComponent implements OnInit {
     this.listaDipendenti = response
   }
 
+  onSuccessdipdipMesiMesi(response : any){
+    console.log(response)
+    this.listaDipMesi = response
+    this.listaDipMesi.forEach(element => {
+      if(this.idSelezionato == element.dipendenteMese.id_dipendente_fk){
+      console.log(element.dipendenteMese.stato)
+    }});
+    
+  }
+
   onSuccessFiltraMese(response: any) {
     if (response == null) {
       this.listaPresenze = null;
     }
     else {
       this.listaPresenze = []
-      this.listaPresenze = response
+      this.listaPresenze = response.presenze
+      this.nomeSelezionato = response.nome
+      this.cognomeSelezionato = response.cognome
 
     }
   }
 
   onSuccessSendMese(response: any) {
-    this.listaPresenze = response
+    this.statoMese = response.stato
     this.meseInviato = true;
   }
 
